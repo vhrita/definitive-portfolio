@@ -1,0 +1,14 @@
+article {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10%;
+
+    div {
+        font-size: 3em;
+
+        &:first-child {
+            color: #CCC
+        }
+    }
+}
