@@ -1,0 +1,38 @@
+nav {
+    width: 100vw;
+    max-width: 100%;
+    height: 10%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-right: 5%;
+
+    div {
+        height: 100%;
+        margin: 0 0 0 auto;
+        display: flex;
+        flex: 1 1 0px;
+        flex-flow: row nowrap;
+        justify-content: flex-end;
+        gap: 3%;
+
+        button {
+            width: 5%;
+            background: inherit;
+            border: none;
+            cursor: pointer;
+
+            font-size: 1.3em;
+            font-weight: 400;
+            color: #2BCAB6;
+
+            &:hover {
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+.scrolled {
+    background-color: rgba($color: #1d1c23, $alpha: .8);
+}
