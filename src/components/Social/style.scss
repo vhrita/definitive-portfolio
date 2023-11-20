@@ -1,0 +1,73 @@
+@mixin animate($animation,$duration,$method,$times){
+    animation: $animation $duration $method $times;
+}
+
+@mixin keyframes($name){
+    @keyframes #{$name}{
+        @content;
+    }
+}
+
+#social {
+    position: absolute;
+    left: 6em;
+    bottom: 0;
+
+    div {
+        color: #2BCAB6;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        margin-bottom: 1em;
+
+        @for $i from 1 through 5 {
+            a:nth-last-child(#{$i}) {
+                opacity: 0;
+
+                @include keyframes(appear) {
+                    0% {
+                        opacity: 0;
+                        transform: rotate(-320deg);
+                    }
+                    100% {
+                        opacity: 1;
+                        transform: rotate(-360deg);
+                    }
+                }
+
+                @include animate(appear, .5s, ease-in-out, 1);
+                animation-delay: calc(1s * #{$i} / 2);
+                animation-fill-mode: forwards;
+            }
+        }
+
+        img {
+            width: 1.5em;
+            height: 1.5em;
+
+            &:hover {
+                filter: brightness(0) invert(1);
+                transform: scale(1.2);
+            }
+        }
+    }
+
+    span {
+        @include keyframes(growing) {
+            0% {
+                height: 0px;
+            }
+            100% {
+                height: 20em;
+            }
+        }
+
+        @include animate(growing, 1s, ease-in-out, 1);
+
+        display: block;
+        width: 1px;
+        height: 20em;
+        border: solid 1px #2BCAB6;
+    }
+}
