@@ -1,7 +1,6 @@
 import './style.scss'
 
 import Typewriter from 'typewriter-effect'
-import Avatar from '../../../public/vite.svg'
 
 const mainSkills = [
   'React.js',
@@ -12,7 +11,7 @@ const mainSkills = [
 
 function Home() {
   return (
-    <div id='home'>
+    <div id="home">
       <div>
         <h1>
           Hello, I'm <b>Vitor</b>.
@@ -21,18 +20,19 @@ function Home() {
         <div>
           <span>Skilled In</span>
           <Typewriter
-            className='skills'
+            className="skills"
             options={{
               strings: mainSkills,
               autoStart: true,
               loop: true,
               pauseFor: 2000,
             }}
-            />
+          />
         </div>
-      </div>
-      <div>
-        <img src={Avatar} alt="" />
+        <div>
+          <span></span>
+          <span></span>
+        </div>
       </div>
     </div>
   );

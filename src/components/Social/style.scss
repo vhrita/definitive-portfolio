@@ -1,20 +1,13 @@
-@mixin animate($animation,$duration,$method,$times){
-    animation: $animation $duration $method $times;
-}
-
-@mixin keyframes($name){
-    @keyframes #{$name}{
-        @content;
-    }
-}
+@import '../../utils/mixins.scss';
+@import '../../utils/variables.scss';
 
 #social {
-    position: absolute;
+    position: fixed;
     left: 6em;
     bottom: 0;
 
     div {
-        color: #2BCAB6;
+        color: $blue;
         transform: translateX(-50%);
         display: flex;
         flex-direction: column;
@@ -64,10 +57,9 @@
         }
 
         @include animate(growing, 1s, ease-in-out, 1);
-
         display: block;
         width: 1px;
         height: 20em;
-        border: solid 1px #2BCAB6;
+        border: solid 1px $blue;
     }
 }

@@ -1,0 +1,60 @@
+@import '../../utils/variables.scss';
+
+#about {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    width: 100%;
+    padding: 0 20% 20% 20%;
+
+    transform: translateY(-18%);
+
+    h2 {
+        position: relative;
+        font-size: 3em;
+        font-weight: 200;
+        color: $blue;
+        padding-bottom: 1%;
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 50%;
+            border-bottom: 1px solid $blue;
+        }
+    }
+
+    p {
+        position: relative;
+        text-align: center;
+        text-justify: inter-word;
+        font-size: 1.2em;
+        line-height: 2em;
+        padding-top: 2%;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -5%;
+            width: 1em;
+            height: 1em;
+            border-left: 1px solid $blue;
+            border-top: 1px solid $blue;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: -5%;
+            width: 1em;
+            height: 1em;
+            border-right: 1px solid $blue;
+            border-bottom: 1px solid $blue;
+        }
+    }
+}

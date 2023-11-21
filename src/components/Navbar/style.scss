@@ -1,4 +1,7 @@
+@import '../../utils/variables.scss';
+
 nav {
+    z-index: 5;
     width: 100vw;
     max-width: 100%;
     height: 10%;
@@ -24,7 +27,7 @@ nav {
 
             font-size: 1.3em;
             font-weight: 400;
-            color: #2BCAB6;
+            color: $blue;
 
             &:hover {
                 font-weight: bold;
