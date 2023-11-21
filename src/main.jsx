@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom/client'
 import Navbar from './components/Navbar'
 import Social from './components/Social'
 import Home from './pages/Home'
+import About from './pages/About'
 
 
 const pages = [
@@ -27,5 +28,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Navbar items={pages} />
     <Social />
     <Home />
+    <About />
   </React.StrictMode>,
 )
