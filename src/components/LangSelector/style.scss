@@ -1,0 +1,57 @@
+@import '../../utils/variables.scss';
+
+#language-selector {
+    position: relative;
+    width: 3.5em;
+    height: 50%;
+    cursor: pointer;
+
+    img {
+        width: 100%;
+    }
+
+    &:hover, div:hover, button:hover {
+        div:nth-of-type(1) {
+            display: flex;
+        }
+    }
+
+    div {
+        position: absolute;
+        z-index: 7;
+        left: 0;
+        bottom: 0;
+        transform: translate(-70%, 100%);
+        width: auto;
+        height: auto;
+        background-color: rgba(#FFF, .1);
+        display: none;
+        flex-direction: column;
+
+        button {
+            width: 100%;
+            white-space: nowrap;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            color: #FFF;
+            padding: 1em;
+
+            img {
+                margin-right: 1em;
+                width: 2em;
+                height: auto;
+            }
+
+            &:hover {
+                font-weight: normal;
+                background-color: $blue;
+            }
+
+            &:disabled {
+                background-color: rgba($blue, .5);
+                color: #CCC;
+            }
+        }
+    }
+}
