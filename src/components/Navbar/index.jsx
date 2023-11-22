@@ -2,6 +2,8 @@ import './style.scss'
 
 import React, { useState, useEffect } from 'react'
 
+import LangSelector from '../LangSelector';
+
 function Navbar({items}) {
     const [onTop, setOnTop] = useState(true);
 
@@ -22,6 +24,7 @@ function Navbar({items}) {
           {items.map((item) => (
             <button key={item.id} onClick={() => jumpTo(item.id)}>{item.name}</button>
           ))}
+          <LangSelector />
         </div>
       </nav>
     );

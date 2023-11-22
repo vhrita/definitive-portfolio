@@ -1,33 +1,12 @@
 import './index.scss'
+
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
-import Navbar from './components/Navbar'
-import Social from './components/Social'
-import Home from './pages/Home'
-import About from './pages/About'
+import App from './App';
 
-
-const pages = [
-  {
-    id: "home",
-    name: "Home",
-  },
-  {
-    id: "about",
-    name: "About",
-  },
-  {
-    id: "portfolio",
-    name: "Portfolio",
-  },
-];
-
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Navbar items={pages} />
-    <Social />
-    <Home />
-    <About />
-  </React.StrictMode>,
-)
+    <App />
+  </React.StrictMode>
+);
