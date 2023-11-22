@@ -1,6 +1,7 @@
 import './style.scss'
 
 import Typewriter from 'typewriter-effect'
+import { useTranslation } from 'react-i18next'
 
 const mainSkills = [
   'React.js',
@@ -10,15 +11,18 @@ const mainSkills = [
 ]
 
 function Home() {
+
+  const { t } = useTranslation()
+
   return (
     <div id="home">
       <div>
         <h1>
-          Hello, I'm <b>Vitor</b>.
+          {t("greatings")} <b>Vitor</b>.
         </h1>
-        <p>A FullStack Developer</p>
+        <p>{t("position")}</p>
         <div>
-          <span>Skilled In</span>
+          <span>{t("skillsPrefix")}</span>
           <Typewriter
             className="skills"
             options={{
