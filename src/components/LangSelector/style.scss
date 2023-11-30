@@ -49,6 +49,7 @@
             }
 
             &:disabled {
+                cursor: not-allowed;
                 background-color: rgba($blue, .5);
                 color: #CCC;
             }

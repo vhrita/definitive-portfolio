@@ -20,6 +20,7 @@ nav {
 
         button {
             width: 5%;
+            height: 100%;
             background: inherit;
             border: none;
             cursor: pointer;
@@ -31,14 +32,27 @@ nav {
             &:hover {
                 font-weight: bold;
             }
+
+            &.active {
+                position: relative;
+                font-weight: bold;
+
+                &::after {
+                    content: '';
+                    z-index: 3;
+                    position: absolute;
+                    width: 1em;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    bottom: 25%;
+                    border-bottom: solid 1px $blue;
+                    border-left: solid 1px $blue;
+                }
+            }
         }
 
         #language-selector {
             margin-left: 2em;
         }
     }
-}
-
-.scrolled {
-    background-color: rgba($color: #1d1c23, $alpha: .8);
 }

@@ -10,7 +10,14 @@ function CardSlider({ cards = [], width = '100%', height = '80%' }) {
     const [position, setPosition] = useState(0);
 
     return (
-      <div id="slider" style={{ width, height }}>
+      <motion.div
+        id="slider"
+        style={{ width, height }}
+        initial={{ position: "absolute", x: "+100%" }}
+        whileInView={{ x: 0, position: "relative" }}
+        transition={{ duration: 1 }}
+        viewport={{ amount: 0.1, once: true }}
+      >
         <span className="counter">
           {position + 1} / {cards.length}
         </span>
@@ -27,10 +34,15 @@ function CardSlider({ cards = [], width = '100%', height = '80%' }) {
             <motion.div
               key={card.title}
               className="card"
-              initial={{ scale: 1, rotation: -180 }}
+              initial={{
+                scale: 1,
+                rotation: -180,
+                opacity: index !== 0 ? 0 : 0.5,
+              }}
               animate={{
-                rotate: 0,
                 left: `${(index - position) * 95}%`,
+                opacity: 1,
+                rotate: 0,
                 scale: index === position ? 1 : 0.8,
               }}
             >
@@ -42,13 +54,16 @@ function CardSlider({ cards = [], width = '100%', height = '80%' }) {
                   <div className="card__content__chips">
                     {card.techs.map((tech, index) => {
                       return (
-                        <motion.span 
-                            key={tech}
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            transition={{ duration: 0.5, delay: index != 0 && index - 0.5 }}
+                        <motion.span
+                          key={tech}
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{
+                            duration: 0.5,
+                            delay: index != 0 && index - 0.5,
+                          }}
                         >
-                            {tech}
+                          {tech}
                         </motion.span>
                       );
                     })}
@@ -66,7 +81,7 @@ function CardSlider({ cards = [], width = '100%', height = '80%' }) {
         >
           <img src={arrow} />
         </button>
-      </div>
+      </motion.div>
     );
 }
 

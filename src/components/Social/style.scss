@@ -1,40 +1,49 @@
-@import '../../utils/mixins.scss';
 @import '../../utils/variables.scss';
 
 #social {
     position: fixed;
     z-index: 5;
-    left: 6em;
-    bottom: 0;
+    
+    &.vertical {
+        left: 6em;
+        bottom: 0;
+        
+        div {
+            flex-direction: column;
+            margin-bottom: 1em;
+            transform: translateX(-50%);
+        }
+
+        span {
+            width: 1px;
+            height: 20em;
+            border-left: solid 1px $blue;
+        }
+    }
+
+    &.horizontal {
+        left: 0;
+        top: 3em;
+        display: flex;
+        flex-direction: row-reverse;
+        flex-wrap: nowrap;
+
+        div {
+            margin-left: 1em;
+            transform: translateY(-50%);
+        }
+
+        span {
+            height: 1px;
+            width: 20em;
+            border-top: solid 1px $blue;
+        }
+    }
 
     div {
         color: $blue;
-        transform: translateX(-50%);
         display: flex;
-        flex-direction: column;
         gap: 1em;
-        margin-bottom: 1em;
-
-        @for $i from 1 through 5 {
-            a:nth-last-child(#{$i}) {
-                opacity: 0;
-
-                @include keyframes(appear) {
-                    0% {
-                        opacity: 0;
-                        transform: rotate(-320deg);
-                    }
-                    100% {
-                        opacity: 1;
-                        transform: rotate(-360deg);
-                    }
-                }
-
-                @include animate(appear, .5s, ease-in-out, 1);
-                animation-delay: calc(1s * #{$i} / 2);
-                animation-fill-mode: forwards;
-            }
-        }
 
         img {
             width: 1.5em;
@@ -48,19 +57,6 @@
     }
 
     span {
-        @include keyframes(growing) {
-            0% {
-                height: 0px;
-            }
-            100% {
-                height: 20em;
-            }
-        }
-
-        @include animate(growing, 1s, ease-in-out, 1);
         display: block;
-        width: 1px;
-        height: 20em;
-        border: solid 1px $blue;
     }
 }

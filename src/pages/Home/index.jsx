@@ -2,6 +2,7 @@ import './style.scss'
 
 import Typewriter from 'typewriter-effect'
 import { useTranslation } from 'react-i18next'
+import { motion } from 'framer-motion';
 
 const mainSkills = [
   'React.js',
@@ -15,7 +16,12 @@ function Home() {
   const { t } = useTranslation()
 
   return (
-    <div id="home">
+    <motion.div id="home">
+      <motion.span
+        initial={{ width: 0 }}
+        whileInView={{ width: "20%" }}
+        transition={{ duration: 1 }}
+      ></motion.span>
       <div>
         <h1>
           {t("greatings")} <b>Vitor</b>.
@@ -34,11 +40,21 @@ function Home() {
           />
         </div>
         <div>
-          <span></span>
-          <span></span>
+          {[...Array(2)].map((e, i) => (
+            <motion.span
+              key={i}
+              whileInView={{ rotate: ["20deg", 0, "-20deg"] }}
+              transition={{
+                duration: 1,
+                repeat: Infinity,
+                repeatType: "mirror",
+                repeatDelay: 2,
+              }}
+            ></motion.span>
+          ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

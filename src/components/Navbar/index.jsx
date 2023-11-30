@@ -1,32 +1,38 @@
-import './style.scss'
+import './style.scss';
 
-import React, { useState, useEffect } from 'react'
+import { motion } from 'framer-motion';
 
 import LangSelector from '../LangSelector';
 
-function Navbar({items}) {
-    const [onTop, setOnTop] = useState(true);
-
-    useEffect(() => {
-        const onScroll = () => window.scrollY >= 75 ? setOnTop(false) : setOnTop(true)
-        window.removeEventListener("scroll", onScroll)
-        window.addEventListener("scroll", onScroll, { passive: true })
-        return () => window.removeEventListener("scroll", onScroll)
-    }, [])
-
-    const jumpTo = (id) => {
-        document.getElementById(id).scrollIntoView({ behavior: 'smooth' })
-    }
+function Navbar({ items, view = 'home', position = 0, background = false }) {  
+  const jumpTo = (id) => {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' })
+  }
 
     return (
-      <nav className={onTop ? "" : "scrolled"}>
+      <motion.nav style={(position >= 75 && background) && { backgroundColor: "#1d1c23cc" }}>
         <div>
-          {items.map((item) => (
-            <button key={item.id} onClick={() => jumpTo(item.id)}>{item.name}</button>
+          {items.map((item, index) => (
+            <motion.button
+              key={item.id}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: index != 0 && index / 3 }}
+              className={view === item.id ? 'active' : '' }
+              onClick={() => jumpTo(item.id)}
+            >
+              {item.name}
+            </motion.button>
           ))}
-          <LangSelector />
+          <motion.div
+            initial={{ transform: "translateX(150%)" }}
+            animate={{ transform: "translateX(0)" }}
+            transition={{ duration: 0.8 }}
+          >
+            <LangSelector />
+          </motion.div>
         </div>
-      </nav>
+      </motion.nav>
     );
 }
 
