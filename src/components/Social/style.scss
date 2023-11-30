@@ -1,28 +1,4 @@
-@import '../../utils/mixins.scss';
 @import '../../utils/variables.scss';
-
-@mixin iconsAnimation($child) {
-    @for $i from 1 through 5 {
-        a:#{$child}(#{$i}) {
-            opacity: 0;
-
-            @include keyframes(appear) {
-                0% {
-                    opacity: 0;
-                    transform: rotate(-320deg);
-                }
-                100% {
-                    opacity: 1;
-                    transform: rotate(-360deg);
-                }
-            }
-
-            @include animate(appear, .5s, ease-in-out, 1);
-            animation-delay: calc(1s * #{$i} / 2);
-            animation-fill-mode: forwards;
-        }
-    }
-}
 
 #social {
     position: fixed;
@@ -36,8 +12,6 @@
             flex-direction: column;
             margin-bottom: 1em;
             transform: translateX(-50%);
-
-            // @include iconsAnimation('nth-last-child')
         }
 
         span {
@@ -57,8 +31,6 @@
         div {
             margin-left: 1em;
             transform: translateY(-50%);
-
-            // @include iconsAnimation('nth-child')
         }
 
         span {
