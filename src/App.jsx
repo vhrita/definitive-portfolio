@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+import { useScroll, useMotionValueEvent, inView } from "framer-motion";
 
 import Navbar from "./components/Navbar";
 import Social from "./components/Social";
@@ -21,15 +23,18 @@ function App() {
     const pages = [
       {
         id: "home",
-        name: t('home'),
+        name: t("home"),
+        social: "vertical",
       },
       {
         id: "about",
-        name: t('about'),
+        name: t("about"),
+        social: "vertical",
       },
       {
         id: "portfolio",
-        name: t('portfolio'),
+        name: t("portfolio"),
+        social: "horizontal",
       },
     ];
 
@@ -54,10 +59,34 @@ function App() {
       },
     ];
 
+    const { scrollY } = useScroll();
+    const [position, setPosition] = useState(0);
+    const [view, setView] = useState(pages[0]);
+    const [ social, setSocial ] = useState(pages[0].social)
+
+    useMotionValueEvent(scrollY, "change", (latest) => {
+      setPosition(latest);
+    });
+
+    useEffect(() => {
+      pages.map((item) => {
+        inView(
+          `#${item.id}`,
+          () => {
+            setView(item);
+            setTimeout(() => {
+              setSocial(item.social)
+            }, 400);
+          },
+          { amount: 0.5 }
+        );
+      });
+    }, [position]);
+
     return (
       <LocaleContext.Provider value={{ locale, setLocale }}>
-        <Navbar items={pages} />
-        <Social />
+        <Navbar items={pages} view={view.id} position={position} background={view.social === "vertical"} />
+        <Social orientation={social} />
         <Home />
         <About />
         <Portfolio projects={projects}/>
