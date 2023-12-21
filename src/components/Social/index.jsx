@@ -2,31 +2,13 @@ import "./style.scss";
 
 import { motion } from 'framer-motion';
 
-import Linkedin from "../../assets/icons/linkedin.svg";
-import Instagram from "../../assets/icons/instagram.svg";
-import Github from "../../assets/icons/github.svg";
-
-const socialMedias = [
-  {
-    name: "Linkedin",
-    icon: Linkedin,
-    link: "https://www.linkedin.com/in/vhrita/",
-  },
-  {
-    name: "Instagram",
-    icon: Instagram,
-    link: "https://www.instagram.com/vhrita.dev/",
-  },
-  {
-    name: "Github",
-    icon: Github,
-    link: "https://github.com/vhrita",
-  },
-];
-
-function Social({ orientation = 'vertical' }) {
+function Social({ orientation = 'vertical', socialMedias = [] }) {
   return (
-    <div id="social" className={orientation}>
+    <div 
+      id="social" 
+      className={orientation}
+      style={orientation === "drop" ? { display: "none" } : {}}
+    >
       <div key={orientation}>
         {socialMedias.map((media, index) => (
           <motion.a

@@ -7,12 +7,16 @@ import Social from "./components/Social";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Portfolio from "./pages/Porfolio";
+import Contact from "./pages/Contact";
 
 import LocaleContext from "./config/internationalization/LocaleContext.js";
 import i18n from './config/internationalization/i18n';
 import { useTranslation } from "react-i18next";
 
 import imageExample from "./assets/background.jpg";
+import Linkedin from "./assets/icons/linkedin.svg";
+import Instagram from "./assets/icons/instagram.svg";
+import Github from "./assets/icons/github.svg";
 
 function App() {
     const [locale, setLocale] = useState(i18n.language);
@@ -36,6 +40,11 @@ function App() {
         name: t("portfolio"),
         social: "horizontal",
       },
+      {
+        id: "contact",
+        name: t("contact"),
+        social: "drop",
+      },
     ];
 
     const projects = [
@@ -56,6 +65,24 @@ function App() {
         description: "aaaa",
         images: Array(3).fill(imageExample),
         techs: ["HTML", "CSS3"],
+      },
+    ];
+
+    const socialMedias = [
+      {
+        name: "Linkedin",
+        icon: Linkedin,
+        link: "https://www.linkedin.com/in/vhrita/",
+      },
+      {
+        name: "Instagram",
+        icon: Instagram,
+        link: "https://www.instagram.com/vhrita.dev/",
+      },
+      {
+        name: "Github",
+        icon: Github,
+        link: "https://github.com/vhrita",
       },
     ];
 
@@ -86,10 +113,11 @@ function App() {
     return (
       <LocaleContext.Provider value={{ locale, setLocale }}>
         <Navbar items={pages} view={view.id} position={position} background={view.social === "vertical"} />
-        <Social orientation={social} />
+        <Social orientation={social} socialMedias={socialMedias} />
         <Home />
         <About />
         <Portfolio projects={projects}/>
+        <Contact socialMedias={socialMedias} />
       </LocaleContext.Provider>
     );
 }

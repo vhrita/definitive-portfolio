@@ -1,0 +1,15 @@
+@import '../../utils/variables.scss';
+
+#contact {
+    background-color: $blue;
+    height: 80vh;
+    width: 100vw;
+    transform: scaleX(1.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    // &.infos {
+        
+    // }
+}
