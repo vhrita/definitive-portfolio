@@ -19,7 +19,7 @@
         position: absolute;
         z-index: 3;
         top: 50%;
-        transform: translateY(-25%);
+        transform: translateY(-50%);
         width: 4em;
         height: 4em;
         background-color: $blue;
@@ -74,24 +74,59 @@
         }
 
         &__content {
-            h3, p {
+            width: 100%;
+            height: 100%;
+            position: relative;
+
+            &__text {
+                width: 80%;
                 position: absolute;
-                z-index: 2;
-                color: #FFF;
                 left: 50%;
                 transform: translateX(-50%);
+                z-index: 2;
+                color: #FFF;
+                bottom: 10%;
                 font-weight: 300;
-            }
 
-            h3 {
-                bottom: 10%;
-                margin-bottom: 5%;
-                font-size: 5em;
-            }
+                h3 {
+                    margin-bottom: 1%;
+                    font-size: 3.5em;
+                }
+    
+                p {
+                    font-size: 1.5em;
+                }
 
-            p {
-                bottom: 10%;
-                font-size: 2.2em;
+                &__more {
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    bottom: 110%;
+                    background-color: inherit;
+                    border: none;
+                    padding: 2% 5%;
+                    border-radius: 25px;
+                    cursor: pointer;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 0;
+                
+                    img {
+                        width: 3em;
+                        height: 3em;
+                        object-fit: scale-down;
+                        transform: rotate(180deg);
+                        filter: brightness(0) saturate(100%) invert(70%) sepia(33%) saturate(851%) hue-rotate(122deg) brightness(89%) contrast(92%);
+                    }
+                
+                    img:first-child {
+                        width: 4em;
+                        height: 4em;
+                        margin-top: 1em;
+                        transform: rotate(180deg) translateX(10%);
+                    }
+                }
             }
 
             &__chips {
@@ -112,22 +147,7 @@
         }
 
         // &:hover {
-        //     &::after {
-        //         content: 'Ver mais';
-        //         position: absolute;
-        //         left: 0;
-        //         top: 0;
-        //         z-index: 2;
-        //         width: 100%;
-        //         height: 100%;
-        //         text-align: center;
-        //         display: flex;
-        //         align-items: center;
-        //         justify-content: center;
-        //         color: $blue;
-        //         font-size: 5em;
-        //         background-color: rgba($color: #000, $alpha: 0.3);
-        //     }
+
         // }
     }
 }
