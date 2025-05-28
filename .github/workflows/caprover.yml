@@ -1,0 +1,40 @@
+name: Build and Deploy to CapRover
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build project
+      run: npm run build
+
+    - name: Deploy to `deploy` branch
+      run: |
+        git config --global user.name "github-actions"
+        git config --global user.email "actions@github.com"
+
+        git clone --branch deploy https://github.com/${{ github.repository }} deploy-branch
+        rm -rf deploy-branch/*
+        cp -r dist deploy-branch/
+        cp captain-definition deploy-branch/
+
+        cd deploy-branch
+        git add .
+        git commit -m "Deploy from main @ $GITHUB_SHA"
+        git push origin deploy --force
