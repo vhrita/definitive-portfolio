@@ -37,4 +37,5 @@ jobs:
         cd deploy
         git add .
         git commit -m "Deploy from main @ $GITHUB_SHA"
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
         git push origin deploy --force
