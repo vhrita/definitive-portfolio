@@ -1,13 +1,50 @@
 {
-    "translation": {
-        "progress": "Ei, eu ainda estou trabalhando neste portfólio, então esta é uma versão de desenvolvimento.",
-        "home": "Inicio",
-        "about": "Sobre",
-        "portfolio": "Portfolio",
-        "greatings": "Olá, eu sou o",
-        "position": "Um Desenvolvedor Fullstack",
-        "skillsPrefix": "Experiente com",
-        "aboutTitle": "Sobre mim",
-        "aboutText": "Lorem ipsum dolor sit amet. Non blanditiis nesciunt non nihil animi a nulla explicabo est debitis fuga! Non voluptatem maiores non rerum dolore id sequi dolor eos commodi deleniti qui quia reprehenderit. Vel suscipit galisum est ullam enim non cupiditate neque aut porro alias qui quia sunt id quia possimus est itaque quia. Est maxime atque sed eaque nihil qui Quis perspiciatis qui porro blanditiis. Aut tempora beatae ea sapiente consequuntur in odio vitae et aliquid fugit et exercitationem eaque sit quia quae. Aut dolores eaque ut adipisci magnam ut unde rerum ut temporibus molestias a exercitationem magni sit corporis dolor ut accusamus corporis. Qui totam voluptatem est alias quos et sint velit eos aspernatur laborum ut praesentium esse et mollitia doloribus. Et quia soluta ea sunt dolorem et officiis autem est numquam tempora eum dignissimos asperiores."
-    }
+  "translation": {
+    "progress": "Ei, ainda estou trabalhando neste portfólio — é uma versão em desenvolvimento.",
+    "home": "Início",
+    "about": "Sobre",
+    "portfolio": "Portfólio",
+    "greatings": "Oi, eu sou",
+    "position": "Engenheiro de Software Sênior",
+    "skillsPrefix": "Experiente em",
+    "aboutTitle": "Sobre mim",
+    "aboutText": "Sou desenvolvedor de software com 7 anos de experiência em aplicações escaláveis. Sou apaixonado por novas tecnologias e criar soluções incríveis. Odeio estagnar — estou sempre aprendendo algo novo, seja coding, mercado financeiro (sou investidor) ou viajando (já conheci vários países e pretendo conhecer muito mais).",
+    "projects": [
+        {
+            "title": "Baixar Mangás",
+            "description": "Projeto criado inicialmente como trabalho de conclusão de curso, posteriormente liberado para a comunidade. Um web scraper que busca capítulos de mangás em sites populares, indexando-os e permitindo a conversão para PDF e posteriomente seu download.",
+            "images": [],
+            "techs": ["NextJS", "Puppeteer", "Tailwind CSS", "NextUI", "Websockets"],
+            "link": "https://mangas.vhrita.dev"
+        },
+        {
+            "title": "Paladins Dynamic Overlay",
+            "description": "Refatoração de um overlay dinâmico para o jogo Paladins, criado por mim para compor minhas streams em 2018, está Open Source e sendo atualizado com novas tecnologias. Busca informações da partida em tempo real, alterando o overlay do streamer de acordo com o persongagem jogado.",
+            "images": [],
+            "techs": ["NextJS", "Websockets", "Tailwind CSS", "Rest API", "UX"],
+            "link": "https://github.com/vhrita/paladins-dynamic-overlay"
+        },
+        {
+            "title": "Kindle Newsletter",
+            "description": "Um serviço simples que envia a newsletter diária do TheNews.cc diretamente para o seu Kindle. Através de scraping, converte o conteúdo em um formato amigável para leitura no Kindle e envia via email.",
+            "images": [],
+            "techs": ["Node.js", "Cheerio", "Nodemailer"],
+            "link": "https://github.com/vhrita/kindle-newsletter"
+        },
+        {
+            "title": "Investidor10 Scraper",
+            "description": "Scraper que coleta dados de ativos financeiros do site Investidor10, podendo diponibiliza-los através de Rest API.",
+            "images": [],
+            "techs": ["ExpressJS", "Puppeteer", "Redis"],
+            "link": "https://github.com/vhrita/investidor10-scrap"
+        },
+        {
+            "title": "Definitive Portfolio",
+            "description": "Meu site pessoal com React e Framer Motion: animações avançadas, scroll horizontal e carrossel responsivo de projetos.",
+            "images": [],
+            "techs": ["React.js", "Framer Motion", "SCSS", "ViteJS", "i18n"],
+            "link": "https://vhrita.dev"
+        }
+    ]
+  }
 }

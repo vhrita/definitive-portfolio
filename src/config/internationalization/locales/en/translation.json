@@ -1,13 +1,50 @@
 {
-    "translation": {
-        "progress": "Hey, I still working in this portfolio, so it's a development version.",
-        "home": "Home",
-        "about": "About",
-        "portfolio": "Portfolio",
-        "greatings": "Hello, I'm",
-        "position": "A Fullstack Developer",
-        "skillsPrefix": "Skilled in",
-        "aboutTitle": "About me",
-        "aboutText": "Lorem ipsum dolor sit amet. Non blanditiis nesciunt non nihil animi a nulla explicabo est debitis fuga! Non voluptatem maiores non rerum dolore id sequi dolor eos commodi deleniti qui quia reprehenderit. Vel suscipit galisum est ullam enim non cupiditate neque aut porro alias qui quia sunt id quia possimus est itaque quia. Est maxime atque sed eaque nihil qui Quis perspiciatis qui porro blanditiis. Aut tempora beatae ea sapiente consequuntur in odio vitae et aliquid fugit et exercitationem eaque sit quia quae. Aut dolores eaque ut adipisci magnam ut unde rerum ut temporibus molestias a exercitationem magni sit corporis dolor ut accusamus corporis. Qui totam voluptatem est alias quos et sint velit eos aspernatur laborum ut praesentium esse et mollitia doloribus. Et quia soluta ea sunt dolorem et officiis autem est numquam tempora eum dignissimos asperiores."
-    }
+  "translation": {
+    "progress": "Hey, I’m still working on this portfolio – it’s a development preview.",
+    "home": "Home",
+    "about": "About",
+    "portfolio": "Portfolio",
+    "greatings": "Hi, I’m",
+    "position": "Senior Software Engineer",
+    "skillsPrefix": "Skilled in",
+    "aboutTitle": "About me",
+    "aboutText": "I’m a software developer with 7 years of experience building scalable web apps. I love exploring new technologies, crafting solutions and pushing boundaries. I never settle — I’m always learning something new, whether in code, finance (I’m an investor and market enthusiast) or travel (I’ve visited many countries and plan to see many more).",
+    "projects": [
+        {
+            "title": "Manga Downloader",
+            "description": "Originally created as a final graduation project and later open-sourced for the community. A web scraper that fetches manga chapters from popular sites, indexes them, and allows conversion to PDF for download.",
+            "images": [],
+            "techs": ["NextJS", "Puppeteer", "Tailwind CSS", "NextUI", "WebSockets"],
+            "link": "https://mangas.vhrita.dev"
+        },
+        {
+            "title": "Paladins Dynamic Overlay",
+            "description": "A refactored dynamic overlay for Paladins that I built for my streams back in 2018. It’s now open-source and continuously updated. It retrieves match data in real time and updates the streamer’s overlay based on the champion being played.",
+            "images": [],
+            "techs": ["NextJS", "WebSockets", "Tailwind CSS", "REST API", "UX"],
+            "link": "https://github.com/vhrita/paladins-dynamic-overlay"
+        },
+        {
+            "title": "Kindle Newsletter",
+            "description": "A simple service that sends TheNews.cc’s daily newsletter straight to your Kindle. It scrapes the content, converts it into a Kindle-friendly format, and delivers it via email.",
+            "images": [],
+            "techs": ["Node.js", "Cheerio", "Nodemailer"],
+            "link": "https://github.com/vhrita/kindle-newsletter"
+        },
+        {
+            "title": "Investidor10 Scraper",
+            "description": "A scraper that collects financial asset data from the Investidor10 website and exposes it through a REST API.",
+            "images": [],
+            "techs": ["ExpressJS", "Puppeteer", "Redis"],
+            "link": "https://github.com/vhrita/investidor10-scrap"
+        },
+        {
+            "title": "Definitive Portfolio",
+            "description": "My personal website built with React and Framer Motion: featuring advanced animations, horizontal scrolling, and a responsive project carousel.",
+            "images": [],
+            "techs": ["React.js", "Framer Motion", "SCSS", "ViteJS", "i18n"],
+            "link": "https://vhrita.dev"
+        }
+    ]
+  }
 }

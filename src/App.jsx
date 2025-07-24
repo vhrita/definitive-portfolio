@@ -38,26 +38,14 @@ function App() {
 		},
 	];
 
-	const projects = [
-		{
-			title: "aaaa",
-			description: "aaaa",
-			images: Array(3).fill(imageExample),
-			techs: ["HTML", "CSS3"],
-		},
-		{
-			title: "bbbb",
-			description: "aaaa",
-			images: Array(3).fill(imageExample),
-			techs: ["HTML", "CSS3"],
-		},
-		{
-			title: "cccc",
-			description: "aaaa",
-			images: Array(3).fill(imageExample),
-			techs: ["HTML", "CSS3"],
-		},
-	];
+	const projects = t("projects", { returnObjects: true }).map(item => ({
+		title: item.title,
+		description: item.description,
+		images: [imageExample],
+		techs: item.techs,
+		// repo: item.repo,
+		link: item.link,
+	}));
 
 	const { scrollY } = useScroll();
 	const [position, setPosition] = useState(0);

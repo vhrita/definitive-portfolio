@@ -1,133 +1,144 @@
 @import '../../utils/variables.scss';
+@import '../../utils/mixins.scss';
 
-#slider {
+.container {
+  position: relative;
+  padding-top: 1%;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .slider {
+    width: 100%;
+    height: 100%;
     position: relative;
-    background-color: inherit;
-    display: flex;
-    align-items: center;
+    perspective: 200px;
+    perspective-origin: 50% 100%;
+  }
 
-    .counter {
-        position: absolute;
-        top: -10%;
-        left: 1%;
-        font-size: 2.5em;
-        color: $blue;
-        font-weight: 100;
+  .card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    border-radius: 10px;
+    transform: translate3d(-50%, -50%, 0px);
+    overflow: hidden;
+    background: #000;
+
+    img {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      opacity: 0.5;
+      object-fit: cover;
     }
 
-    .btn-previous, .btn-next {
-        position: absolute;
-        z-index: 3;
-        top: 50%;
-        transform: translateY(-25%);
-        width: 4em;
-        height: 4em;
-        background-color: $blue;
-        border: none;
-        border-radius: 100%;
-        cursor: pointer;
+    .copy {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .chips {
         display: flex;
-        align-items: center;
-        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
 
-        img {
-            position: relative;
-            width: 80%;
-            height: 80%;
-            object-fit: scale-down;
-            filter: brightness(0) invert(1) opacity(1);
+        span, a {
+          background-color: $blue;
+          color: #fff;
+          padding: 0.2rem 0.5rem;
+          border-radius: 20px;
+          font-size: 0.6rem;
+          font-weight: bold;
         }
-    }
 
-    .btn-previous {
-        left: -2%;
+        a {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          right: 0;
+          margin-right: 5%;
+          transform: translateY(-25%);
+          padding: 0;
+          border-radius: 100%;
+          width: 2rem;
+          height: 2rem;
 
-        img {
-            transform: rotate(90deg);
+          img {
+            width: 50%;
+            height: 50%;
+            filter: invert(1);
+            opacity: 1;
+            font-weight: bold;
+          }
         }
-    }
+      }
 
-    .btn-next {
-        right: -2%;
+      .text-content {
+        text-align: center;
+        margin-top: auto;
 
-        img {
-            transform: rotate(-90deg);
+        h1 {
+          font-size: 2vw;
+          font-weight: 300;
+          letter-spacing: -0.05em;
+          text-transform: uppercase;
+          color: $blue;
+          margin-bottom: 0.5rem;
+
+          span {
+            display: inline-block;
+          }
         }
-    }
 
+        p {
+          font-size: 1rem;
+          color: #fff;
+          font-weight: 300;
+          max-width: 600px;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+
+  @include respond-to('mobile') {
     .card {
-        position: absolute;
-        left: 0;
-        width: 100%;
-        height: 100%;
+      width: 80%;
+      height: 450px;
 
-        img {
-            z-index: 1;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            -webkit-user-drag: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            filter: opacity(0.5);
+      .copy {
+        padding: 1rem;
+
+        .text-content {
+          h1 {
+            font-size: 5vw;
+          }
+
+          p {
+            font-size: 1rem;
+          }
         }
 
-        &__content {
-            h3, p {
-                position: absolute;
-                z-index: 2;
-                color: #FFF;
-                left: 50%;
-                transform: translateX(-50%);
-                font-weight: 300;
-            }
-
-            h3 {
-                bottom: 10%;
-                margin-bottom: 5%;
-                font-size: 5em;
-            }
-
-            p {
-                bottom: 10%;
-                font-size: 2.2em;
-            }
-
-            &__chips {
-                z-index: 2;
-                position: absolute;
-                left: 2.5%;
-                top: 5%;
-                display: flex;
-                gap: 20%;
-                font-weight: bold;
-
-                span {
-                    padding: 5% 15%;
-                    background-color: $blue;
-                    border-radius: 25px;
-                }
-            }
+        .chips {
+          span {
+            padding: 0.2rem 0.5rem;
+            font-size: 0.6rem;
+          }
         }
-
-        // &:hover {
-        //     &::after {
-        //         content: 'Ver mais';
-        //         position: absolute;
-        //         left: 0;
-        //         top: 0;
-        //         z-index: 2;
-        //         width: 100%;
-        //         height: 100%;
-        //         text-align: center;
-        //         display: flex;
-        //         align-items: center;
-        //         justify-content: center;
-        //         color: $blue;
-        //         font-size: 5em;
-        //         background-color: rgba($color: #000, $alpha: 0.3);
-        //     }
-        // }
+      }
     }
+  }
 }
