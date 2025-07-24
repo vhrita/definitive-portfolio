@@ -1,3 +1,4 @@
+@import '../../utils/mixins.scss';
 @import '../../utils/variables.scss';
 
 #language-selector {
@@ -54,5 +55,9 @@
                 color: #CCC;
             }
         }
+    }
+
+    @include respond-to('mobile') {
+        width: 2.5em;
     }
 }
