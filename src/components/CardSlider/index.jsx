@@ -1,88 +1,120 @@
 import './style.scss';
+import { useRef, useEffect } from 'react';
+import gsap from 'gsap';
+import { CustomEase } from 'gsap/CustomEase';
 
-import { useState } from "react";
-import { motion } from 'framer-motion';
+import OpenExternal from '../../assets/icons/open_external.svg';
 
-import arrow from "../../assets/icons/arrow_down.svg";
+gsap.registerPlugin(CustomEase);
+CustomEase.create("cubic", "0.83, 0, 0.17, 1");
 
+function CardSlider({ cards = [] }) {
+  const sliderRef = useRef(null);
+  const isAnimatingRef = useRef(false);
 
-function CardSlider({ cards = [], width = '100%', height = '80%' }) {
-    const [position, setPosition] = useState(0);
+  // Split text into spans for animation
+  const splitTextIntoSpans = (element) => {
+    const text = element.innerText;
+    const splitText = text.split("").map(char =>
+      `<span>${char === " " ? "&nbsp;&nbsp;" : char}</span>`
+    ).join("");
+    element.innerHTML = splitText;
+  };
 
-    return (
-      <motion.div
-        id="slider"
-        style={{ width, height }}
-        initial={{ position: "absolute", x: "+100%" }}
-        whileInView={{ x: 0, position: "relative" }}
-        transition={{ duration: 1 }}
-        viewport={{ amount: 0.1, once: true }}
-      >
-        <span className="counter">
-          {position + 1} / {cards.length}
-        </span>
-        <button
-          className="btn-previous"
-          onClick={() =>
-            setPosition(position === 0 ? cards.length - 1 : position - 1)
-          }
-        >
-          <img src={arrow} />
-        </button>
-        {cards.map((card, index) => {
-          return (
-            <motion.div
-              key={card.title}
-              className="card"
-              initial={{
-                scale: 1,
-                rotation: -180,
-                opacity: index !== 0 ? 0 : 0.5,
-              }}
-              animate={{
-                left: `${(index - position) * 95}%`,
-                opacity: 1,
-                rotate: 0,
-                scale: index === position ? 1 : 0.8,
-              }}
-            >
-              <img src={card.images[0]} />
-              {index === position && (
-                <div className="card__content">
-                  <h3>{card.title}</h3>
-                  <p>{card.description}</p>
-                  <div className="card__content__chips">
-                    {card.techs.map((tech, index) => {
-                      return (
-                        <motion.span
-                          key={tech}
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{
-                            duration: 0.5,
-                            delay: index != 0 && index - 0.5,
-                          }}
-                        >
-                          {tech}
-                        </motion.span>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
-            </motion.div>
-          );
-        })}
-        <button
-          className="btn-next"
-          onClick={() =>
-            setPosition(position >= cards.length - 1 ? 0 : position + 1)
-          }
-        >
-          <img src={arrow} />
-        </button>
-      </motion.div>
-    );
+  // Position cards in 3D stack
+  const initializeCards = () => {
+    const cardsDOM = sliderRef.current.querySelectorAll(".card");
+    gsap.to(cardsDOM, {
+      y: (i) => -15 + 15 * i + "%",
+      z: (i) => 15 * i,
+      opacity: 1,
+      duration: 1,
+      ease: "cubic",
+      stagger: -0.1,
+    });
+  };
+
+  useEffect(() => {
+    initializeCards(); 
+
+    const h1s = sliderRef.current.querySelectorAll(".copy h1");
+    h1s.forEach(h1 => splitTextIntoSpans(h1));
+
+    gsap.set("h1 span", { y: -200 });
+    gsap.set(sliderRef.current.querySelectorAll(".card:last-child h1 span"), { y: 0 });
+
+    // Click handler for card slider
+    const handleClick = () => {
+      if (isAnimatingRef.current) return;
+      isAnimatingRef.current = true;
+
+      const cards = Array.from(sliderRef.current.querySelectorAll(".card"));
+      const lastCard = cards.pop();
+      const nextCard = cards[cards.length - 1];
+
+      // Animate out last card's text
+      gsap.to(lastCard.querySelectorAll("h1 span"), {
+        y: 200,
+        duration: 0.75,
+        ease: "cubic",
+      });
+
+      // Animate out last card
+      gsap.to(lastCard, {
+        y: "+=150%",
+        duration: 0.75,
+        ease: "cubic",
+        onComplete: () => {
+          sliderRef.current.prepend(lastCard);
+          initializeCards();
+          gsap.set(lastCard.querySelectorAll("h1 span"), { y: -200 });
+          setTimeout(() => {
+            isAnimatingRef.current = false;
+          }, 1000);
+        }
+      });
+
+      // Animate in next card's text
+      gsap.to(nextCard.querySelectorAll("h1 span"), {
+        y: 0,
+        duration: 1,
+        ease: "cubic",
+        stagger: 0.05,
+      });
+    };
+
+    const sliderEl = sliderRef.current;
+    sliderEl.addEventListener("click", handleClick);
+    return () => {
+      sliderEl.removeEventListener("click", handleClick);
+    };
+  }, []);
+
+  return (
+    <div className="container">
+      <div className="slider" ref={sliderRef}>
+        {cards.map((card, index) => (
+          <div className="card" key={index}>
+            <img src={card.images[0]} alt={card.title} />
+            <div className="copy">
+              <div className="chips">
+                {card.techs.map((tech, i) => (
+                  <span key={i}>{tech}</span>
+                ))}
+                <a className="link" href={card.link} target='_blank'>
+                  <img src={OpenExternal} alt="Link to project" />
+                </a>
+              </div>
+              <div className="text-content">
+                <h1>{card.title}</h1>
+                <p>{card.description}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
-export default CardSlider
+export default CardSlider;
