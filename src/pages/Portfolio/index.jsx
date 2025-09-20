@@ -1,14 +1,12 @@
 import './style.scss'
 
-import CardSlider from '../../components/CardSlider';
+import StickyCards from '../../components/StickyCards';
 
 
 function Portfolio({ projects }) {
-    
-    
     return (
       <div id="portfolio">
-        <CardSlider cards={projects} />
+        <StickyCards cards={projects} />
       </div>
     );
 }
