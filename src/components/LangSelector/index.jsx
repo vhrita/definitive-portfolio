@@ -19,7 +19,7 @@ const languages = [
   },
 ];
 
-function LangSelector() {
+function LangSelector({ isPortfolio = false }) {
   const [ lang, setLang ] = useState(i18n.language)
 
   const handleLanguage = (language) => {
@@ -29,7 +29,7 @@ function LangSelector() {
 
   return (
     <>
-      <div id="language-selector">
+      <div id="language-selector" className={isPortfolio ? 'portfolio-mode' : ''}>
         <img src={languages.find(obj => obj.code === lang).flag} />
         <div>
           {languages.map(l => (
