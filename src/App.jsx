@@ -6,7 +6,8 @@ import Navbar from "./components/Navbar";
 import Social from "./components/Social";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Portfolio from "./pages/Porfolio";
+import Portfolio from "./pages/Portfolio";
+import Contact from "./pages/Contact";
 
 import LocaleContext from "./config/internationalization/LocaleContext.js";
 import i18n from "./config/internationalization/i18n";
@@ -34,8 +35,13 @@ function App() {
 		{
 			id: "portfolio",
 			name: t("portfolio"),
-			social: "horizontal",
+			social: "vertical",
 		},
+		{
+			id: "contact",
+			name: t("contact"),
+			social: "vertical"
+		}
 	];
 
 	const projects = t("projects", { returnObjects: true }).map(item => ({
@@ -43,7 +49,6 @@ function App() {
 		description: item.description,
 		images: [imageExample],
 		techs: item.techs,
-		// repo: item.repo,
 		link: item.link,
 	}));
 
@@ -51,6 +56,9 @@ function App() {
 	const [position, setPosition] = useState(0);
 	const [view, setView] = useState(pages[0]);
 	const [social, setSocial] = useState(pages[0].social);
+	const [isContactInView, setIsContactInView] = useState(false);
+	const [isPortfolioInView, setIsPortfolioInView] = useState(false);
+	const [lastViewChange, setLastViewChange] = useState(0);
 
 	useMotionValueEvent(scrollY, "change", latest => {
 		setPosition(latest);
@@ -58,23 +66,79 @@ function App() {
 
 	useEffect(() => {
 		pages.map(item => {
+			let threshold = 0.5;
+			if (item.id === 'contact') threshold = 0.3;
+			if (item.id === 'portfolio') threshold = 0.2;
+
 			inView(
 				`#${item.id}`,
 				() => {
+					const now = Date.now();
+
+					if (now - lastViewChange < 400) {
+						return;
+					}
+
+					setLastViewChange(now);
 					setView(item);
-					setTimeout(() => {
+
+					if (item.id === 'contact') {
+						setIsContactInView(true);
+						setIsPortfolioInView(false);
+						setTimeout(() => {
+							setSocial(item.social);
+						}, 800);
+					} else if (item.id === 'portfolio') {
+						setIsPortfolioInView(true);
+						setIsContactInView(false);
 						setSocial(item.social);
-					}, 400);
+					} else {
+						setIsContactInView(false);
+						setIsPortfolioInView(false);
+						setTimeout(() => {
+							setSocial(item.social);
+						}, 400);
+					}
 				},
-				{ amount: 0.5 }
+				{ amount: threshold }
 			);
 		});
-	}, [position]);
+	}, [position, lastViewChange]);
 
-	//TODO: Remove when MVP is ready
+	// Early portfolio detection based on scroll position
 	useEffect(() => {
-		alert(t("progress"));
-	}, [locale]);
+		const handleEarlyPortfolioDetection = () => {
+			const portfolioElement = document.getElementById('portfolio')
+			const contactElement = document.getElementById('contact')
+			if (!portfolioElement || !contactElement) return
+
+			const portfolioRect = portfolioElement.getBoundingClientRect()
+			const contactRect = contactElement.getBoundingClientRect()
+			const windowHeight = window.innerHeight
+
+			const contactTop = contactRect.top
+			const contactVisible = contactTop < windowHeight * 0.7
+
+			if (contactVisible) {
+				return
+			}
+
+			const portfolioTop = portfolioRect.top
+			const portfolioVisible = portfolioTop < windowHeight * 0.3
+
+			if (portfolioVisible && !isPortfolioInView && !isContactInView) {
+				setIsPortfolioInView(true)
+				setSocial('vertical')
+			} else if (!portfolioVisible && portfolioTop > windowHeight * 0.5 && isPortfolioInView && !isContactInView) {
+				setIsPortfolioInView(false)
+			}
+		}
+
+		window.addEventListener('scroll', handleEarlyPortfolioDetection)
+		handleEarlyPortfolioDetection()
+
+		return () => window.removeEventListener('scroll', handleEarlyPortfolioDetection)
+	}, [isPortfolioInView, isContactInView]);
 
 	return (
 		<LocaleContext.Provider value={{ locale, setLocale }}>
@@ -83,11 +147,18 @@ function App() {
 				view={view.id}
 				position={position}
 				background={view.social === "vertical"}
+				isPortfolio={isPortfolioInView}
+				isContact={isContactInView}
 			/>
-			<Social orientation={social} />
+			<Social
+				orientation={social}
+				isContactInView={isContactInView}
+				isPortfolio={isPortfolioInView}
+			/>
 			<Home />
 			<About />
 			<Portfolio projects={projects} />
+			<Contact isContactInView={isContactInView} />
 		</LocaleContext.Provider>
 	);
 }
