@@ -24,9 +24,23 @@ const socialMedias = [
   },
 ];
 
-function Social({ orientation = 'vertical' }) {
+function Social({ orientation = 'vertical', isContactInView = false, isPortfolio = false }) {
   return (
-    <div id="social" className={orientation}>
+    <motion.div
+      id="social"
+      className={`${orientation} ${isPortfolio ? 'portfolio-mode' : ''}`}
+      animate={{
+        opacity: isContactInView ? 0 : 1,
+        scale: isContactInView ? 0.8 : 1,
+        y: isContactInView ? (orientation === 'vertical' ? 50 : 0) : 0,
+        x: isContactInView ? (orientation === 'horizontal' ? -50 : 0) : 0
+      }}
+      transition={{
+        duration: 0.8,
+        ease: "easeInOut",
+        opacity: { duration: 0.6 }
+      }}
+    >
       <div key={orientation}>
         {socialMedias.map((media, index) => (
           <motion.a
@@ -34,13 +48,20 @@ function Social({ orientation = 'vertical' }) {
             href={media.link}
             target="_blank"
             initial={{ opacity: 0, rotate: "-320deg" }}
-            animate={{ opacity: 1, rotate: "-360deg" }}
+            animate={{
+              opacity: isContactInView ? 0 : 1,
+              rotate: "-360deg",
+              scale: isContactInView ? 0.5 : 1
+            }}
             transition={{
               duration: 1,
-              delay:
-                orientation === "vertical"
-                  ? (socialMedias.length - index) / 2
-                  : index / 2,
+              delay: isContactInView
+                ? index * 0.2
+                : orientation === "vertical"
+                  ? 0.3 + (socialMedias.length - index) / 2
+                  : 0.3 + index / 2,
+              opacity: { duration: isContactInView ? 0.4 : 1 },
+              scale: { duration: isContactInView ? 0.6 : 1 }
             }}
           >
             <img src={media.icon} alt={media.name}></img>
@@ -49,10 +70,22 @@ function Social({ orientation = 'vertical' }) {
       </div>
       <motion.span
         initial={orientation === "vertical" ? { height: 0 } : { width: 0 }}
-        animate={orientation === "vertical" ? { height: "20em", width: "1px" } : { width: "20em", height: "1px" }}
-        transition={{ duration: 1 }}
+        animate={{
+          height: orientation === "vertical"
+            ? (isContactInView ? 0 : "20em")
+            : (isContactInView ? 0 : "1px"),
+          width: orientation === "horizontal"
+            ? (isContactInView ? 0 : "20em")
+            : (isContactInView ? 0 : "1px"),
+          opacity: isContactInView ? 0 : 1
+        }}
+        transition={{
+          duration: isContactInView ? 0.6 : 0.3,
+          delay: 0,
+          ease: "easeOut"
+        }}
       ></motion.span>
-    </div>
+    </motion.div>
   );
 }
 

@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "framer-motion": "^10.16.5",
     "gsap": "^3.13.0",
     "i18next": "^23.7.6",
@@ -29,6 +30,5 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
     "vite": "^5.0.0"
-  },
-  "packageManager": "yarn@1.22.2"
+  }
 }

@@ -213,6 +213,8 @@
         }
 
         div:nth-of-type(2) {
+            width: 100%;
+            
             &::before, &::after {
                 overflow: hidden;
                 width: 90%;
@@ -230,8 +232,6 @@
                 bottom: -25;
                 background-position: 75% 45%
             }
-
-            width: 100%;
 
             span {
                 &:nth-of-type(1) {

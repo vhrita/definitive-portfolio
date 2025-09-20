@@ -4,11 +4,18 @@
     "home": "Início",
     "about": "Sobre",
     "portfolio": "Portfólio",
+    "contact": "Contato",
     "greatings": "Oi, eu sou",
     "position": "Engenheiro de Software Sênior",
     "skillsPrefix": "Experiente em",
     "aboutTitle": "Sobre mim",
     "aboutText": "Sou desenvolvedor de software com 7 anos de experiência em aplicações escaláveis. Sou apaixonado por novas tecnologias e criar soluções incríveis. Odeio estagnar — estou sempre aprendendo algo novo, seja coding, mercado financeiro (sou investidor) ou viajando (já conheci vários países e pretendo conhecer muito mais).",
+    "contactTitle": "Vamos Conversar",
+    "contactSubtitle": "Pronto para dar vida às suas ideias? Vamos conversar!",
+    "nameField": "Seu Nome",
+    "emailField": "Seu Email",
+    "messageField": "Sua Mensagem",
+    "sendButton": "Enviar Mensagem",
     "projects": [
         {
             "title": "Baixar Mangás",

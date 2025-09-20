@@ -49,6 +49,7 @@
         img {
             width: 1.5em;
             height: 1.5em;
+            transition: all 0.3s ease;
 
             &:hover {
                 filter: brightness(0) invert(1);
@@ -59,6 +60,30 @@
 
     span {
         display: block;
+        transition: all 0.3s ease;
+    }
+
+    // Portfolio mode styles - immersive white theme
+    &.portfolio-mode {
+        div {
+            img {
+                filter: brightness(0) invert(1) !important;
+
+                &:hover {
+                    filter: brightness(0) invert(1) !important;
+                    opacity: 0.8 !important;
+                    transform: scale(1.2) !important;
+                }
+            }
+        }
+
+        &.vertical span {
+            border-left-color: white !important;
+        }
+
+        &.horizontal span {
+            border-top-color: white !important;
+        }
     }
 
     @include respond-to('mobile') {
