@@ -113,20 +113,48 @@ nav {
         }
     }
 
-    @include respond-to('mobile') {
-        height: 8%;
-        padding: 0 5%;
+    @media (max-width: 768px) {
+        height: 60px;
+        padding: 0 1rem;
 
         div:nth-of-type(1) {
-            justify-content: flex-start;
+            justify-content: space-between;
+            gap: 0.5rem;
 
             button {
                 width: auto;
-                font-size: 1em;
+                min-width: auto;
+                font-size: 0.85rem;
+                padding: 0.5rem 0.8rem;
+                height: auto;
+                white-space: nowrap;
+
+                &.active::after {
+                    width: 0.8em;
+                    bottom: 20%;
+                }
             }
 
-            div {
-                margin-left: auto;
+            #language-selector {
+                margin-left: 0;
+                flex-shrink: 0;
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
+        padding: 0 0.5rem;
+
+        div:nth-of-type(1) {
+            gap: 0.25rem;
+
+            button {
+                font-size: 0.75rem;
+                padding: 0.4rem 0.6rem;
+
+                &.active::after {
+                    width: 0.6em;
+                }
             }
         }
     }
