@@ -230,19 +230,18 @@
     .social-icons-absorbed {
       .absorbed-icon {
         &:nth-child(1) {
-          top: 10%;
-          left: 10%;
+          top: 8%;
+          left: 5%;
         }
 
         &:nth-child(2) {
-          top: 15%;
-          right: 10%;
+          top: 8%;
+          right: 5%;
         }
 
         &:nth-child(3) {
-          top: 25%;
-          left: 50%;
-          transform: translateX(-50%);
+          bottom: 8%;
+          right: 5%;
         }
 
         a img {
