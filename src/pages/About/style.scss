@@ -57,15 +57,33 @@
         }
     }
 
-    @include respond-to('mobile') {
+    @media (max-width: 768px) {
         padding: 15% 5%;
 
         h2 {
-            font-size: 2em;
+            font-size: 2.2em;
         }
 
         p {
             font-size: 1em;
+            line-height: 1.6em;
+
+            &::before, &::after {
+                width: 0.8em;
+                height: 0.8em;
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
+        padding: 20% 5%;
+
+        h2 {
+            font-size: 1.8em;
+        }
+
+        p {
+            font-size: 0.9em;
             line-height: 1.5em;
         }
     }
