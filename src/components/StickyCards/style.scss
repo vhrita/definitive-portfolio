@@ -13,7 +13,6 @@
   width: 100%;
   height: 100vh;
   background-color: $blue;
-  color: white;
   padding: 4rem 6rem;
   display: flex;
   will-change: transform;
@@ -34,10 +33,6 @@
 
   &:nth-child(even) {
     background-color: darken($blue, 10%);
-  }
-
-  &:nth-child(3n) {
-    background-color: darken($blue, 5%);
   }
 }
 
@@ -114,6 +109,8 @@
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
+  overflow: hidden; // Evita que o conteúdo saia do container
+  min-height: 0; // Permite que os flex items encolham adequadamente
 }
 
 .sticky-card-header {
@@ -130,6 +127,8 @@
   display: flex;
   gap: 1.5rem;
   flex: 1;
+  overflow: hidden; // Evita que o conteúdo saia do container
+  min-height: 0; // Permite que o flex item encolha
 }
 
 .sticky-card-copy-title {
@@ -148,6 +147,9 @@
 
 .sticky-card-copy-description {
   flex: 2;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 
   p {
     font-size: 1rem;
@@ -156,6 +158,15 @@
     margin: 0;
     font-weight: 300;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+
+    // Desktop: controle dinâmico de altura com text overflow
+    max-height: 8rem; // Aproximadamente 5 linhas com line-height 1.6
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    word-break: break-word;
   }
 }
 
@@ -164,6 +175,8 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   justify-content: center;
+  flex-shrink: 0; // Evita que as techs encolham
+  margin-top: auto; // Empurra para o final do container
 
   .tech-chip {
     background-color: rgba(255, 255, 255, 0.4);
@@ -190,6 +203,8 @@
 }
 
 .sticky-card-actions {
+  flex-shrink: 0; // Evita que o botão encolha
+
   .project-link {
     display: inline-flex;
     align-items: center;
@@ -267,10 +282,26 @@
   .sticky-card-copy {
     flex-direction: column;
     gap: 0.8rem;
+    overflow: hidden;
+    min-height: 0;
   }
 
-  .sticky-card-copy-description p {
-    font-size: 0.85rem;
+  .sticky-card-copy-description {
+    overflow: hidden;
+    flex: 1;
+
+    p {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      margin: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 4; // Tablet: 4 linhas
+      -webkit-box-orient: vertical;
+      word-break: break-word;
+      max-height: 5.1rem; // 4 linhas × 1.5 line-height × 0.85rem
+    }
   }
 }
 
@@ -392,16 +423,23 @@
     margin: 0;
   }
 
-  .sticky-card-copy-description p {
-    font-size: 0.8rem;
-    line-height: 1.4;
-    text-align: center;
-    margin: 0;
+  .sticky-card-copy-description {
     overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
+    flex: 1;
+
+    p {
+      font-size: 0.8rem;
+      line-height: 1.4;
+      text-align: center;
+      margin: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3; // Reduzido de 4 para 3 para dar mais espaço às techs
+      -webkit-box-orient: vertical;
+      word-break: break-word;
+      max-height: 3.36rem; // 3 linhas × 1.4 line-height × 0.8rem
+    }
   }
 
   .sticky-card-techs {
