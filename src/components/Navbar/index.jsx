@@ -3,6 +3,7 @@ import './style.scss';
 import { motion } from 'framer-motion';
 
 import LangSelector from '../LangSelector';
+import ResumeDownloader from '../ResumeDownloader';
 
 function Navbar({ items, view = 'home', position = 0, background = false, isPortfolio = false, isContact = false }) {
   const jumpTo = (id) => {
@@ -40,17 +41,16 @@ function Navbar({ items, view = 'home', position = 0, background = false, isPort
   }
 
   const getNavbarClass = () => {
-    if (isPortfolio) return 'portfolio-mode'
-    if (isContact) return 'contact-mode'
-    return ''
+    return isPortfolio ? 'portfolio-mode' : ''
   }
 
   return (
     <motion.nav
       className={getNavbarClass()}
-      style={(position >= 75 && (background && !isPortfolio && !isContact)) && { backgroundColor: "#1d1c23cc" }}
+      style={(position >= 75 && (background && !isPortfolio)) && { backgroundColor: "#1d1c23cc" }}
     >
-      <div>
+      <ResumeDownloader isPortfolio={isPortfolio} isContact={isContact} />
+      <div className="nav-items">
         {items.map((item, index) => (
           <motion.button
             key={item.id}
@@ -68,7 +68,7 @@ function Navbar({ items, view = 'home', position = 0, background = false, isPort
           animate={{ transform: "translateX(0)" }}
           transition={{ duration: 0.8 }}
         >
-          <LangSelector isPortfolio={isPortfolio || isContact} />
+          <LangSelector isPortfolio={isPortfolio} />
         </motion.div>
       </div>
     </motion.nav>

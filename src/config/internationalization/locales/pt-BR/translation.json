@@ -16,42 +16,71 @@
     "emailField": "Seu Email",
     "messageField": "Sua Mensagem",
     "sendButton": "Enviar Mensagem",
+    "resume": "Currículo",
     "projects": [
-        {
-            "title": "Baixar Mangás",
-            "description": "Projeto criado inicialmente como trabalho de conclusão de curso, posteriormente liberado para a comunidade. Um web scraper que busca capítulos de mangás em sites populares, indexando-os e permitindo a conversão para PDF e posteriomente seu download.",
-            "images": [],
-            "techs": ["NextJS", "Puppeteer", "Tailwind CSS", "NextUI", "Websockets"],
-            "link": "https://mangas.vhrita.dev"
-        },
-        {
-            "title": "Paladins Dynamic Overlay",
-            "description": "Refatoração de um overlay dinâmico para o jogo Paladins, criado por mim para compor minhas streams em 2018, está Open Source e sendo atualizado com novas tecnologias. Busca informações da partida em tempo real, alterando o overlay do streamer de acordo com o persongagem jogado.",
-            "images": [],
-            "techs": ["NextJS", "Websockets", "Tailwind CSS", "Rest API", "UX"],
-            "link": "https://github.com/vhrita/paladins-dynamic-overlay"
-        },
-        {
-            "title": "Kindle Newsletter",
-            "description": "Um serviço simples que envia a newsletter diária do TheNews.cc diretamente para o seu Kindle. Através de scraping, converte o conteúdo em um formato amigável para leitura no Kindle e envia via email.",
-            "images": [],
-            "techs": ["Node.js", "Cheerio", "Nodemailer"],
-            "link": "https://github.com/vhrita/kindle-newsletter"
-        },
-        {
-            "title": "Investidor10 Scraper",
-            "description": "Scraper que coleta dados de ativos financeiros do site Investidor10, podendo diponibiliza-los através de Rest API.",
-            "images": [],
-            "techs": ["ExpressJS", "Puppeteer", "Redis"],
-            "link": "https://github.com/vhrita/investidor10-scrap"
-        },
-        {
-            "title": "Definitive Portfolio",
-            "description": "Meu site pessoal com React e Framer Motion: animações avançadas, scroll horizontal e carrossel responsivo de projetos.",
-            "images": [],
-            "techs": ["React.js", "Framer Motion", "SCSS", "ViteJS", "i18n"],
-            "link": "https://vhrita.dev"
-        }
+      {
+        "title": "Baixar Mangás",
+        "description": "Projeto criado inicialmente como trabalho de conclusão de curso, posteriormente liberado para a comunidade. Um web scraper que busca capítulos de mangás em sites populares, indexando-os e permitindo a conversão para PDF e posteriomente seu download.",
+        "images": [],
+        "techs": ["NextJS", "Puppeteer", "Tailwind CSS", "NextUI", "WebSockets"],
+        "link": "https://mangas.vhrita.dev"
+      },
+      {
+        "title": "Musa Bot",
+        "description": "Um complexo bot para Discord, baseado na fada da música Musa, do clube das Winx, devido ao nome do meu servidor no Discord ser Winx. Diversas funções como multifontes de áudio, suporte a playlists do Spotify e Youtube/YoutubeMusic, subdiretório de Youtube Resolver que pode ser rodado em máquinas fracas como Raspberry Pi, diversos comandos e controle de mensagens.",
+        "images": [],
+        "techs": ["TypeScript", "Discord.js v14", "Docker", "Spotify API", "YouTube API"],
+        "link": "https://github.com/vhrita/musa-bot"
+      },
+      {
+        "title": "Stella Bot",
+        "description": "Bot Discord baseado na fada da Luz Stella, do clube das Winx, com personalidade criativa e divertida. Stella é especializada em gerar imagens a partir de texto usando IA, com múltiplos níveis de qualidade e geração em tempo real via WebSocket. Futuramente será a geradora de memes e outros conteúdos criativos para o servidor.",
+        "images": [],
+        "techs": ["TypeScript", "Discord.js", "AI Image Generation", "N8N", "WebSockets"],
+        "link": "https://github.com/vhrita/stella-bot"
+      },
+      {
+        "title": "Image AI API",
+        "description": "REST API em Python construída para servir e gerenciar modelos de geração de imagem com fallbacks entre modelos complexos, médios e rápidos. Inicialmente desenvolvida para servir o Stella-bot quando queremos gerar imagens de melhor qualidade, mas pode ser implementada em qualquer sistema que precise de geração de imagens via IA.",
+        "images": [],
+        "techs": ["Python", "FastAPI", "WebSockets", "Diffusers", "Docker"],
+        "link": "https://github.com/vhrita/image-ai"
+      },
+      {
+        "title": "Paladins Dynamic Overlay",
+        "description": "Refatoração de um overlay dinâmico para o jogo Paladins, criado por mim para compor minhas streams em 2018, está Open Source e sendo atualizado com novas tecnologias. Busca informações da partida em tempo real, alterando o overlay do streamer de acordo com o persongagem jogado.",
+        "images": [],
+        "techs": ["NextJS", "WebSockets", "Tailwind CSS", "REST API", "TypeScript"],
+        "link": "https://github.com/vhrita/paladins-dynamic-overlay"
+      },
+      {
+        "title": "Definitive Portfolio",
+        "description": "Meu site pessoal com React e Framer Motion: animações avançadas, scroll horizontal e carrossel responsivo de projetos.",
+        "images": [],
+        "techs": ["React.js", "Framer Motion", "SCSS", "ViteJS", "i18n"],
+        "link": "https://vhrita.dev"
+      },
+      {
+        "title": "Escola Família Cata-Vento",
+        "description": "Website institucional para escola de educação infantil, com design moderno e layout responsivo para apresentação de conteúdo educacional.",
+        "images": [],
+        "techs": ["TypeScript", "React", "CSS3", "Responsive Design"],
+        "link": "https://github.com/vhrita/familia-cata-vento"
+      },
+      {
+        "title": "Kindle Newsletter",
+        "description": "Um simples script criado por mim que roda todos os dias para capturar minha Newsletter favorita (The News), converter e enviar para o meu Kindle. Foi criado como uma solução necessária a um problema pessoal que eu tinha, automatizando completamente o processo de leitura de newsletters no Kindle.",
+        "images": [],
+        "techs": ["Node.js", "PM2", "Email Automation", "EPUB Conversion", "Cron"],
+        "link": "https://github.com/vhrita/kindle-newsletter"
+      },
+      {
+        "title": "Investidor10 Scraper",
+        "description": "Projeto criado para resolver um problema pessoal meu: Como investidor tenho planilhas para controle dos investimentos, ativos, etc. precisava de uma API para capturar dados de ativos. Decidi criar a minha fazendo scraper da ferramenta de gerenciamento de carteiras que sempre utilizei: Investidor10 (brasileira). Hoje essa API é utilizada nas minhas planilhas do Google Sheets através de App Scripts.",
+        "images": [],
+        "techs": ["Node.js", "Puppeteer", "Redis", "Express", "Google Sheets API"],
+        "link": "https://github.com/vhrita/investidor10-scrap"
+      }
     ]
   }
 }

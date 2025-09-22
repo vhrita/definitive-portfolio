@@ -2,6 +2,7 @@
 @import '../../utils/mixins.scss';
 
 nav {
+    position: relative;
     z-index: 5;
     width: 100vw;
     max-width: 100%;
@@ -12,7 +13,7 @@ nav {
     padding-right: 2%;
     transition: all 0.3s ease;
 
-    div:nth-of-type(1) {
+    div.nav-items {
         height: 100%;
         display: flex;
         flex-flow: row nowrap;
@@ -64,7 +65,7 @@ nav {
     &.portfolio-mode {
         background-color: transparent !important;
 
-        div:nth-of-type(1) {
+        div.nav-items {
             button {
                 color: white !important;
 
@@ -88,30 +89,6 @@ nav {
         // No need to override here as it causes conflicts
     }
 
-    // Contact mode styles - same as portfolio mode
-    &.contact-mode {
-        background-color: transparent !important;
-
-        div:nth-of-type(1) {
-            button {
-                color: white !important;
-
-                &:hover {
-                    color: rgba(255, 255, 255, 0.8) !important;
-                    font-weight: bold;
-                }
-
-                &.active {
-                    color: white !important;
-
-                    &::after {
-                        border-bottom-color: white !important;
-                        border-left-color: white !important;
-                    }
-                }
-            }
-        }
-    }
 
     @media (max-width: 768px) {
         height: 60px;

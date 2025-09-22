@@ -42,14 +42,6 @@
     gap: 5%;
     font-weight: 100;
 
-    & > span:first-child {
-        position: absolute;
-        left: -10vw;
-        top: 10%;
-        width: var(--first-span-width);
-        height: 5%;
-        background-color: $blue;
-    }
 
     & > div {
         font-size: 3em;
@@ -167,11 +159,6 @@
         height: 100%;
         gap: 0;
 
-        & > span:first-child {
-            top: 6%;
-            height: 3.5%;
-            width: var(--first-span-width);
-        }
 
         & > div {
             flex-direction: column;

@@ -2,7 +2,7 @@ import './style.scss'
 
 import Typewriter from 'typewriter-effect'
 import { useTranslation } from 'react-i18next'
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'
 
 const mainSkills = [
   'React.js',
@@ -12,16 +12,10 @@ const mainSkills = [
 ]
 
 function Home() {
-
   const { t } = useTranslation()
 
   return (
     <motion.div id="home">
-      <motion.span
-        initial={{ width: 0 }}
-        whileInView={{ width: "var(--first-span-width)" }}
-        transition={{ duration: 1 }}
-      ></motion.span>
       <motion.div
         animate={{
           '--float-before-x': ['0px', '10px', '-8px', '12px', '0px'],
