@@ -147,7 +147,7 @@ function App() {
 				view={view.id}
 				position={position}
 				background={view.social === "vertical"}
-				isPortfolio={isPortfolioInView}
+				isPortfolio={isPortfolioInView || isContactInView}
 				isContact={isContactInView}
 			/>
 			<Social
