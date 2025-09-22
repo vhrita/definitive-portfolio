@@ -12,6 +12,7 @@
   transition: background-color 1.5s ease-in-out;
   margin-left: calc(-50vw + 50%);
   margin-right: calc(-50vw + 50%);
+  margin-top: -1px; // Elimina qualquer gap visual com o Portfolio
 
   .contact-container {
     position: relative;
