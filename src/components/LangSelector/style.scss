@@ -93,6 +93,7 @@
     }
 
     @include respond-to('mobile') {
-        width: 2.5em;
+        height: 100%;
+        margin-right: 1rem;
     }
 }
