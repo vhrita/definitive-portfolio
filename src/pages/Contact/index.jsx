@@ -6,6 +6,11 @@ import { useTranslation } from 'react-i18next'
 import Linkedin from "../../assets/icons/linkedin.svg"
 import Instagram from "../../assets/icons/instagram.svg"
 import Github from "../../assets/icons/github.svg"
+import PhoneIcon from "../../assets/icons/phone.svg"
+import EmailIcon from "../../assets/icons/email.svg"
+import LocationIcon from "../../assets/icons/location.svg"
+import CopyIcon from "../../assets/icons/copy.svg"
+import useIsMobile from '../../utils/useIsMobile'
 
 const socialMedias = [
   {
@@ -30,6 +35,20 @@ function Contact({ isContactInView = false }) {
   const ref = useRef(null)
   const [shouldShowForm, setShouldShowForm] = useState(false)
   const [iconVisibility, setIconVisibility] = useState([true, true, true])
+  const [copyFeedback, setCopyFeedback] = useState({ phone: false, email: false })
+  const isMobile = useIsMobile()
+
+  const copyToClipboard = async (text, type) => {
+    try {
+      await navigator.clipboard.writeText(text)
+      setCopyFeedback(prev => ({ ...prev, [type]: true }))
+      setTimeout(() => {
+        setCopyFeedback(prev => ({ ...prev, [type]: false }))
+      }, 2000)
+    } catch (err) {
+      console.error('Failed to copy: ', err)
+    }
+  }
 
   // Form visibility based on scroll position
   useEffect(() => {
@@ -169,39 +188,105 @@ function Contact({ isContactInView = false }) {
             ease: shouldShowForm ? "easeOut" : "easeIn"
           }}
         >
-          <h1>{t("contactTitle")}</h1>
-          <p>{t("contactSubtitle")}</p>
+          <div className="contact-header">
+            <h1>{t("contactTitle")}</h1>
+            <p>{t("contactSubtitle")}</p>
+          </div>
 
-          <form className="contact-form">
-            <div className="form-group">
-              <input
-                type="text"
-                placeholder={t("nameField")}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="email"
-                placeholder={t("emailField")}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <textarea
-                placeholder={t("messageField")}
-                rows="5"
-                required
-              ></textarea>
-            </div>
-            <motion.button
-              type="submit"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+          <div className={`contact-layout ${isMobile ? 'mobile' : 'desktop'}`}>
+            <motion.div
+              className="contact-info"
+              initial={{ opacity: 0, x: isMobile ? 0 : -30 }}
+              animate={{
+                opacity: shouldShowForm ? 1 : 0,
+                x: shouldShowForm ? 0 : (isMobile ? 0 : -30)
+              }}
+              transition={{ delay: shouldShowForm ? 0.8 : 0, duration: 0.6 }}
             >
-              {t("sendButton")}
-            </motion.button>
-          </form>
+              <h3>{t("contactInfoTitle")}</h3>
+
+              <div className="contact-item">
+                <img src={PhoneIcon} alt="Phone" />
+                <div className="item-content">
+                  <span className="label">{t("phoneLabel")}</span>
+                  <a href="tel:+5511989186251" className="value">{t("phoneNumber")}</a>
+                </div>
+                <motion.button
+                  className={`copy-button ${copyFeedback.phone ? 'copied' : ''}`}
+                  onClick={() => copyToClipboard('+5511989186251', 'phone')}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  title="Copy phone number"
+                >
+                  <img src={CopyIcon} alt="Copy" />
+                </motion.button>
+              </div>
+
+              <div className="contact-item">
+                <img src={EmailIcon} alt="Email" />
+                <div className="item-content">
+                  <span className="label">{t("emailLabel")}</span>
+                  <a href="mailto:vhrita.dev@gmail.com" className="value">{t("emailAddress")}</a>
+                </div>
+                <motion.button
+                  className={`copy-button ${copyFeedback.email ? 'copied' : ''}`}
+                  onClick={() => copyToClipboard('vhrita.dev@gmail.com', 'email')}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  title="Copy email address"
+                >
+                  <img src={CopyIcon} alt="Copy" />
+                </motion.button>
+              </div>
+
+              <div className="contact-item">
+                <img src={LocationIcon} alt="Location" />
+                <div className="item-content">
+                  <span className="label">{t("locationLabel")}</span>
+                  <span className="value">{t("location")}</span>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.form
+              className="contact-form"
+              initial={{ opacity: 0, x: isMobile ? 0 : 30 }}
+              animate={{
+                opacity: shouldShowForm ? 1 : 0,
+                x: shouldShowForm ? 0 : (isMobile ? 0 : 30)
+              }}
+              transition={{ delay: shouldShowForm ? 1.0 : 0, duration: 0.6 }}
+            >
+              <div className="form-group">
+                <input
+                  type="text"
+                  placeholder={t("nameField")}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="email"
+                  placeholder={t("emailField")}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <textarea
+                  placeholder={t("messageField")}
+                  rows="5"
+                  required
+                ></textarea>
+              </div>
+              <motion.button
+                type="submit"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {t("sendButton")}
+              </motion.button>
+            </motion.form>
+          </div>
         </motion.div>
       </div>
     </div>
