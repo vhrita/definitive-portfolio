@@ -39,29 +39,34 @@
 
     .absorbed-icon {
       position: absolute;
+      width: 4em;
+      height: 4em;
 
       &:nth-child(1) {
-        top: 20%;
-        left: 15%;
+        top: 25%;
+        left: 5%;
       }
 
       &:nth-child(2) {
-        top: 60%;
-        right: 20%;
+        top: 20%;
+        right: 5%;
       }
 
       &:nth-child(3) {
-        bottom: 25%;
-        left: 25%;
+        bottom: 20%;
+        left: 50%;
+        transform: translateX(-50%);
       }
 
       a {
         display: block;
         pointer-events: all;
+        width: 100%;
+        height: 100%;
 
         img {
-          width: 4em;
-          height: 4em;
+          width: 100%;
+          height: 100%;
           filter: brightness(0) invert(1);
           opacity: 0.6;
           transition: all 0.3s ease;
@@ -81,27 +86,162 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 20px;
     padding: 3rem;
-    max-width: 600px;
+    max-width: 1200px;
     width: 90%;
-    text-align: center;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 
-    h1 {
-      color: white;
-      font-size: 3rem;
-      font-weight: 300;
-      margin-bottom: 1rem;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    .contact-header {
+      text-align: center;
+      margin-bottom: 3rem;
     }
 
-    p {
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-      font-weight: 300;
+    .contact-header {
+      h1 {
+        color: white;
+        font-size: 3rem;
+        font-weight: 300;
+        margin-bottom: 1rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      p {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.2rem;
+        margin-bottom: 0;
+        font-weight: 300;
+      }
+    }
+
+    .contact-layout {
+      display: flex;
+      gap: 3rem;
+      align-items: flex-start;
+
+      &.desktop {
+        flex-direction: row;
+      }
+
+      &.mobile {
+        flex-direction: column;
+        gap: 2rem;
+      }
+    }
+
+    .contact-info {
+      flex: 1;
+      text-align: left;
+
+      h3 {
+        color: white;
+        font-size: 1.8rem;
+        font-weight: 400;
+        margin-bottom: 2rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+        position: relative;
+        min-height: auto;
+        height: auto;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.1);
+          transform: translateX(5px);
+        }
+
+        > img {
+          width: 24px;
+          height: 24px;
+          filter: brightness(0) invert(1);
+          opacity: 0.8;
+          flex-shrink: 0;
+        }
+
+        .item-content {
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+          flex: 1;
+
+          .label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            font-weight: 300;
+          }
+
+          .value, a.value {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s ease;
+
+            &:hover {
+              color: rgba(255, 255, 255, 0.8);
+            }
+          }
+        }
+
+        .copy-button {
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 8px;
+          padding: 0;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 36px;
+          height: 36px;
+          flex-shrink: 0;
+
+          img {
+            width: 16px;
+            height: 16px;
+            filter: brightness(0) invert(1);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+          }
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+
+            img {
+              opacity: 1;
+            }
+          }
+
+          &.copied {
+            background: rgba(34, 197, 94, 0.3);
+            border-color: rgba(34, 197, 94, 0.5);
+
+            img {
+              opacity: 1;
+              filter: brightness(0) invert(1);
+            }
+          }
+
+          &:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+          }
+        }
+      }
     }
 
     .contact-form {
+      flex: 1;
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
@@ -170,22 +310,52 @@
   @include respond-to('tablet') {
     .contact-content {
       padding: 2rem;
-      max-width: 500px;
+      max-width: 900px;
 
-      h1 {
-        font-size: 2.5rem;
+      .contact-header {
+        margin-bottom: 2rem;
+
+        h1 {
+          font-size: 2.5rem;
+        }
+
+        p {
+          font-size: 1rem;
+        }
       }
 
-      p {
-        font-size: 1rem;
+      .contact-layout {
+        gap: 2rem;
+
+        &.desktop {
+          flex-direction: column;
+        }
+      }
+
+      .contact-info {
+        h3 {
+          font-size: 1.5rem;
+        }
+
+        .contact-item {
+          margin-bottom: 1rem;
+        }
       }
     }
 
     .social-icons-absorbed {
       .absorbed-icon {
-        a img {
-          width: 3em;
-          height: 3em;
+        width: 3em;
+        height: 3em;
+
+        a {
+          width: 100%;
+          height: 100%;
+
+          img {
+            width: 100%;
+            height: 100%;
+          }
         }
       }
     }
@@ -194,60 +364,126 @@
   @include respond-to('mobile') {
     height: 100%;
     min-height: 100vh;
-    padding: 2rem 1rem;
+    padding: 4rem 1rem;
 
     .contact-content {
-      padding: 1.5rem;
+      padding: 2rem 1rem;
       max-width: 100%;
-      margin-top: 10%;
+      width: 100%;
+      margin: 8% 0;
 
-      h1 {
-        font-size: 2rem;
+      .contact-header {
+        margin-bottom: 2rem;
+
+        h1 {
+          font-size: 2rem;
+        }
+
+        p {
+          font-size: 0.9rem;
+        }
       }
 
-      p {
-        font-size: 0.9rem;
-        margin-bottom: 1.5rem;
+      .contact-layout {
+        gap: 1.5rem;
+      }
+
+      .contact-info {
+        text-align: center;
+        width: 100%;
+
+        h3 {
+          font-size: 1.3rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .contact-item {
+          margin-bottom: 1rem;
+          padding: 0.8rem;
+          text-align: left;
+          width: 100%;
+
+          > img {
+            width: 20px;
+            height: 20px;
+          }
+
+          .item-content {
+            .label {
+              font-size: 0.8rem;
+            }
+
+            .value, a.value {
+              font-size: 1rem;
+            }
+          }
+
+          .copy-button {
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            flex-shrink: 0;
+
+            img {
+              width: 14px;
+              height: 14px;
+            }
+          }
+        }
       }
 
       .contact-form {
         gap: 1rem;
+        width: 100%;
 
         .form-group {
+          width: 100%;
+
           input,
           textarea {
             padding: 0.8rem 1rem;
             font-size: 0.9rem;
+            width: 100%;
+            box-sizing: border-box;
           }
         }
 
         button {
           padding: 0.8rem 1.5rem;
           font-size: 1rem;
+          width: 100%;
         }
       }
     }
 
     .social-icons-absorbed {
       .absorbed-icon {
+        width: 2.5em;
+        height: 2.5em;
+
         &:nth-child(1) {
-          top: 8%;
-          left: 5%;
+          top: 15%;
+          left: 2%;
         }
 
         &:nth-child(2) {
-          top: 8%;
-          right: 5%;
+          top: 15%;
+          right: 2%;
         }
 
         &:nth-child(3) {
-          bottom: 8%;
-          right: 5%;
+          bottom: 45%;
+          left: 86%;
         }
 
-        a img {
-          width: 2.5em;
-          height: 2.5em;
+        a {
+          width: 100%;
+          height: 100%;
+
+          img {
+            width: 100%;
+            height: 100%;
+          }
         }
       }
     }

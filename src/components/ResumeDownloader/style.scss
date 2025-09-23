@@ -16,14 +16,14 @@
     left: 0;
     top: 15%;
     width: auto;
-    min-width: 140px; // Width base maior
+    min-width: 140px;
     height: 6vh;
     transition: all 0.3s ease;
     z-index: 1001;
     cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: flex-end; // Alinhado à direita
+    justify-content: flex-end;
     gap: 0.5rem;
     padding: 0 1rem;
     background-color: $blue;
@@ -32,7 +32,7 @@
     img {
         width: 1.2em;
         height: 1.2em;
-        filter: brightness(0) invert(1); // Convert blue to white
+        filter: brightness(0) invert(1);
     }
 
     span {
@@ -44,22 +44,13 @@
 
     // Mobile responsivo
     @include respond-to('mobile') {
-        top: 6vh;
-        right: 100%;
-        height: 3.5vh;
-
-        img {
-            width: 1em;
-            height: 1em;
-        }
+        height: 5vh;
+        min-width: 120px;
+        padding: 0;
 
         span {
-            font-size: 0.8rem;
+            font-size: 1rem;
         }
-    }
-
-    &:hover {
-        background-color: darken($blue, 10%);
     }
 }
 

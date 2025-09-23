@@ -129,8 +129,18 @@ function App() {
 			if (portfolioVisible && !isPortfolioInView && !isContactInView) {
 				setIsPortfolioInView(true)
 				setSocial('vertical')
+				// Update view to portfolio when it's visible
+				const portfolioPage = pages.find(page => page.id === 'portfolio')
+				if (portfolioPage) {
+					setView(portfolioPage)
+				}
 			} else if (!portfolioVisible && portfolioTop > windowHeight * 0.5 && isPortfolioInView && !isContactInView) {
 				setIsPortfolioInView(false)
+				// Reset view to about when portfolio is no longer visible
+				const aboutPage = pages.find(page => page.id === 'about')
+				if (aboutPage) {
+					setView(aboutPage)
+				}
 			}
 		}
 
@@ -138,7 +148,7 @@ function App() {
 		handleEarlyPortfolioDetection()
 
 		return () => window.removeEventListener('scroll', handleEarlyPortfolioDetection)
-	}, [isPortfolioInView, isContactInView]);
+	}, [isPortfolioInView, isContactInView, pages]);
 
 	return (
 		<LocaleContext.Provider value={{ locale, setLocale }}>

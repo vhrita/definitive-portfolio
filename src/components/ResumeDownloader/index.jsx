@@ -3,10 +3,12 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import DownloadIcon from '../../assets/icons/download.svg'
+import useIsMobile from '../../utils/useIsMobile'
 
 function ResumeDownloader({ isPortfolio = false, isContact = false }) {
   const { t } = useTranslation()
   const [isHovered, setIsHovered] = useState(false)
+  const isMobile = useIsMobile()
 
   const handleDownload = () => {
     // Criar um link temporário para download
@@ -27,8 +29,8 @@ function ResumeDownloader({ isPortfolio = false, isContact = false }) {
       animate={{
         opacity: 1,
         scale: isHovered ? 1 : [1, 1.07, 1], // Pulse pausado no hover
-        paddingLeft: isHovered ? "4rem" : "3rem",
-        paddingRight: isHovered ? "4rem" : "3rem",
+        paddingLeft: isHovered ? (isMobile ? "2rem" : "4rem") : (isMobile ? "1rem" : "3rem"),
+        paddingRight: isHovered ? (isMobile ? "2rem" : "4rem") : (isMobile ? "1rem" : "3rem"),
       }}
       transition={{
         opacity: { duration: 0.3 },

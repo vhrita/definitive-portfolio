@@ -21,6 +21,16 @@ nav {
         align-items: center;
         gap: 3%;
 
+        // Mobile layout: Language selector + Hamburger menu
+        &.mobile-layout {
+            gap: 1rem;
+        }
+
+        // Desktop layout: All navigation items
+        &.desktop-layout {
+            gap: 3%;
+        }
+
         button {
             width: 5%;
             height: 100%;
@@ -94,27 +104,20 @@ nav {
         height: 60px;
         padding: 0 1rem;
 
-        div:nth-of-type(1) {
-            justify-content: space-between;
-            gap: 0.5rem;
+        .nav-items {
+            &.mobile-layout {
+                justify-content: flex-end;
+                gap: 1.5rem;
 
-            button {
-                width: auto;
-                min-width: auto;
-                font-size: 0.85rem;
-                padding: 0.5rem 0.8rem;
-                height: auto;
-                white-space: nowrap;
-
-                &.active::after {
-                    width: 0.8em;
-                    bottom: 20%;
+                #language-selector {
+                    margin-left: 0;
+                    flex-shrink: 0;
                 }
             }
 
-            #language-selector {
-                margin-left: 0;
-                flex-shrink: 0;
+            // Hide desktop buttons on mobile
+            &.desktop-layout {
+                display: none;
             }
         }
     }
@@ -122,16 +125,20 @@ nav {
     @media (max-width: 480px) {
         padding: 0 0.5rem;
 
-        div:nth-of-type(1) {
-            gap: 0.25rem;
+        .nav-items.mobile-layout {
+            gap: 1rem;
+        }
+    }
 
-            button {
-                font-size: 0.75rem;
-                padding: 0.4rem 0.6rem;
+    // Show desktop layout only on desktop
+    @media (min-width: 769px) {
+        .nav-items {
+            &.mobile-layout {
+                display: none;
+            }
 
-                &.active::after {
-                    width: 0.6em;
-                }
+            &.desktop-layout {
+                display: flex;
             }
         }
     }

@@ -1,9 +1,10 @@
 import './style.scss'
 
-import { useRef, useState, useEffect } from 'react'
+import { useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
+import useIsMobile from '../../utils/useIsMobile'
 
 import OpenExternal from '../../assets/icons/open_external.svg'
 
@@ -11,18 +12,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 function StickyCards({ cards = [] }) {
   const container = useRef(null)
-  const [isMobile, setIsMobile] = useState(false)
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768)
-    }
-
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
+  const isMobile = useIsMobile()
 
   useGSAP(
     () => {
