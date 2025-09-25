@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @mixin animate($animation,$duration,$method,$times){
     animation: $animation $duration $method $times;
 }
@@ -57,5 +59,26 @@
         @media (max-width: 320px) {
             @content;
         }
+    }
+}
+
+// Fluid typography helper
+@mixin fluid-type($min-size, $max-size, $min-vw: 320px, $max-vw: 1440px) {
+    $min-size-num: math.div($min-size, 1rem);
+    $max-size-num: math.div($max-size, 1rem);
+    $min-vw-num: math.div($min-vw, 1px);
+    $max-vw-num: math.div($max-vw, 1px);
+
+    @if $max-vw-num == $min-vw-num {
+        font-size: $min-size;
+    } @else {
+        $slope: math.div(($max-size-num - $min-size-num), ($max-vw-num - $min-vw-num));
+        $intercept: $min-size-num - $slope * $min-vw-num;
+
+        font-size: clamp(
+            #{$min-size},
+            calc(#{$intercept}rem + #{$slope * 100}vw),
+            #{$max-size}
+        );
     }
 }

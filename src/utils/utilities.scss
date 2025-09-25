@@ -27,42 +27,17 @@
 // ========================================
 
 // Base typography (mobile first)
-.text-xs { font-size: 0.6rem; }    // 9.6px at 16px base
-.text-sm { font-size: 0.75rem; }   // 12px
-.text-base { font-size: 0.9rem; }  // 14.4px
-.text-lg { font-size: 1rem; }      // 16px
-.text-xl { font-size: 1.2rem; }    // 19.2px
-.text-2xl { font-size: 1.8rem; }   // 28.8px
-.text-3xl { font-size: 2rem; }     // 32px
-.text-4xl { font-size: 2.5rem; }   // 40px
-.text-5xl { font-size: 3rem; }     // 48px
-.text-6xl { font-size: 4rem; }     // 64px
-.text-7xl { font-size: 6rem; }     // 96px
-
-// Responsive typography - scales up on larger screens
-@include respond-to('tablet-up') {
-  .text-xs { font-size: 0.7rem; }
-  .text-sm { font-size: 0.8rem; }
-  .text-base { font-size: 1rem; }
-  .text-lg { font-size: 1.1rem; }
-  .text-xl { font-size: 1.3rem; }
-  .text-2xl { font-size: 2rem; }
-  .text-3xl { font-size: 2.5rem; }
-  .text-4xl { font-size: 3rem; }
-  .text-5xl { font-size: 3.5rem; }
-  .text-6xl { font-size: 4.5rem; }
-  .text-7xl { font-size: 7rem; }
-}
-
-@include respond-to('desktop') {
-  .text-xl { font-size: 1.4rem; }
-  .text-2xl { font-size: 2.2rem; }
-  .text-3xl { font-size: 2.8rem; }
-  .text-4xl { font-size: 3.2rem; }
-  .text-5xl { font-size: 4rem; }
-  .text-6xl { font-size: 5rem; }
-  .text-7xl { font-size: 8rem; }
-}
+.text-xs { @include fluid-type(0.6rem, 0.7rem); }     // 9.6px → 11.2px
+.text-sm { @include fluid-type(0.75rem, 0.9rem); }    // 12px → 14.4px
+.text-base { @include fluid-type(0.9rem, 1.05rem); }  // 14.4px → 16.8px
+.text-lg { @include fluid-type(1rem, 1.2rem); }       // 16px → 19.2px
+.text-xl { @include fluid-type(1.2rem, 1.4rem); }     // 19.2px → 22.4px
+.text-2xl { @include fluid-type(1.8rem, 2.2rem); }    // 28.8px → 35.2px
+.text-3xl { @include fluid-type(2rem, 2.8rem); }      // 32px → 44.8px
+.text-4xl { @include fluid-type(2.5rem, 3.2rem); }    // 40px → 51.2px
+.text-5xl { @include fluid-type(3rem, 4rem); }        // 48px → 64px
+.text-6xl { @include fluid-type(4rem, 5rem); }        // 64px → 80px
+.text-7xl { @include fluid-type(6rem, 8rem); }        // 96px → 128px
 
 // ========================================
 // 3. SPACING UTILITIES
@@ -254,9 +229,9 @@
 // Full width section
 .section-full {
   position: relative;
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
+  width: calc(100% + (var(--page-gutter) * 2));
+  margin-left: calc(-1 * var(--page-gutter));
+  margin-right: calc(-1 * var(--page-gutter));
   overflow-x: hidden;
 }
 
