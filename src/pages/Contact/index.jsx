@@ -36,7 +36,8 @@ function Contact({ isContactInView = false }) {
   const [shouldShowForm, setShouldShowForm] = useState(false)
   const [iconVisibility, setIconVisibility] = useState([true, true, true])
   const [copyFeedback, setCopyFeedback] = useState({ phone: false, email: false })
-  const isMobile = useIsMobile()
+  const [formStatus, setFormStatus] = useState({ submitting: false, success: false, error: null })
+  const isMobile = useIsMobile(1024)
 
   const copyToClipboard = async (text, type) => {
     try {
@@ -47,6 +48,42 @@ function Contact({ isContactInView = false }) {
       }, 2000)
     } catch (err) {
       console.error('Failed to copy: ', err)
+    }
+  }
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault()
+    setFormStatus({ submitting: true, success: false, error: null })
+
+    const formData = new FormData(e.target)
+
+    try {
+      const response = await fetch('https://formspree.io/f/mqayappb', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+
+      if (response.ok) {
+        setFormStatus({ submitting: false, success: true, error: null })
+        e.target.reset()
+        setTimeout(() => {
+          setFormStatus({ submitting: false, success: false, error: null })
+        }, 5000)
+      } else {
+        throw new Error('Form submission failed')
+      }
+    } catch (error) {
+      setFormStatus({
+        submitting: false,
+        success: false,
+        error: t("formErrorMessage")
+      })
+      setTimeout(() => {
+        setFormStatus({ submitting: false, success: false, error: null })
+      }, 5000)
     }
   }
 
@@ -250,6 +287,7 @@ function Contact({ isContactInView = false }) {
 
             <motion.form
               className="contact-form"
+              onSubmit={handleFormSubmit}
               initial={{ opacity: 0, x: isMobile ? 0 : 30 }}
               animate={{
                 opacity: shouldShowForm ? 1 : 0,
@@ -260,30 +298,61 @@ function Contact({ isContactInView = false }) {
               <div className="form-group">
                 <input
                   type="text"
+                  name="name"
                   placeholder={t("nameField")}
                   required
+                  disabled={formStatus.submitting}
                 />
               </div>
               <div className="form-group">
                 <input
                   type="email"
+                  name="email"
                   placeholder={t("emailField")}
                   required
+                  disabled={formStatus.submitting}
                 />
               </div>
               <div className="form-group">
                 <textarea
+                  name="message"
                   placeholder={t("messageField")}
                   rows="5"
                   required
+                  disabled={formStatus.submitting}
                 ></textarea>
               </div>
+
+              {formStatus.success && (
+                <motion.div
+                  className="form-success"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  ✅ {t("formSuccessMessage")}
+                </motion.div>
+              )}
+
+              {formStatus.error && (
+                <motion.div
+                  className="form-error"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  ❌ {formStatus.error}
+                </motion.div>
+              )}
+
               <motion.button
                 type="submit"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                disabled={formStatus.submitting}
+                whileHover={!formStatus.submitting ? { scale: 1.05 } : {}}
+                whileTap={!formStatus.submitting ? { scale: 0.95 } : {}}
+                className={formStatus.submitting ? 'submitting' : ''}
               >
-                {t("sendButton")}
+                {formStatus.submitting ? t("sendingButton") : t("sendButton")}
               </motion.button>
             </motion.form>
           </div>

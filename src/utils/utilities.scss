@@ -1,0 +1,286 @@
+@import './mixins.scss';
+
+// ========================================
+// RESPONSIVE UTILITY CLASSES
+// ========================================
+// Usage: Apply these classes directly in your HTML/JSX
+// Example: <div class="container-lg text-2xl padding-lg">
+
+// ========================================
+// 1. CONTAINER UTILITIES
+// ========================================
+
+// Max-width containers
+.container-sm { max-width: 600px; margin: 0 auto; }
+.container-md { max-width: 900px; margin: 0 auto; }
+.container-lg { max-width: 1200px; margin: 0 auto; }
+.container-xl { max-width: 1400px; margin: 0 auto; }
+.container-full { max-width: 100%; width: 100%; }
+
+// Width utilities
+.w-full { width: 100%; }
+.w-auto { width: auto; }
+.max-w-full { max-width: 100%; }
+
+// ========================================
+// 2. TYPOGRAPHY SCALE
+// ========================================
+
+// Base typography (mobile first)
+.text-xs { font-size: 0.6rem; }    // 9.6px at 16px base
+.text-sm { font-size: 0.75rem; }   // 12px
+.text-base { font-size: 0.9rem; }  // 14.4px
+.text-lg { font-size: 1rem; }      // 16px
+.text-xl { font-size: 1.2rem; }    // 19.2px
+.text-2xl { font-size: 1.8rem; }   // 28.8px
+.text-3xl { font-size: 2rem; }     // 32px
+.text-4xl { font-size: 2.5rem; }   // 40px
+.text-5xl { font-size: 3rem; }     // 48px
+.text-6xl { font-size: 4rem; }     // 64px
+.text-7xl { font-size: 6rem; }     // 96px
+
+// Responsive typography - scales up on larger screens
+@include respond-to('tablet-up') {
+  .text-xs { font-size: 0.7rem; }
+  .text-sm { font-size: 0.8rem; }
+  .text-base { font-size: 1rem; }
+  .text-lg { font-size: 1.1rem; }
+  .text-xl { font-size: 1.3rem; }
+  .text-2xl { font-size: 2rem; }
+  .text-3xl { font-size: 2.5rem; }
+  .text-4xl { font-size: 3rem; }
+  .text-5xl { font-size: 3.5rem; }
+  .text-6xl { font-size: 4.5rem; }
+  .text-7xl { font-size: 7rem; }
+}
+
+@include respond-to('desktop') {
+  .text-xl { font-size: 1.4rem; }
+  .text-2xl { font-size: 2.2rem; }
+  .text-3xl { font-size: 2.8rem; }
+  .text-4xl { font-size: 3.2rem; }
+  .text-5xl { font-size: 4rem; }
+  .text-6xl { font-size: 5rem; }
+  .text-7xl { font-size: 8rem; }
+}
+
+// ========================================
+// 3. SPACING UTILITIES
+// ========================================
+
+// Padding utilities (following consistent scale)
+.padding-none { padding: 0; }
+.padding-xs { padding: 0.25rem; }    // 4px
+.padding-sm { padding: 0.5rem; }     // 8px
+.padding-base { padding: 1rem; }     // 16px
+.padding-lg { padding: 1.5rem; }     // 24px
+.padding-xl { padding: 2rem; }       // 32px
+.padding-2xl { padding: 3rem; }      // 48px
+
+// Padding directional
+.padding-x-sm { padding-left: 0.5rem; padding-right: 0.5rem; }
+.padding-x-base { padding-left: 1rem; padding-right: 1rem; }
+.padding-x-lg { padding-left: 1.5rem; padding-right: 1.5rem; }
+.padding-x-xl { padding-left: 2rem; padding-right: 2rem; }
+
+.padding-y-sm { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+.padding-y-base { padding-top: 1rem; padding-bottom: 1rem; }
+.padding-y-lg { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+.padding-y-xl { padding-top: 2rem; padding-bottom: 2rem; }
+
+// Margin utilities
+.margin-none { margin: 0; }
+.margin-auto { margin: 0 auto; }
+.margin-xs { margin: 0.25rem; }
+.margin-sm { margin: 0.5rem; }
+.margin-base { margin: 1rem; }
+.margin-lg { margin: 1.5rem; }
+.margin-xl { margin: 2rem; }
+
+// Gap utilities (for flexbox/grid)
+.gap-none { gap: 0; }
+.gap-xs { gap: 0.25rem; }
+.gap-sm { gap: 0.5rem; }
+.gap-base { gap: 1rem; }
+.gap-lg { gap: 1.5rem; }
+.gap-xl { gap: 2rem; }
+.gap-2xl { gap: 3rem; }
+
+// ========================================
+// 4. LAYOUT UTILITIES
+// ========================================
+
+// Flexbox utilities
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-row { flex-direction: row; }
+.items-center { align-items: center; }
+.items-start { align-items: flex-start; }
+.items-end { align-items: flex-end; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-start { justify-content: flex-start; }
+.justify-end { justify-content: flex-end; }
+
+// Responsive flex utilities
+@include respond-to('mobile') {
+  .mobile\:flex-col { flex-direction: column; }
+  .mobile\:items-start { align-items: flex-start; }
+  .mobile\:text-center { text-align: center; }
+  .mobile\:gap-sm { gap: 0.5rem; }
+  .mobile\:padding-sm { padding: 0.5rem; }
+}
+
+@include respond-to('tablet') {
+  .tablet\:flex-col { flex-direction: column; }
+  .tablet\:gap-base { gap: 1rem; }
+  .tablet\:padding-base { padding: 1rem; }
+}
+
+// ========================================
+// 5. RESPONSIVE SPACING
+// ========================================
+
+// Responsive padding that adapts to screen size
+.padding-responsive {
+  padding: 1rem;
+
+  @include respond-to('tablet') {
+    padding: 2rem;
+  }
+
+  @include respond-to('desktop') {
+    padding: 3rem;
+  }
+}
+
+.padding-x-responsive {
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  @include respond-to('tablet') {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  @include respond-to('desktop') {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+// ========================================
+// 6. COMMON PATTERNS
+// ========================================
+
+// Form elements
+.form-input {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+// Button patterns
+.btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+// Section containers - common pattern
+.section-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+
+  @include respond-to('tablet') {
+    padding: 3rem 2rem;
+  }
+
+  @include respond-to('desktop') {
+    padding: 4rem 3rem;
+  }
+}
+
+// Full width section
+.section-full {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  overflow-x: hidden;
+}
+
+// ========================================
+// 7. HIDE/SHOW UTILITIES
+// ========================================
+
+.hidden { display: none; }
+.block { display: block; }
+.inline { display: inline; }
+.inline-block { display: inline-block; }
+
+// Responsive visibility
+@include respond-to('mobile') {
+  .mobile\:hidden { display: none; }
+  .mobile\:block { display: block; }
+}
+
+@include respond-to('tablet') {
+  .tablet\:hidden { display: none; }
+  .tablet\:block { display: block; }
+}
+
+@include respond-to('desktop') {
+  .desktop\:hidden { display: none; }
+  .desktop\:block { display: block; }
+}

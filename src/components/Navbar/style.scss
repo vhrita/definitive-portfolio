@@ -23,11 +23,13 @@ nav {
 
         // Mobile layout: Language selector + Hamburger menu
         &.mobile-layout {
+            display: none;
             gap: 1rem;
         }
 
         // Desktop layout: All navigation items
         &.desktop-layout {
+            display: flex;
             gap: 3%;
         }
 
@@ -100,12 +102,13 @@ nav {
     }
 
 
-    @media (max-width: 768px) {
+    @include respond-to('tablet-landscape') {
         height: 60px;
         padding: 0 1rem;
 
-        .nav-items {
+        div.nav-items {
             &.mobile-layout {
+                display: flex;
                 justify-content: flex-end;
                 gap: 1.5rem;
 
@@ -122,24 +125,11 @@ nav {
         }
     }
 
-    @media (max-width: 480px) {
+    @include respond-to('mobile') {
         padding: 0 0.5rem;
 
-        .nav-items.mobile-layout {
+        div.nav-items.mobile-layout {
             gap: 1rem;
-        }
-    }
-
-    // Show desktop layout only on desktop
-    @media (min-width: 769px) {
-        .nav-items {
-            &.mobile-layout {
-                display: none;
-            }
-
-            &.desktop-layout {
-                display: flex;
-            }
         }
     }
 }

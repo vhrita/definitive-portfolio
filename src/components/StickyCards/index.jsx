@@ -12,7 +12,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 function StickyCards({ cards = [] }) {
   const container = useRef(null)
-  const isMobile = useIsMobile()
+  const isMobile = useIsMobile(1024)
 
   useGSAP(
     () => {
@@ -182,54 +182,69 @@ function StickyCards({ cards = [] }) {
 
   return (
     <div className="sticky-cards" ref={container}>
-      {cards.map((card, index) => (
-        <div className="sticky-card" key={index}>
-          <div className="sticky-card-index">
-            <h1>{String(index + 1).padStart(2, '0')}</h1>
-          </div>
+      {cards.map((card, index) => {
+        const primaryImage = Array.isArray(card.images) && card.images.length > 0
+          ? card.images[0]
+          : card.images
+        const primaryImagePosition = Array.isArray(card.imagePositions) && card.imagePositions.length > 0
+          ? card.imagePositions[0]
+          : 'center top'
 
-          <div className="sticky-card-main-container">
-            <div className="sticky-card-img">
-              <img src={card.images[0]} alt={card.title} />
+        return (
+          <div className="sticky-card" key={index}>
+            <div className="sticky-card-index">
+              <h1>{String(index + 1).padStart(2, '0')}</h1>
             </div>
 
-            <div className="sticky-card-content">
-              <div className="sticky-card-content-wrapper">
-                <h1 className="sticky-card-header">{card.title}</h1>
+            <div className="sticky-card-main-container">
+              <div className="sticky-card-img">
+                {primaryImage && (
+                  <img
+                    src={primaryImage}
+                    alt={card.title}
+                    style={{ objectPosition: primaryImagePosition || 'center top' }}
+                  />
+                )}
+              </div>
 
-                <div className="sticky-card-copy">
-                  <div className="sticky-card-copy-title">
-                    <p>(Project Details)</p>
+              <div className="sticky-card-content">
+                <div className="sticky-card-content-wrapper">
+                  <h1 className="sticky-card-header">{card.title}</h1>
+
+                  <div className="sticky-card-copy">
+                    <div className="sticky-card-copy-title">
+                      <p>(Project Details)</p>
+                    </div>
+                    <div className="sticky-card-copy-description">
+                      <p>{card.description}</p>
+                    </div>
                   </div>
-                  <div className="sticky-card-copy-description">
-                    <p>{card.description}</p>
+
+                  <div className="sticky-card-actions">
+                    {card.link && (
+                      <a
+                        href={card.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-link"
+                      >
+                        <img src={OpenExternal} alt="Visit project" />
+                        <span>View Project</span>
+                      </a>
+                    )}
                   </div>
-                </div>
 
-                <div className="sticky-card-actions">
-                  {card.link && (
-                    <a
-                      href={card.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project-link"
-                    >
-                      <img src={OpenExternal} alt="Visit project" />
-                      <span>View Project</span>
-                    </a>
-                  )}
-                </div>
-
-                <div className="sticky-card-techs">
-                  {card.techs.map((tech, i) => (
-                    <span key={i} className="tech-chip">{tech}</span>
-                  ))}
+                  <div className="sticky-card-techs">
+                    {card.techs.map((tech, i) => (
+                      <span key={i} className="tech-chip">{tech}</span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        )
+      })}
     </div>
   )
 }
