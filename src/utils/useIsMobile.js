@@ -1,7 +1,15 @@
 import { useState, useEffect } from 'react'
 
 const useIsMobile = (breakpoint = 768) => {
-  const [isMobile, setIsMobile] = useState(false)
+  const getInitialState = () => {
+    if (typeof window === 'undefined') {
+      return false
+    }
+
+    return window.innerWidth <= breakpoint
+  }
+
+  const [isMobile, setIsMobile] = useState(getInitialState)
 
   useEffect(() => {
     const checkMobile = () => {
@@ -10,8 +18,12 @@ const useIsMobile = (breakpoint = 768) => {
 
     checkMobile()
     window.addEventListener('resize', checkMobile)
+    window.addEventListener('orientationchange', checkMobile)
 
-    return () => window.removeEventListener('resize', checkMobile)
+    return () => {
+      window.removeEventListener('resize', checkMobile)
+      window.removeEventListener('orientationchange', checkMobile)
+    }
   }, [breakpoint])
 
   return isMobile

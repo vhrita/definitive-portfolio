@@ -8,13 +8,53 @@
     }
 }
 
+// Breakpoint system - mobile first approach
+//
+// Available breakpoints:
+// 'mobile'      -> max-width: 480px  (existing - phones)
+// 'tablet'      -> max-width: 768px  (existing - tablets portrait)
+// 'tablet-landscape' -> max-width: 1024px (new - tablets landscape / medium screens)
+// 'desktop'     -> min-width: 1024px (new - desktop screens)
+// 'large'       -> min-width: 1400px (new - large desktop screens)
+//
+// Special breakpoints for compatibility:
+// 'tablet-up'   -> min-width: 769px  (for min-width: 769px found in codebase)
+// 'small-mobile'-> max-width: 320px  (for max-width: 320px found in codebase)
+//
+// Usage: @include respond-to('desktop') { ... }
+
 @mixin respond-to($breakpoint) {
-    @if $breakpoint == 'tablet' {
+    // Legacy breakpoints (max-width) - keep exact same values for compatibility
+    @if $breakpoint == 'mobile' {
+        @media (max-width: 480px) {
+            @content;
+        }
+    } @else if $breakpoint == 'tablet' {
         @media (max-width: 768px) {
             @content;
         }
-    } @else if $breakpoint == 'mobile' {
-        @media (max-width: 480px) {
+    } @else if $breakpoint == 'tablet-landscape' {
+        @media (max-width: 1024px) {
+            @content;
+        }
+    }
+    // New breakpoints for larger screens (min-width)
+    @else if $breakpoint == 'desktop' {
+        @media (min-width: 1024px) {
+            @content;
+        }
+    } @else if $breakpoint == 'large' {
+        @media (min-width: 1400px) {
+            @content;
+        }
+    }
+    // Specific breakpoints for current hardcoded values found in codebase
+    @else if $breakpoint == 'tablet-up' {
+        @media (min-width: 769px) {
+            @content;
+        }
+    } @else if $breakpoint == 'small-mobile' {
+        @media (max-width: 320px) {
             @content;
         }
     }
