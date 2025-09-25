@@ -7,8 +7,25 @@ import { useGSAP } from '@gsap/react'
 import useIsMobile from '../../utils/useIsMobile'
 
 import OpenExternal from '../../assets/icons/open_external.svg'
+import GithubIcon from '../../assets/icons/github.svg'
 
 gsap.registerPlugin(ScrollTrigger)
+
+const ActionButton = ({ href, icon, label }) => {
+  if (!href) return null
+
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="sticky-card-action-btn"
+    >
+      <img src={icon} alt={label} />
+      <span>{label}</span>
+    </a>
+  )
+}
 
 function StickyCards({ cards = [] }) {
   const container = useRef(null)
@@ -221,17 +238,16 @@ function StickyCards({ cards = [] }) {
                   </div>
 
                   <div className="sticky-card-actions">
-                    {card.link && (
-                      <a
-                        href={card.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="project-link"
-                      >
-                        <img src={OpenExternal} alt="Visit project" />
-                        <span>View Project</span>
-                      </a>
-                    )}
+                    <ActionButton
+                      href={card.link}
+                      icon={OpenExternal}
+                      label="View Project"
+                    />
+                    <ActionButton
+                      href={card.repository}
+                      icon={GithubIcon}
+                      label="View Code"
+                    />
                   </div>
 
                   <div className="sticky-card-techs">
