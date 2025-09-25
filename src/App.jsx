@@ -98,6 +98,7 @@ function App() {
 			imagePositions: resolvedPositions,
 			techs: item.techs,
 			link: item.link,
+			repository: item.repository,
 		};
 	});
 

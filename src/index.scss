@@ -19,20 +19,17 @@ body {
   width: 100%;
   height: 100%;
   margin: 0;
-  padding: 0 10vw;
+  padding: 0 var(--page-gutter);
   display: flex;
   place-items: center;
   overflow-x: hidden;
-
-  @include respond-to('mobile') {
-    padding: 0 5vw;
-  }
 }
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  --page-gutter: 6rem;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -47,4 +44,16 @@ body {
   justify-content: center;
   text-align: center;
   place-items: center;
+}
+
+@include respond-to('tablet') {
+  :root {
+    --page-gutter: 3.5rem;
+  }
+}
+
+@include respond-to('mobile') {
+  :root {
+    --page-gutter: 1.75rem;
+  }
 }
