@@ -86,9 +86,7 @@
         }
     }
 
-    @include respond-to('mobile') {
-        visibility: hidden;
-        width: 0;
-        height: 0;
+    @include respond-to('tablet-landscape') {
+        display: none;
     }
 }
