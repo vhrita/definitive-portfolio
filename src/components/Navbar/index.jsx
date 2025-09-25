@@ -11,7 +11,7 @@ import useIsMobile from '../../utils/useIsMobile';
 
 function Navbar({ items, view = 'home', position = 0, background = false, isPortfolio = false, isContact = false }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  const isMobile = useIsMobile()
+  const isMobile = useIsMobile(1024)
   const jumpTo = (id) => {
     const element = document.getElementById(id)
     if (element) {
