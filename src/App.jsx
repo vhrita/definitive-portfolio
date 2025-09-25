@@ -14,6 +14,15 @@ import i18n from "./config/internationalization/i18n";
 import { useTranslation } from "react-i18next";
 
 import imageExample from "./assets/background.jpg";
+import baixarMangasImg from "./assets/portfolio/baixar-mangas.png";
+import musaBotImg from "./assets/portfolio/musa-bot.png";
+import stellaBotImg from "./assets/portfolio/stella-bot.png";
+import imagineAiImg from "./assets/portfolio/imagine-ai.png";
+import paladinsOverlayImg from "./assets/portfolio/paladins-dynamic-overlay.gif";
+import definitivePortfolioImg from "./assets/portfolio/definitive-portfolio.png";
+import familiaCataVentoImg from "./assets/portfolio/familia-cata-vento.png";
+import kindleNewsletterImg from "./assets/portfolio/kindle_newsletter.png";
+import investidorScraperImg from "./assets/portfolio/investidor10-scraper.png";
 
 function App() {
 	const [locale, setLocale] = useState(i18n.language);
@@ -44,13 +53,53 @@ function App() {
 		}
 	];
 
-	const projects = t("projects", { returnObjects: true }).map(item => ({
-		title: item.title,
-		description: item.description,
-		images: [imageExample],
-		techs: item.techs,
-		link: item.link,
-	}));
+	const projectImageMap = {
+		"baixar-mangas": { src: baixarMangasImg, position: "center center" },
+		"musa-bot": { src: musaBotImg, position: "center 25%" },
+		"stella-bot": { src: stellaBotImg, position: "center 25%" },
+		"imagine-ai": { src: imagineAiImg, position: "center 25%" },
+		"paladins-dynamic-overlay": { src: paladinsOverlayImg, position: "center 25%" },
+		"definitive-portfolio": { src: definitivePortfolioImg, position: "center top" },
+		"familia-cata-vento": { src: familiaCataVentoImg, position: "center top" },
+		"kindle_newsletter": { src: kindleNewsletterImg, position: "center top" },
+		"investidor10-scraper": { src: investidorScraperImg, position: "center top" },
+	};
+
+	const projects = t("projects", { returnObjects: true }).map(item => {
+		const assetKeys = Array.isArray(item.images) && item.images.length > 0
+			? item.images
+			: [];
+
+		const resolvedImages = [];
+		const resolvedPositions = [];
+
+		if (assetKeys.length > 0) {
+			assetKeys.forEach(key => {
+				const config = projectImageMap[key];
+				if (config) {
+					resolvedImages.push(config.src);
+					resolvedPositions.push(config.position);
+				} else {
+					resolvedImages.push(imageExample);
+					resolvedPositions.push("center top");
+				}
+			});
+		}
+
+		if (resolvedImages.length === 0) {
+			resolvedImages.push(imageExample);
+			resolvedPositions.push("center top");
+		}
+
+		return {
+			title: item.title,
+			description: item.description,
+			images: resolvedImages,
+			imagePositions: resolvedPositions,
+			techs: item.techs,
+			link: item.link,
+		};
+	});
 
 	const { scrollY } = useScroll();
 	const [position, setPosition] = useState(0);
