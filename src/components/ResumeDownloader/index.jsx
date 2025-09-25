@@ -8,7 +8,7 @@ import useIsMobile from '../../utils/useIsMobile'
 function ResumeDownloader({ isPortfolio = false, isContact = false }) {
   const { t } = useTranslation()
   const [isHovered, setIsHovered] = useState(false)
-  const isMobile = useIsMobile()
+  const isMobile = useIsMobile(1024)
 
   const handleDownload = () => {
     // Criar um link temporário para download
