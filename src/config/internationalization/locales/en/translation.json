@@ -9,7 +9,11 @@
     "position": "Senior Software Engineer",
     "skillsPrefix": "Skilled in",
     "aboutTitle": "About me",
-    "aboutText": "I'm a software developer with 7 years of experience building scalable web apps. I love exploring new technologies, crafting solutions and pushing boundaries. I never settle — I'm always learning something new, whether in code, finance (I'm an investor and market enthusiast) or travel (I've visited many countries and plan to see many more).",
+    "aboutText": [
+      "I'm a Senior Full Stack Developer from São Paulo with 7+ years shipping scalable web platforms for companies like Compass UOL, Genesis Group, and VILT. I move comfortably across JavaScript, TypeScript, Node.js, and modern front-end frameworks to deliver resilient experiences.",
+      "I've led B2B e-commerce and agritech initiatives end-to-end, building APIs, automating infrastructure on AWS, modernizing legacy stacks, and coaching squads on best practices. From OAuth-secured microservices to real-time dashboards and AI-powered workflows, I enjoy turning complex requirements into clean architecture.",
+      "Beyond code, I'm a curious technologist who invests in my growth: mentoring peers, studying finance as an active investor, and exploring the world (many countries already, plenty more on the list). I value partnerships built on transparency, steady delivery, and a drive to push products further every sprint."
+    ],
     "contactTitle": "Let's Connect",
     "contactSubtitle": "Ready to bring your ideas to life? Let's talk!",
     "contactInfoTitle": "Get in Touch",
