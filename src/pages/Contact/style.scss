@@ -13,17 +13,15 @@
   overflow-y: visible;
   transition: background-color 1.5s ease-in-out;
   margin-top: -1px; // Elimina qualquer gap visual com o Portfolio
-  padding: 2rem 0; // Add vertical padding for mobile safety
 
   .contact-container {
     position: relative;
+    @extend .section-shell--wide;
     width: 100%;
-    max-width: 1200px;
     @extend .flex;
     @extend .items-center;
     @extend .justify-center;
     z-index: 2;
-    padding: 0 1rem; // Add horizontal padding for mobile
     overflow-x: hidden; // Ensure no horizontal overflow
   }
 
