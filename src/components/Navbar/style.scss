@@ -32,13 +32,18 @@ nav {
             gap: 3%;
         }
 
-        button {
-            width: 5%;
+        > button {
             height: 100%;
             background: inherit;
             border: none;
             cursor: pointer;
-
+            padding: 0 clamp(0.75rem, 1.5vw, 1.1rem);
+            min-width: clamp(3.5rem, 5vw, 5.5rem);
+            width: auto;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
             font-size: 1.3em;
             font-weight: 400;
             color: $blue;

@@ -5,7 +5,8 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'
 
 import en from './locales/en/translation.json'
-import ptBR from "./locales/pt-BR/translation.json"
+import ptBR from './locales/pt-BR/translation.json'
+import ja from './locales/ja/translation.json'
 
 i18n
   .use(Backend)
@@ -14,9 +15,20 @@ i18n
   .init({
     resources: {
       en: { ...en },
-      pt: { ...ptBR }
+      pt: { ...ptBR },
+      ja: { ...ja }
     },
-    fallbackLng: "en",
+    supportedLngs: ['en', 'pt', 'ja'],
+    fallbackLng: 'en',
+    load: 'languageOnly',
+    lowerCaseLng: true,
+    nonExplicitSupportedLngs: true,
+    detection: {
+      order: ['localStorage', 'navigator', 'htmlTag'],
+      caches: ['localStorage'],
+      lookupLocalStorage: 'definitive-portfolio-lang',
+      htmlTag: typeof document !== 'undefined' ? document.documentElement : undefined,
+    },
     debug: false,
     interpolation: {
       escapeValue: false,

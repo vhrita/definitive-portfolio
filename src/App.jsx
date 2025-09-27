@@ -43,8 +43,9 @@ function App() {
 			social: "vertical"
 		}
 	];
-
-	const projects = buildProjects(t("projects", { returnObjects: true }))
+	const projectTranslationsRaw = t("projects", { returnObjects: true });
+	const projectTranslations = Array.isArray(projectTranslationsRaw) ? projectTranslationsRaw : [];
+	const projects = buildProjects(projectTranslations);
 
 	const { scrollY } = useScroll();
 	const [position, setPosition] = useState(0);

@@ -5,6 +5,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import useIsMobile from '../../utils/useIsMobile'
+import { useTranslation } from 'react-i18next'
 
 import OpenExternal from '../../assets/icons/open_external.svg'
 import GithubIcon from '../../assets/icons/github.svg'
@@ -30,6 +31,7 @@ const ActionButton = ({ href, icon, label }) => {
 function StickyCards({ cards = [] }) {
   const container = useRef(null)
   const isMobile = useIsMobile(1024)
+  const { t } = useTranslation()
 
   useGSAP(
     () => {
@@ -241,12 +243,12 @@ function StickyCards({ cards = [] }) {
                     <ActionButton
                       href={card.link}
                       icon={OpenExternal}
-                      label="View Project"
+                      label={t('viewProject')}
                     />
                     <ActionButton
                       href={card.repository}
                       icon={GithubIcon}
-                      label="View Code"
+                      label={t('viewCode')}
                     />
                   </div>
 

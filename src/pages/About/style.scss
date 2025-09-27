@@ -1,90 +1,121 @@
 @import '../../utils/variables.scss';
 @import '../../utils/mixins.scss';
+@import '../../utils/utilities.scss';
 
 #about {
+  @extend .section-full;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(4rem, 8vw, 7rem) var(--page-gutter);
+
+  .about__content {
+    width: min(60rem, 100%);
     display: flex;
-    flex-flow: column wrap;
+    flex-direction: column;
     align-items: center;
-    width: 100%;
-    padding: 20%;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
 
-    h2 {
-        position: relative;
-        font-size: 3em;
-        font-weight: 200;
-        color: $blue;
-        padding-bottom: 1%;
+  h2 {
+    position: relative;
+    color: $blue;
+    font-weight: 200;
+    text-align: center;
+    padding-bottom: 0.75rem;
+    @include fluid-type(2.2rem, 3.4rem);
 
-        &::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: 0;
-            width: 50%;
-            border-bottom: 1px solid $blue;
-        }
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: clamp(4rem, 10vw, 6rem);
+      border-bottom: 1px solid $blue;
     }
+  }
+
+  .about__copy {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.25rem, 2.5vw, 2rem);
+    padding: clamp(2rem, 4vw, 3rem);
+    background: rgba(20, 20, 20, 0.35);
+    border-radius: 18px;
+    line-height: 1.85;
+    backdrop-filter: blur(6px);
 
     p {
-        position: relative;
-        text-align: center;
-        text-justify: inter-word;
-        font-size: 1.2em;
-        line-height: 2em;
-        padding-top: 2%;
-
-        &::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -5%;
-            width: 1em;
-            height: 1em;
-            border-left: 1px solid $blue;
-            border-top: 1px solid $blue;
-        }
-
-        &::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: -5%;
-            width: 1em;
-            height: 1em;
-            border-right: 1px solid $blue;
-            border-bottom: 1px solid $blue;
-        }
+      margin: 0;
+      color: rgba(255, 255, 255, 0.9);
+      text-align: left;
+      @include fluid-type(1rem, 1.15rem);
     }
 
-    @media (max-width: 768px) {
-        padding: 15% 5%;
-
-        h2 {
-            font-size: 2.2em;
-        }
-
-        p {
-            font-size: 1em;
-            line-height: 1.6em;
-
-            &::before, &::after {
-                width: 0.8em;
-                height: 0.8em;
-            }
-        }
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      width: clamp(1rem, 2.5vw, 1.5rem);
+      height: clamp(1rem, 2.5vw, 1.5rem);
+      border: 1px solid transparent;
+      pointer-events: none;
     }
 
-    @media (max-width: 480px) {
-        padding: 20% 5%;
-
-        h2 {
-            font-size: 1.8em;
-        }
-
-        p {
-            font-size: 0.9em;
-            line-height: 1.5em;
-        }
+    &::before {
+      top: 1rem;
+      left: 1rem;
+      border-top-color: $blue;
+      border-left-color: $blue;
     }
+
+    &::after {
+      bottom: 1rem;
+      right: 1rem;
+      border-bottom-color: $blue;
+      border-right-color: $blue;
+    }
+  }
+
+  @include respond-to('tablet-landscape') {
+    padding: clamp(3rem, 6vw, 4.5rem) var(--page-gutter);
+
+    .about__content {
+      align-items: center;
+    }
+  }
+
+  @include respond-to('tablet') {
+    padding: clamp(2.5rem, 6vw, 3.5rem) var(--page-gutter);
+
+    .about__copy {
+      padding: clamp(1.75rem, 6vw, 2.5rem);
+      background: rgba(20, 20, 20, 0.3);
+    }
+  }
+
+  @include respond-to('mobile') {
+    padding: clamp(2.5rem, 10vw, 3rem) var(--page-gutter);
+
+    .about__content {
+      gap: 1.75rem;
+    }
+
+    .about__copy {
+      gap: 1.25rem;
+
+      &::before,
+      &::after {
+        width: 1rem;
+        height: 1rem;
+      }
+    }
+
+    h2 {
+      @include fluid-type(2rem, 2.6rem);
+    }
+  }
 }

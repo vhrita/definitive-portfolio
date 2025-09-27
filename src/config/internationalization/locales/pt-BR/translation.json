@@ -9,7 +9,11 @@
     "position": "Engenheiro de Software Sênior",
     "skillsPrefix": "Experiente em",
     "aboutTitle": "Sobre mim",
-    "aboutText": "Sou desenvolvedor de software com 7 anos de experiência em aplicações escaláveis. Sou apaixonado por novas tecnologias e criar soluções incríveis. Odeio estagnar — estou sempre aprendendo algo novo, seja coding, mercado financeiro (sou investidor) ou viajando (já conheci vários países e pretendo conhecer muito mais).",
+    "aboutText": [
+      "Sou Engenheiro de Software Full Stack sênior em São Paulo, com mais de 7 anos entregando plataformas web escaláveis para empresas como Compass UOL, Genesis Group e VILT. Navego com fluidez entre JavaScript, TypeScript, Node.js e os principais frameworks de front-end para construir experiências robustas.",
+      "Já liderei iniciativas de e-commerce B2B e agronegócio de ponta a ponta, construindo APIs, automatizando infraestrutura na AWS, modernizando legados e orientando squads com boas práticas. De microserviços com OAuth a dashboards em tempo real e fluxos com IA, gosto de transformar requisitos complexos em arquiteturas limpas.",
+      "Fora do código, mantenho uma curiosidade constante: mentoro colegas, estudo finanças como investidor ativo e exploro o mundo (já visitei diversos países e a lista só cresce). Valorizo parcerias baseadas em transparência, entregas consistentes e vontade de levar os produtos mais longe a cada sprint."
+    ],
     "contactTitle": "Vamos Conversar",
     "contactSubtitle": "Pronto para dar vida às suas ideias? Vamos conversar!",
     "contactInfoTitle": "Entre em Contato",
@@ -27,6 +31,8 @@
     "formSuccessMessage": "Mensagem enviada com sucesso! Entrarei em contato em breve.",
     "formErrorMessage": "Erro ao enviar mensagem. Tente novamente.",
     "resume": "Currículo",
+    "viewProject": "Ver Projeto",
+    "viewCode": "Ver Código",
     "projects": [
       {
         "id": "manga-downloader",
