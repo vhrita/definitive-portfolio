@@ -1,0 +1,84 @@
+{
+  "translation": {
+    "progress": "現在このポートフォリオは開発中のプレビュー版です。",
+    "home": "ホーム",
+    "about": "概要",
+    "portfolio": "ポートフォリオ",
+    "contact": "お問い合わせ",
+    "greatings": "こんにちは、私は",
+    "position": "シニアソフトウェアエンジニア",
+    "skillsPrefix": "得意分野",
+    "aboutTitle": "私について",
+    "aboutText": [
+      "私はサンパウロ出身のシニアフルスタック開発者で、Compass UOL、Genesis Group、VILT などでスケーラブルな Web プラットフォームを7年以上にわたり提供してきました。JavaScript、TypeScript、Node.js、モダンなフロントエンドフレームワークを自在に扱い、堅牢な体験を構築します。",
+      "B2B eコマースやアグリテックの案件をエンドツーエンドでリードし、API の設計、AWS 上のインフラ自動化、レガシー刷新、ベストプラクティスの導入を進めてきました。OAuth 対応のマイクロサービスからリアルタイムダッシュボード、AI ワークフローまで、複雑な要件をクリーンなアーキテクチャに落とし込むのが得意です。",
+      "コードの外でも常に好奇心を持ち、メンタリングや投資の学習を続けながら、世界中を旅しています（訪れた国は数多く、これからも増える予定です）。透明性、安定したデリバリー、プロダクトを毎スプリント進化させたいという情熱を大切にしています。"
+    ],
+    "contactTitle": "つながりましょう",
+    "contactSubtitle": "アイデアを形にする準備はできていますか？ぜひご連絡ください。",
+    "contactInfoTitle": "連絡先",
+    "phoneLabel": "電話・WhatsApp",
+    "emailLabel": "メール",
+    "locationLabel": "所在地",
+    "phoneNumber": "+55 11 98918-6251",
+    "emailAddress": "vhrita.dev@gmail.com",
+    "location": "ブラジル サンパウロ",
+    "nameField": "お名前",
+    "emailField": "メールアドレス",
+    "messageField": "メッセージ",
+    "sendButton": "メッセージを送信",
+    "sendingButton": "送信中...",
+    "formSuccessMessage": "送信が完了しました。まもなくご連絡いたします。",
+    "formErrorMessage": "送信中にエラーが発生しました。もう一度お試しください。",
+    "resume": "履歴書",
+    "viewProject": "プロジェクトを見る",
+    "viewCode": "コードを見る",
+    "projects": [
+      {
+        "id": "manga-downloader",
+        "title": "Manga Downloader",
+        "description": "卒業制作として開発し、その後コミュニティ向けに公開した Web スクレイパー。人気サイトからマンガの章を取得してインデックス化し、PDF に変換してダウンロードできます。"
+      },
+      {
+        "id": "musa-bot",
+        "title": "Musa Bot",
+        "description": "Winx Club の音楽の妖精ムーサをテーマにした Discord ボット。マルチソースのオーディオ再生、Spotify や YouTube/YouTube Music のプレイリスト統合、Raspberry Pi でも動作する YouTube Resolver サービス、豊富なコマンドとメッセージ管理機能を備えています。"
+      },
+      {
+        "id": "stella-bot",
+        "title": "Stella Bot",
+        "description": "光の妖精ステラをモチーフにした Discord ボット。テキストから画像を生成する AI 機能を中心に、複数の品質レベルと WebSocket によるリアルタイム生成を提供。将来的にはミーム生成などクリエイティブな機能も予定しています。"
+      },
+      {
+        "id": "imagine-ai",
+        "title": "Image AI API",
+        "description": "複数のモデルをフェイルオーバーできる画像生成 API。Stella Bot の高品質な生成要求を支えるために構築しましたが、AI 画像生成を必要とするあらゆるシステムで利用できます。"
+      },
+      {
+        "id": "paladins-dynamic-overlay",
+        "title": "Paladins Dynamic Overlay",
+        "description": "2018年に自分の配信向けに作り、現在はオープンソースとして改良を続けている Paladins 用のダイナミックオーバーレイ。試合データをリアルタイムで取得し、プレイ中のチャンピオンに合わせてオーバーレイを更新します。"
+      },
+      {
+        "id": "definitive-portfolio",
+        "title": "Definitive Portfolio",
+        "description": "React と Framer Motion で構築したパーソナルサイト。高度なアニメーション、水平スクロール、レスポンシブなプロジェクトカルーセルを備えています。"
+      },
+      {
+        "id": "familia-cata-vento",
+        "title": "Família Cata-Vento School",
+        "description": "幼児教育向けの学校のために作成した Web サイト。モダンなデザインとレスポンシブなレイアウトで教育コンテンツを紹介します。"
+      },
+      {
+        "id": "kindle-newsletter",
+        "title": "Kindle Newsletter",
+        "description": "お気に入りのニュースレター（The News）を毎日取得し、変換して Kindle に送信する自動化スクリプト。個人的な課題を解決するために作成し、Kindle でのニュースレター読書を完全に自動化しました。"
+      },
+      {
+        "id": "investidor10-scraper",
+        "title": "Investidor10 Scraper",
+        "description": "投資管理のためのデータ取得を自動化するために開発したスクレイパー。愛用しているブラジルのポートフォリオ管理ツール Investidor10 からデータを取得し、Google スプレッドシートの App Scripts で利用しています。"
+      }
+    ]
+  }
+}
