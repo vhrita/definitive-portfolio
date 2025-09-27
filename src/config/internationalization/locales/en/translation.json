@@ -31,6 +31,8 @@
     "formSuccessMessage": "Message sent successfully! I'll get back to you soon.",
     "formErrorMessage": "Error sending message. Please try again.",
     "resume": "Resume",
+    "viewProject": "View Project",
+    "viewCode": "View Code",
     "projects": [
       {
         "id": "manga-downloader",

@@ -31,6 +31,8 @@
     "formSuccessMessage": "Mensagem enviada com sucesso! Entrarei em contato em breve.",
     "formErrorMessage": "Erro ao enviar mensagem. Tente novamente.",
     "resume": "Currículo",
+    "viewProject": "Ver Projeto",
+    "viewCode": "Ver Código",
     "projects": [
       {
         "id": "manga-downloader",
