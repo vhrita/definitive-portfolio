@@ -7,11 +7,146 @@
     --float-before-y: 0px;
     --float-after-x: 0px;
     --float-after-y: 0px;
+    --hero-fragment-width: 60%;
+    --hero-fragment-height: 55%;
+    --hero-fragment-x: 40%;
+    --hero-fragment-y: -60%;
+    --hero-fragment-top: 50%;
+    --hero-fragment-left: 0%;
+    --hero-before-width: 70%;
+    --hero-before-height: 100%;
+    --hero-before-top: 5%;
+    --hero-before-left: 5%;
+    --hero-before-bg-x: -50px;
+    --hero-before-bg-y: 15%;
+    --hero-before-clip: polygon(0 0, 100% 10%, 10% 100%);
+    --hero-after-width: 70%;
+    --hero-after-height: 100%;
+    --hero-after-bottom: -20%;
+    --hero-after-right: 25%;
+    --hero-after-bg-x: 75%;
+    --hero-after-bg-y: 40%;
+    --hero-after-clip: polygon(100% 0%, 80% 85%, 5% 100%);
+    --hero-span1-left: 0%;
+    --hero-span1-top: 0%;
+    --hero-span2-right: 35%;
+    --hero-span2-bottom: -10%;
+}
+
+@include respond-to('large') {
+    :root {
+        --hero-fragment-width: 62%;
+        --hero-fragment-height: 56%;
+        --hero-fragment-x: 42%;
+        --hero-fragment-y: -60%;
+        --hero-before-width: 72%;
+        --hero-before-height: 102%;
+        --hero-before-bg-x: -60px;
+        --hero-after-width: 72%;
+        --hero-after-height: 102%;
+        --hero-after-right: 23%;
+    }
+}
+
+@include respond-to('desktop') {
+    :root {
+        --hero-fragment-width: 60%;
+        --hero-fragment-height: 52%;
+        --hero-fragment-x: 34%;
+        --hero-fragment-y: -56%;
+        --hero-before-width: 68%;
+        --hero-before-height: 98%;
+        --hero-before-top: 6%;
+        --hero-before-left: 6%;
+        --hero-before-bg-x: -60px;
+        --hero-before-bg-y: 14%;
+        --hero-after-width: 68%;
+        --hero-after-height: 98%;
+        --hero-after-bottom: -18%;
+        --hero-after-right: 28%;
+        --hero-after-bg-x: 72%;
+        --hero-after-bg-y: 39%;
+        --hero-span2-right: 32%;
+    }
+}
+
+@include respond-to('tablet-landscape') {
+    :root {
+        --hero-fragment-width: 74%;
+        --hero-fragment-height: 56%;
+        --hero-fragment-x: 14%;
+        --hero-fragment-y: -54%;
+        --hero-before-width: 100%;
+        --hero-before-height: 95%;
+        --hero-before-top: 0%;
+        --hero-before-left: 0%;
+        --hero-before-bg-x: -32px;
+        --hero-before-bg-y: 15%;
+        --hero-after-width: 100%;
+        --hero-after-height: 95%;
+        --hero-after-bottom: -8%;
+        --hero-after-right: 0%;
+        --hero-after-bg-x: 66%;
+        --hero-after-bg-y: 40%;
+        --hero-span1-left: -5%;
+        --hero-span1-top: -5%;
+        --hero-span2-right: 15%;
+        --hero-span2-bottom: 0%;
+    }
+}
+
+@include respond-to('tablet') {
+    :root {
+        --hero-fragment-width: 82%;
+        --hero-fragment-height: 46%;
+        --hero-fragment-top: 48%;
+        --hero-fragment-left: 50%;
+        --hero-fragment-x: -50%;
+        --hero-fragment-y: -46%;
+        --hero-before-width: 88%;
+        --hero-before-height: 92%;
+        --hero-before-top: 6%;
+        --hero-before-left: 6%;
+        --hero-before-bg-x: -28px;
+        --hero-before-bg-y: 10%;
+        --hero-after-width: 88%;
+        --hero-after-height: 92%;
+        --hero-after-bottom: -10%;
+        --hero-after-right: 8%;
+        --hero-after-bg-x: 72%;
+        --hero-after-bg-y: 48%;
+        --hero-span1-left: -6%;
+        --hero-span1-top: 4%;
+        --hero-span2-right: 22%;
+        --hero-span2-bottom: -6%;
+    }
 }
 
 @include respond-to('mobile') {
     :root {
         --first-span-width: 22%;
+        --hero-fragment-width: 88%;
+        --hero-fragment-height: 42%;
+        --hero-fragment-top: 46%;
+        --hero-fragment-left: 50%;
+        --hero-fragment-x: -50%;
+        --hero-fragment-y: -42%;
+        --hero-before-width: 94%;
+        --hero-before-height: 90%;
+        --hero-before-top: 8%;
+        --hero-before-left: 5%;
+        --hero-before-bg-x: -.3em;
+        --hero-before-bg-y: 0;
+        --hero-after-width: 94%;
+        --hero-after-height: 90%;
+        --hero-after-bottom: -6%;
+        --hero-after-right: -5%;
+        --hero-after-bg-x: 68%;
+        --hero-after-bg-y: 50%;
+        --hero-span1-left: 0;
+        --hero-span1-top: 2%;
+        --hero-span2-right: 10%;
+        --hero-span2-bottom: 0%;
     }
 
     .Typewriter {
@@ -90,11 +225,11 @@
 
     div:nth-of-type(2) {
         position: absolute;
-        top: 50%;
-        left: 0;
-        transform: translate(40%, -60%);
-        height: 55%;
-        width: 60%;
+        top: var(--hero-fragment-top);
+        left: var(--hero-fragment-left);
+        transform: translate(var(--hero-fragment-x), var(--hero-fragment-y));
+        height: var(--hero-fragment-height);
+        width: var(--hero-fragment-width);
         z-index: 1;
 
         span {
@@ -104,15 +239,15 @@
             height: 1em;
             
             &:nth-of-type(1) {
-                left: 0;
-                top: 0;
+                left: var(--hero-span1-left);
+                top: var(--hero-span1-top);
                 border-top: solid 1px $blue;
                 border-left: solid 1px $blue;
             }
 
             &:nth-of-type(2) {
-                bottom: -10%;
-                right: 35%;
+                bottom: var(--hero-span2-bottom);
+                right: var(--hero-span2-right);
                 border-bottom: solid 1px $blue;
                 border-right: solid 1px $blue;
             }
@@ -130,23 +265,108 @@
         }
 
         &::before {
-            width: 70%;
-            height: 100%;
-            top: 5%;
-            left: 5%;
-            background-position: -50px 15%;
-            clip-path: polygon(0 0, 100% 10%, 10% 100%);
+            width: var(--hero-before-width);
+            height: var(--hero-before-height);
+            top: var(--hero-before-top);
+            left: var(--hero-before-left);
+            background-position: var(--hero-before-bg-x) var(--hero-before-bg-y);
+            clip-path: var(--hero-before-clip);
             transform: translate(var(--float-before-x), var(--float-before-y));
         }
 
         &::after {
-            width: 70%;
-            height: 100%;
-            bottom: -20%;
-            right: 25%;
-            background-position: 75% 40%;
-            clip-path: polygon(100% 0%, 80% 85%, 5% 100%);
+            width: var(--hero-after-width);
+            height: var(--hero-after-height);
+            bottom: var(--hero-after-bottom);
+            right: var(--hero-after-right);
+            background-position: var(--hero-after-bg-x) var(--hero-after-bg-y);
+            clip-path: var(--hero-after-clip);
             transform: translate(var(--float-after-x), var(--float-after-y));
+        }
+    }
+
+    @include respond-to('tablet-landscape') {
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+        gap: clamp(1.4rem, 3.8vw, 2.2rem);
+        min-height: 100vh;
+        height: auto;
+        padding: 0;
+
+        & > div {
+            width: 100%;
+            max-width: min(52rem, 100%);
+            align-items: stretch;
+            justify-content: flex-start;
+            text-align: left;
+            font-size: clamp(2.05rem, 4.6vw, 2.65rem);
+            gap: clamp(1rem, 3vw, 1.8rem);
+
+            h1 {
+                font-size: clamp(1.4em, 4.8vw, 1.75em);
+                text-align: left;
+                align-self: flex-start;
+            }
+
+            p {
+                font-size: clamp(1.1em, 3.6vw, 1.35em);
+                text-align: left;
+                align-self: flex-start;
+            }
+
+            > div:first-of-type {
+                order: 3;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                justify-content: center;
+                width: 100%;
+                gap: 0.65rem;
+                margin-top: clamp(0.9rem, 3vw, 1.5rem);
+
+                span {
+                    margin: 0;
+                    letter-spacing: 0.18em;
+                }
+
+                .Typewriter {
+                    max-width: 100%;
+                    display: block;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: clip;
+
+                    &__wrapper,
+                    &__cursor {
+                        display: inline-block;
+                        white-space: inherit;
+                    }
+                }
+
+                .skills {
+                    width: 100%;
+                    text-align: right;
+                }
+
+                > div {
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-end;
+                }
+            }
+        }
+
+        div:nth-of-type(2) {
+            order: 2;
+            position: relative;
+            top: auto;
+            left: auto;
+            transform: none;
+            width: min(36rem, 92vw);
+            height: clamp(22rem, 66vh, 36rem);
+            margin: clamp(1.1rem, 3vw, 1.8rem) auto;
+            flex-shrink: 0;
         }
     }
 
@@ -158,6 +378,7 @@
         justify-content: center;
         height: 100%;
         gap: 0;
+        padding: 1.5rem 0;
 
 
         & > div {
@@ -170,10 +391,13 @@
 
             h1 {
                 font-size: 1.2em;
+                margin: 0 auto 0 auto;
             }
 
             h1, p {
                 justify-self: flex-start;
+                text-align: center;
+                font-size: 1em;
             }
 
             div {
@@ -200,37 +424,10 @@
         }
 
         div:nth-of-type(2) {
-            width: 100%;
-            
-            &::before, &::after {
-                overflow: hidden;
-                width: 90%;
-                height: 80%;
-            }
-
-            &::before {
-                left: -30%;
-                top: 25%;
-                background-position: -25px 10%;
-            }
-
-            &::after {
-                right: 40%;
-                bottom: -25;
-                background-position: 75% 45%
-            }
-
-            span {
-                &:nth-of-type(1) {
-                    left: -35%;
-                    top: 20%;
-                }
-
-                &:nth-of-type(2) {
-                    bottom: -15%;
-                    right: 45%;
-                }
-            }
+            width: var(--hero-fragment-width);
+            height: clamp(16rem, 50vh, 24rem);
+            flex-shrink: 0;
+            margin: clamp(1.25rem, 8vw, 2.25rem) 0;
         }
     }
 }
