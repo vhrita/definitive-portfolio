@@ -111,9 +111,9 @@
   height: 100%;
   @extend .flex;
   @extend .flex-col;
-  gap: 1.2rem; // Custom gap mantido pois é específico
-  overflow: hidden; // Evita que o conteúdo saia do container
-  min-height: 0; // Permite que os flex items encolham adequadamente
+  gap: 1.2rem;
+  overflow: hidden;
+  min-height: 0;
 }
 
 .sticky-card-header {
@@ -130,8 +130,8 @@
   display: flex;
   gap: 1.5rem;
   flex: 1;
-  overflow: hidden; // Evita que o conteúdo saia do container
-  min-height: 0; // Permite que o flex item encolha
+  overflow: hidden;
+  min-height: 0;
 }
 
 .sticky-card-copy-title {
@@ -336,6 +336,13 @@
     -webkit-overflow-scrolling: touch;
     overflow-x: hidden;
     scroll-behavior: smooth;
+
+    --img-height: 55vh;
+    --main-container-height: 85vh;
+    --min-img-overlap: calc(var(--img-height) * 0.1);
+    --max-img-overlap: calc(var(--img-height) * 0.2);
+    --content-max-height-mobile: calc(var(--main-container-height) - (var(--img-height) * 0.8));
+    --content-max-height-tablet: calc(var(--main-container-height) - (var(--img-height) * 0.8));
   }
 
   .sticky-card {
@@ -379,25 +386,27 @@
     width: 92%;
     min-height: 78vh;
     height: auto;
-    max-height: none;
+    max-height: 85vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     gap: 1.25rem;
-    overflow: visible; // Permite que elementos saiam do container para animação
+    overflow: visible;
   }
 
   .sticky-card-img {
     position: relative;
     width: 100%;
-    height: 43vh;
+    height: var(--img-height, 55vh);
+    min-height: 350px;
+    max-height: none;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     will-change: transform, opacity;
     z-index: 1;
-    transform: translateZ(0); // Force hardware acceleration
+    flex-shrink: 0;
 
     img {
       width: 100%;
@@ -411,11 +420,12 @@
     position: relative;
     width: 95%;
     height: auto;
-    max-height: none;
+    max-height: var(--content-max-height-mobile, 62.5vh);
+    min-height: 200px;
     left: 0;
-    top: -10%;
-    margin-top: -6vh;
-    margin-bottom: 1.5rem;
+    top: var(--content-overlap-top, -10%);
+    margin-top: calc(-1 * var(--max-img-overlap, 22.5vh));
+    margin-bottom: 1rem;
     padding: 1.8rem;
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(15px);
@@ -424,16 +434,21 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    flex-grow: 1;
+    flex-grow: 0;
+    flex-shrink: 0;
     gap: 1rem;
     will-change: transform, opacity;
     z-index: 2;
-    overflow: visible;
-    transform: translateZ(0); // Force hardware acceleration
+    overflow: hidden;
+    transform: translateZ(0);
 
     @include respond-to('tablet') {
       padding: 1.6rem;
-      margin-top: -5vh;
+      margin-top: calc(-1 * var(--min-img-overlap, 5.5vh));
+      max-height: var(--content-max-height-tablet, 41vh);
+      min-height: 180px;
+      margin-bottom: 1rem;
+      flex-grow: 1;
     }
   }
 
@@ -441,9 +456,11 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: 0.85rem;
     overflow: visible;
+    min-height: 0;
+    padding-bottom: 0.5rem;
   }
 
   .sticky-card-header {
@@ -461,34 +478,50 @@
     flex-direction: column;
     gap: 0.85rem;
     flex: 1;
-    overflow: visible;
+    overflow: hidden;
+    min-height: 80px;
+    display: flex;
 
     @include respond-to('tablet') {
       gap: 0.7rem;
+      min-height: 60px;
     }
   }
 
-  .sticky-card-copy-title p {
-    text-align: center;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.7);
-    margin: 0;
+  .sticky-card-copy-title {
+    flex: 0 0 auto;
+
+    p {
+      text-align: center;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      margin: 0;
+    }
   }
 
   .sticky-card-copy-description {
-    overflow: visible;
+    overflow: hidden;
     flex: 1;
+    min-height: 60px;
+    max-height: none;
 
     p {
       font-size: 1rem;
       line-height: 1.5;
       text-align: center;
       margin: 0;
-      overflow: visible;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: none;
+      -webkit-box-orient: vertical;
+      max-height: none;
 
       @include respond-to('tablet') {
         font-size: 0.95rem;
+        -webkit-line-clamp: none;
+        max-height: none;
       }
     }
   }
@@ -500,6 +533,7 @@
     justify-content: center;
     margin: 0;
     flex-shrink: 0;
+    padding-bottom: 0.25rem;
 
     .tech-chip {
       font-size: 0.8rem;
@@ -523,6 +557,7 @@
     text-align: center;
     flex-shrink: 0;
     margin-top: auto;
+    margin-bottom: 0.5rem;
     display: flex;
     gap: 0.75rem;
     justify-content: center;

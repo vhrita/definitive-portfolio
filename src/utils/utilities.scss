@@ -235,6 +235,44 @@
   overflow-x: hidden;
 }
 
+// Responsive container shells
+.section-shell {
+  width: min(1200px, 100%);
+  margin-left: auto;
+  margin-right: auto;
+  padding-block: clamp(3rem, 6vw, 5.5rem);
+}
+
+.section-shell--wide {
+  width: min(1400px, 100%);
+  margin-left: auto;
+  margin-right: auto;
+  padding-block: clamp(3rem, 6vw, 5.5rem);
+}
+
+.section-shell--narrow {
+  width: min(960px, 100%);
+  margin-left: auto;
+  margin-right: auto;
+  padding-block: clamp(3rem, 6vw, 5rem);
+}
+
+@include respond-to('tablet') {
+  .section-shell,
+  .section-shell--wide,
+  .section-shell--narrow {
+    padding-block: clamp(2.5rem, 7vw, 4rem);
+  }
+}
+
+@include respond-to('mobile') {
+  .section-shell,
+  .section-shell--wide,
+  .section-shell--narrow {
+    padding-block: clamp(2rem, 9vw, 3rem);
+  }
+}
+
 // ========================================
 // 7. HIDE/SHOW UTILITIES
 // ========================================
