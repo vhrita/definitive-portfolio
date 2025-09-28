@@ -4,6 +4,7 @@ import { useScroll, useMotionValueEvent, inView } from "framer-motion";
 
 import Navbar from "./components/Navbar";
 import Social from "./components/Social";
+import ErrorBoundary from "./components/ErrorBoundary";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Portfolio from "./pages/Portfolio";
@@ -147,23 +148,33 @@ function App() {
 
 	return (
 		<LocaleContext.Provider value={{ locale, setLocale }}>
-			<Navbar
-				items={pages}
-				view={view.id}
-				position={position}
-				background={view.social === "vertical"}
-				isPortfolio={isPortfolioInView || isContactInView}
-				isContact={isContactInView}
-			/>
-			<Social
-				orientation={social}
-				isContactInView={isContactInView}
-				isPortfolio={isPortfolioInView}
-			/>
-			<Home />
-			<About />
-			<Portfolio projects={projects} />
-			<Contact isContactInView={isContactInView} />
+			<ErrorBoundary>
+				<Navbar
+					items={pages}
+					view={view.id}
+					position={position}
+					background={view.social === "vertical"}
+					isPortfolio={isPortfolioInView || isContactInView}
+					isContact={isContactInView}
+				/>
+				<Social
+					orientation={social}
+					isContactInView={isContactInView}
+					isPortfolio={isPortfolioInView}
+				/>
+			</ErrorBoundary>
+			<ErrorBoundary>
+				<Home />
+			</ErrorBoundary>
+			<ErrorBoundary>
+				<About />
+			</ErrorBoundary>
+			<ErrorBoundary>
+				<Portfolio projects={projects} />
+			</ErrorBoundary>
+			<ErrorBoundary>
+				<Contact isContactInView={isContactInView} />
+			</ErrorBoundary>
 		</LocaleContext.Provider>
 	);
 }
