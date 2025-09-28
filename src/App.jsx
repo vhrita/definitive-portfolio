@@ -5,10 +5,12 @@ import { useScroll, useMotionValueEvent, inView } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Social from "./components/Social";
 import ErrorBoundary from "./components/ErrorBoundary";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Portfolio from "./pages/Portfolio";
-import Contact from "./pages/Contact";
+import { lazy, Suspense } from "react";
+
+const Home = lazy(() => import("./pages/Home"));
+const About = lazy(() => import("./pages/About"));
+const Portfolio = lazy(() => import("./pages/Portfolio"));
+const Contact = lazy(() => import("./pages/Contact"));
 
 import LocaleContext from "./config/internationalization/LocaleContext.js";
 import i18n from "./config/internationalization/i18n";
@@ -166,16 +168,24 @@ function App() {
 			</ErrorBoundary>
 			<main id="main-content">
 				<ErrorBoundary>
-					<Home />
+					<Suspense fallback={<div className="page-loading">Loading...</div>}>
+						<Home />
+					</Suspense>
 				</ErrorBoundary>
 				<ErrorBoundary>
-					<About />
+					<Suspense fallback={<div className="page-loading">Loading...</div>}>
+						<About />
+					</Suspense>
 				</ErrorBoundary>
 				<ErrorBoundary>
-					<Portfolio projects={projects} />
+					<Suspense fallback={<div className="page-loading">Loading...</div>}>
+						<Portfolio projects={projects} />
+					</Suspense>
 				</ErrorBoundary>
 				<ErrorBoundary>
-					<Contact isContactInView={isContactInView} />
+					<Suspense fallback={<div className="page-loading">Loading...</div>}>
+						<Contact isContactInView={isContactInView} />
+					</Suspense>
 				</ErrorBoundary>
 			</main>
 		</LocaleContext.Provider>
