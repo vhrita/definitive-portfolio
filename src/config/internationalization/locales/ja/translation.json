@@ -33,6 +33,22 @@
     "resume": "履歴書",
     "viewProject": "プロジェクトを見る",
     "viewCode": "コードを見る",
+    "accessibility": {
+      "homeIntroduction": "ホーム - 紹介",
+      "aboutMe": "私について",
+      "portfolioProjects": "ポートフォリオプロジェクト",
+      "contactForm": "連絡先情報とフォーム",
+      "mainNavigation": "メインナビゲーション",
+      "skipToMain": "メインコンテンツへスキップ",
+      "projectActions": "プロジェクトアクション",
+      "technologiesUsed": "使用技術",
+      "socialMediaProfile": "ソーシャルメディアプロフィール",
+      "phoneContactIcon": "電話連絡先アイコン",
+      "emailContactIcon": "メール連絡先アイコン",
+      "locationIcon": "位置アイコン",
+      "copyPhoneClipboard": "電話番号をクリップボードにコピー",
+      "copyEmailClipboard": "メールアドレスをクリップボードにコピー"
+    },
     "projects": [
       {
         "id": "manga-downloader",

@@ -242,7 +242,7 @@ function StickyCards({ cards = [] }) {
                         )}
                         <img
                           src={primaryImage}
-                          alt={card.title}
+                          alt={`${card.title} project screenshot showing the application interface`}
                           style={{
                             objectPosition: primaryImagePosition || 'center top',
                             opacity: loadingStates[index] === false ? 1 : 0
@@ -269,7 +269,7 @@ function StickyCards({ cards = [] }) {
                     </div>
                   </div>
 
-                  <div className="sticky-card-actions">
+                  <div className="sticky-card-actions" role="group" aria-label={t('accessibility.projectActions')}>
                     <ActionButton
                       href={card.link}
                       icon={OpenExternal}
@@ -282,9 +282,9 @@ function StickyCards({ cards = [] }) {
                     />
                   </div>
 
-                  <div className="sticky-card-techs">
+                  <div className="sticky-card-techs" role="list" aria-label={t('accessibility.technologiesUsed')}>
                     {card.techs.map((tech, i) => (
-                      <span key={i} className="tech-chip">{tech}</span>
+                      <span key={i} className="tech-chip" role="listitem">{tech}</span>
                     ))}
                   </div>
                 </div>

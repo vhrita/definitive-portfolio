@@ -160,10 +160,11 @@ function Contact({ isContactInView = false }) {
   }, [iconVisibility, isContactInView])
 
   return (
-    <div
+    <section
       id='contact'
       ref={ref}
       style={{ backgroundColor: "#2BCAB6" }}
+      aria-label={t('accessibility.contactForm')}
     >
       <div className="contact-container">
         <motion.div
@@ -206,7 +207,7 @@ function Contact({ isContactInView = false }) {
               }}
             >
               <a href={media.link} target="_blank" rel="noopener noreferrer">
-                <img src={media.icon} alt={media.name} />
+                <img src={media.icon} alt={`${media.name} ${t('accessibility.socialMediaProfile')}`} />
               </a>
             </motion.div>
           ))}
@@ -243,7 +244,7 @@ function Contact({ isContactInView = false }) {
               <h3>{t("contactInfoTitle")}</h3>
 
               <div className="contact-item">
-                <img src={PhoneIcon} alt="Phone" />
+                <img src={PhoneIcon} alt={t('accessibility.phoneContactIcon')} />
                 <div className="item-content">
                   <span className="label">{t("phoneLabel")}</span>
                   <a href="tel:+5511989186251" className="value">{t("phoneNumber")}</a>
@@ -255,12 +256,12 @@ function Contact({ isContactInView = false }) {
                   whileTap={{ scale: 0.9 }}
                   title="Copy phone number"
                 >
-                  <img src={CopyIcon} alt="Copy" />
+                  <img src={CopyIcon} alt={t('accessibility.copyPhoneClipboard')} />
                 </motion.button>
               </div>
 
               <div className="contact-item">
-                <img src={EmailIcon} alt="Email" />
+                <img src={EmailIcon} alt={t('accessibility.emailContactIcon')} />
                 <div className="item-content">
                   <span className="label">{t("emailLabel")}</span>
                   <a href="mailto:vhrita.dev@gmail.com" className="value">{t("emailAddress")}</a>
@@ -272,12 +273,12 @@ function Contact({ isContactInView = false }) {
                   whileTap={{ scale: 0.9 }}
                   title="Copy email address"
                 >
-                  <img src={CopyIcon} alt="Copy" />
+                  <img src={CopyIcon} alt={t('accessibility.copyEmailClipboard')} />
                 </motion.button>
               </div>
 
               <div className="contact-item">
-                <img src={LocationIcon} alt="Location" />
+                <img src={LocationIcon} alt={t('accessibility.locationIcon')} />
                 <div className="item-content">
                   <span className="label">{t("locationLabel")}</span>
                   <span className="value">{t("location")}</span>
@@ -300,6 +301,7 @@ function Contact({ isContactInView = false }) {
                   type="text"
                   name="name"
                   placeholder={t("nameField")}
+                  aria-label={t("nameField")}
                   required
                   disabled={formStatus.submitting}
                 />
@@ -309,6 +311,7 @@ function Contact({ isContactInView = false }) {
                   type="email"
                   name="email"
                   placeholder={t("emailField")}
+                  aria-label={t("emailField")}
                   required
                   disabled={formStatus.submitting}
                 />
@@ -317,6 +320,7 @@ function Contact({ isContactInView = false }) {
                 <textarea
                   name="message"
                   placeholder={t("messageField")}
+                  aria-label={t("messageField")}
                   rows="5"
                   required
                   disabled={formStatus.submitting}
@@ -358,7 +362,7 @@ function Contact({ isContactInView = false }) {
           </div>
         </motion.div>
       </div>
-    </div>
+    </section>
   )
 }
 
