@@ -391,9 +391,12 @@
 
     --img-height: 55vh;
     --main-container-height: 85vh;
-    --min-img-overlap: calc(var(--img-height) * 0.1);
-    --max-img-overlap: calc(var(--img-height) * 0.2);
-    --content-max-height-mobile: calc(var(--main-container-height) - (var(--img-height) * 0.8));
+    --main-container-height-mobile: 75vh;
+    --min-img-overlap-tablet: calc(var(--img-height) * 0.1);
+    --max-img-overlap-tablet: calc(var(--img-height) * 0.2);
+    --min-img-overlap-mobile: calc(var(--img-height) * 0.3);
+    --max-img-overlap-mobile: calc(var(--img-height) * 0.5);
+    --content-max-height-mobile: calc(var(--main-container-height-mobile) - (var(--img-height) * 0.5));
     --content-max-height-tablet: calc(var(--main-container-height) - (var(--img-height) * 0.8));
   }
 
@@ -445,6 +448,12 @@
     justify-content: flex-start;
     gap: 1.25rem;
     overflow: visible;
+
+    @include respond-to('mobile') {
+      max-height: 75vh;
+      min-height: 65vh;
+      height: 75vh;
+    }
   }
 
   .sticky-card-img {
@@ -472,11 +481,11 @@
     position: relative;
     width: 95%;
     height: auto;
-    max-height: var(--content-max-height-mobile, 62.5vh);
+    max-height: var(--content-max-height-tablet, 41vh);
     min-height: 200px;
     left: 0;
     top: var(--content-overlap-top, -10%);
-    margin-top: calc(-1 * var(--max-img-overlap, 22.5vh));
+    margin-top: calc(-1 * var(--max-img-overlap-tablet, 11vh));
     margin-bottom: 1rem;
     padding: 1.8rem;
     background: rgba(0, 0, 0, 0.6);
@@ -496,11 +505,22 @@
 
     @include respond-to('tablet') {
       padding: 1.6rem;
-      margin-top: calc(-1 * var(--min-img-overlap, 5.5vh));
+      margin-top: calc(-1 * var(--min-img-overlap-tablet, 5.5vh));
       max-height: var(--content-max-height-tablet, 41vh);
       min-height: 180px;
       margin-bottom: 1rem;
       flex-grow: 1;
+    }
+
+    @include respond-to('mobile') {
+      padding: 1.4rem;
+      margin-top: calc(-1 * var(--min-img-overlap-mobile, 16.5vh));
+      height: auto;
+      max-height: calc(var(--main-container-height-mobile, 75vh) - var(--img-height, 55vh) + var(--max-img-overlap-mobile, 27.5vh));
+      min-height: calc(var(--main-container-height-mobile, 75vh) - var(--img-height, 55vh) + var(--min-img-overlap-mobile, 16.5vh));
+      margin-bottom: 1rem;
+      flex-grow: 1;
+      flex-shrink: 1;
     }
   }
 
@@ -513,6 +533,27 @@
     overflow: visible;
     min-height: 0;
     padding-bottom: 0.5rem;
+
+    @include respond-to('mobile') {
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding-bottom: 0.75rem;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 2px;
+      }
+    }
   }
 
   .sticky-card-header {
@@ -572,6 +613,13 @@
 
       @include respond-to('tablet') {
         font-size: 0.95rem;
+        -webkit-line-clamp: none;
+        max-height: none;
+      }
+
+      @include respond-to('mobile') {
+        font-size: 0.9rem;
+        line-height: 1.4;
         -webkit-line-clamp: none;
         max-height: none;
       }

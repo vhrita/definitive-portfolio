@@ -1,8 +1,8 @@
 import './style.scss'
 
 import { useRef, useState } from 'react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { gsap } from 'gsap/dist/gsap'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import useIsMobile from '../../utils/useIsMobile'
 import { useTranslation } from 'react-i18next'
@@ -243,6 +243,8 @@ function StickyCards({ cards = [] }) {
                         <img
                           src={primaryImage}
                           alt={`${card.title} project screenshot showing the application interface`}
+                          loading="lazy"
+                          decoding="async"
                           style={{
                             objectPosition: primaryImagePosition || 'center top',
                             opacity: loadingStates[index] === false ? 1 : 0
