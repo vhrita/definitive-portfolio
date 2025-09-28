@@ -148,6 +148,7 @@ function App() {
 
 	return (
 		<LocaleContext.Provider value={{ locale, setLocale }}>
+			<a href="#main-content" className="skip-link">{t('accessibility.skipToMain')}</a>
 			<ErrorBoundary>
 				<Navbar
 					items={pages}
@@ -163,18 +164,20 @@ function App() {
 					isPortfolio={isPortfolioInView}
 				/>
 			</ErrorBoundary>
-			<ErrorBoundary>
-				<Home />
-			</ErrorBoundary>
-			<ErrorBoundary>
-				<About />
-			</ErrorBoundary>
-			<ErrorBoundary>
-				<Portfolio projects={projects} />
-			</ErrorBoundary>
-			<ErrorBoundary>
-				<Contact isContactInView={isContactInView} />
-			</ErrorBoundary>
+			<main id="main-content">
+				<ErrorBoundary>
+					<Home />
+				</ErrorBoundary>
+				<ErrorBoundary>
+					<About />
+				</ErrorBoundary>
+				<ErrorBoundary>
+					<Portfolio projects={projects} />
+				</ErrorBoundary>
+				<ErrorBoundary>
+					<Contact isContactInView={isContactInView} />
+				</ErrorBoundary>
+			</main>
 		</LocaleContext.Provider>
 	);
 }
