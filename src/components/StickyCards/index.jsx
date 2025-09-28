@@ -1,6 +1,6 @@
 import './style.scss'
 
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
@@ -32,6 +32,15 @@ function StickyCards({ cards = [] }) {
   const container = useRef(null)
   const isMobile = useIsMobile(1024)
   const { t } = useTranslation()
+  const [loadingStates, setLoadingStates] = useState({})
+
+  const handleImageLoad = (index) => {
+    setLoadingStates(prev => ({ ...prev, [index]: false }))
+  }
+
+  const handleImageError = (index) => {
+    setLoadingStates(prev => ({ ...prev, [index]: 'error' }))
+  }
 
   useGSAP(
     () => {
@@ -218,11 +227,32 @@ function StickyCards({ cards = [] }) {
             <div className="sticky-card-main-container">
               <div className="sticky-card-img">
                 {primaryImage && (
-                  <img
-                    src={primaryImage}
-                    alt={card.title}
-                    style={{ objectPosition: primaryImagePosition || 'center top' }}
-                  />
+                  <>
+                    {loadingStates[index] === 'error' ? (
+                      <div className="sticky-card-img-error">
+                        <span>⚠️</span>
+                        <p>Failed to load image</p>
+                      </div>
+                    ) : (
+                      <>
+                        {loadingStates[index] !== false && (
+                          <div className="sticky-card-img-loading">
+                            <div className="loading-spinner"></div>
+                          </div>
+                        )}
+                        <img
+                          src={primaryImage}
+                          alt={card.title}
+                          style={{
+                            objectPosition: primaryImagePosition || 'center top',
+                            opacity: loadingStates[index] === false ? 1 : 0
+                          }}
+                          onLoad={() => handleImageLoad(index)}
+                          onError={() => handleImageError(index)}
+                        />
+                      </>
+                    )}
+                  </>
                 )}
               </div>
 
