@@ -15,7 +15,7 @@ function Home() {
   const { t } = useTranslation()
 
   return (
-    <motion.div id="home">
+    <section id="home" aria-label={t('accessibility.homeIntroduction')}>
       <motion.div
         animate={{
           '--float-before-x': ['0px', '10px', '-8px', '12px', '0px'],
@@ -61,7 +61,7 @@ function Home() {
           ))}
         </div>
       </motion.div>
-    </motion.div>
+    </section>
   );
 }
 

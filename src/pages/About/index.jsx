@@ -8,7 +8,7 @@ function About() {
   const paragraphs = Array.isArray(aboutText) ? aboutText : [aboutText];
 
   return (
-    <section id="about" className="about">
+    <section id="about" className="about" aria-label={t('accessibility.aboutMe')}>
       <div className="about__content">
         <h2>{t('aboutTitle')}</h2>
         <div className="about__copy">

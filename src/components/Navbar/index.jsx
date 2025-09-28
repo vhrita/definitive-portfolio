@@ -2,6 +2,7 @@ import './style.scss';
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import LangSelector from '../LangSelector';
 import ResumeDownloader from '../ResumeDownloader';
@@ -12,6 +13,7 @@ import useIsMobile from '../../utils/useIsMobile';
 function Navbar({ items, view = 'home', position = 0, background = false, isPortfolio = false, isContact = false }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const isMobile = useIsMobile(1024)
+  const { t } = useTranslation()
   const jumpTo = (id) => {
     const element = document.getElementById(id)
     if (element) {
@@ -55,6 +57,8 @@ function Navbar({ items, view = 'home', position = 0, background = false, isPort
       <motion.nav
         className={getNavbarClass()}
         style={(position >= 75 && (background && !isPortfolio)) && { backgroundColor: "#1d1c23cc" }}
+        role="navigation"
+        aria-label={t('accessibility.mainNavigation')}
       >
         <ResumeDownloader isPortfolio={isPortfolio} isContact={isContact} />
 
