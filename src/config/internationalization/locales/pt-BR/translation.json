@@ -33,6 +33,22 @@
     "resume": "Currículo",
     "viewProject": "Ver Projeto",
     "viewCode": "Ver Código",
+    "accessibility": {
+      "homeIntroduction": "Início - Apresentação",
+      "aboutMe": "Sobre mim",
+      "portfolioProjects": "Projetos do portfólio",
+      "contactForm": "Informações de contato e formulário",
+      "mainNavigation": "Navegação principal",
+      "skipToMain": "Pular para o conteúdo principal",
+      "projectActions": "Ações do projeto",
+      "technologiesUsed": "Tecnologias utilizadas",
+      "socialMediaProfile": "perfil de rede social",
+      "phoneContactIcon": "Ícone de contato telefônico",
+      "emailContactIcon": "Ícone de contato por email",
+      "locationIcon": "Ícone de localização",
+      "copyPhoneClipboard": "Copiar número de telefone para área de transferência",
+      "copyEmailClipboard": "Copiar endereço de email para área de transferência"
+    },
     "projects": [
       {
         "id": "manga-downloader",
