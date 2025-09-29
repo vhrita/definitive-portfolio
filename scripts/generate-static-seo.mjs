@@ -258,30 +258,25 @@ if (missingKeys.size) {
   console.warn('Add these under translation.json -> seo.* for each locale to avoid English fallbacks.')
 }
 
-// Generate _redirects file for proper routing priority
-const redirectsContent = `# Static SEO pages - force priority over SPA fallback
-/            /index.html           200!
-/about       /about/index.html     200!
-/portfolio   /portfolio/index.html 200!
-/contact     /contact/index.html   200!
-
-# Portuguese routes
-/pt          /pt/index.html        200!
-/pt/about    /pt/about/index.html  200!
-/pt/portfolio /pt/portfolio/index.html 200!
-/pt/contact  /pt/contact/index.html 200!
-
-# Japanese routes
-/ja          /ja/index.html        200!
-/ja/about    /ja/about/index.html  200!
-/ja/portfolio /ja/portfolio/index.html 200!
-/ja/contact  /ja/contact/index.html 200!
-
-# SPA fallback for everything else (without force flag)
-/*           /index.html           200
+// Generate .htaccess file for Apache/hosting providers
+const htaccessContent = `# Static SEO pages priority
+RewriteEngine On
+RewriteRule ^$ /index.html [L]
+RewriteRule ^about$ /about/index.html [L]
+RewriteRule ^portfolio$ /portfolio/index.html [L]
+RewriteRule ^contact$ /contact/index.html [L]
+RewriteRule ^pt$ /pt/index.html [L]
+RewriteRule ^pt/about$ /pt/about/index.html [L]
+RewriteRule ^pt/portfolio$ /pt/portfolio/index.html [L]
+RewriteRule ^pt/contact$ /pt/contact/index.html [L]
+RewriteRule ^ja$ /ja/index.html [L]
+RewriteRule ^ja/about$ /ja/about/index.html [L]
+RewriteRule ^ja/portfolio$ /ja/portfolio/index.html [L]
+RewriteRule ^ja/contact$ /ja/contact/index.html [L]
+RewriteRule ^(.*)$ /index.html [L]
 `
 
-writeFileSync(join(__dirname, '../dist/_redirects'), redirectsContent, 'utf8')
-console.log('✅ Generated: _redirects')
+writeFileSync(join(__dirname, '../dist/.htaccess'), htaccessContent, 'utf8')
+console.log('✅ Generated: .htaccess (for Apache hosting)')
 
 console.log(`🎉 Generated ${routes.length} SEO pages successfully!`)
