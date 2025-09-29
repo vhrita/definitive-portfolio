@@ -8,49 +8,54 @@ export default function SEO() {
   const { pathname } = useLocation()
   const { t, i18n } = useTranslation()
 
-  // Get current language
-  const currentLang = i18n.language || 'en'
-
-  // Extract base section from multilingual pathname
+  // Extract language and section from URL pathname
   const pathParts = pathname.split('/').filter(Boolean)
+  let currentLang = 'en' // default
   let baseSection = '/'
 
   if (pathParts.length > 0) {
     const firstPart = pathParts[0]
     if (['pt', 'ja'].includes(firstPart)) {
       // Language prefix route: /pt/about, /ja/portfolio
+      currentLang = firstPart === 'pt' ? 'pt-BR' : 'ja'
       baseSection = pathParts.length > 1 ? `/${pathParts[1]}` : '/'
     } else if (['about', 'portfolio', 'contact'].includes(firstPart)) {
       // Direct section route (English default): /about, /portfolio
+      currentLang = 'en'
       baseSection = `/${firstPart}`
     }
+  }
+
+  // Force translation to use the detected language
+  const tWithLang = (key, fallback) => {
+    return i18n.getFixedT(currentLang)(key, fallback)
   }
 
   // Define route-specific meta data
   const routes = {
     '/': {
-      title: t('seo.home.title', 'Vitor Rita — Senior Software Engineer'),
-      description: t('seo.home.description', 'Portfolio of a Senior Software Engineer specialized in React, Vue.js, Node.js and Adobe Experience Manager. View my projects and get in touch.'),
+      title: tWithLang('seo.home.title', 'Vitor Rita — Senior Software Engineer'),
+      description: tWithLang('seo.home.description', 'Portfolio of a Senior Software Engineer specialized in React, Vue.js, Node.js and Adobe Experience Manager. View my projects and get in touch.'),
       ogType: 'website',
-      keywords: t('seo.home.keywords', 'software engineer, frontend developer, react, vue, nodejs, portfolio, vitor rita'),
+      keywords: tWithLang('seo.home.keywords', 'software engineer, frontend developer, react, vue, nodejs, portfolio, vitor rita'),
     },
     '/about': {
-      title: t('seo.about.title', 'About — Vitor Rita'),
-      description: t('seo.about.description', 'Learn about my background, skills and experience as a Senior Software Engineer. Specialized in modern web technologies and enterprise solutions.'),
+      title: tWithLang('seo.about.title', 'About — Vitor Rita'),
+      description: tWithLang('seo.about.description', 'Learn about my background, skills and experience as a Senior Software Engineer. Specialized in modern web technologies and enterprise solutions.'),
       ogType: 'profile',
-      keywords: t('seo.about.keywords', 'about, background, skills, experience, software engineer, web developer'),
+      keywords: tWithLang('seo.about.keywords', 'about, background, skills, experience, software engineer, web developer'),
     },
     '/portfolio': {
-      title: t('seo.portfolio.title', 'Projects — Vitor Rita'),
-      description: t('seo.portfolio.description', 'Explore my selected projects including Discord bots, manga readers, AI tools and enterprise web applications built with modern technologies.'),
+      title: tWithLang('seo.portfolio.title', 'Projects — Vitor Rita'),
+      description: tWithLang('seo.portfolio.description', 'Explore my selected projects including Discord bots, manga readers, AI tools and enterprise web applications built with modern technologies.'),
       ogType: 'website',
-      keywords: t('seo.portfolio.keywords', 'projects, portfolio, discord bot, web applications, react projects, vue projects'),
+      keywords: tWithLang('seo.portfolio.keywords', 'projects, portfolio, discord bot, web applications, react projects, vue projects'),
     },
     '/contact': {
-      title: t('seo.contact.title', 'Contact — Vitor Rita'),
-      description: t('seo.contact.description', 'Get in touch for freelance projects, full-time opportunities or collaboration. Available for remote work worldwide.'),
+      title: tWithLang('seo.contact.title', 'Contact — Vitor Rita'),
+      description: tWithLang('seo.contact.description', 'Get in touch for freelance projects, full-time opportunities or collaboration. Available for remote work worldwide.'),
       ogType: 'website',
-      keywords: t('seo.contact.keywords', 'contact, hire, freelance, remote work, software engineer, collaboration'),
+      keywords: tWithLang('seo.contact.keywords', 'contact, hire, freelance, remote work, software engineer, collaboration'),
     }
   }
 
