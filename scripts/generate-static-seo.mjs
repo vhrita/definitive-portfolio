@@ -249,4 +249,30 @@ if (missingKeys.size) {
   console.warn('Add these under translation.json -> seo.* for each locale to avoid English fallbacks.')
 }
 
+// Generate _redirects file for proper routing priority
+const redirectsContent = `# Static SEO pages - force priority over SPA fallback
+/            /index.html           200!
+/about       /about/index.html     200!
+/portfolio   /portfolio/index.html 200!
+/contact     /contact/index.html   200!
+
+# Portuguese routes
+/pt          /pt/index.html        200!
+/pt/about    /pt/about/index.html  200!
+/pt/portfolio /pt/portfolio/index.html 200!
+/pt/contact  /pt/contact/index.html 200!
+
+# Japanese routes
+/ja          /ja/index.html        200!
+/ja/about    /ja/about/index.html  200!
+/ja/portfolio /ja/portfolio/index.html 200!
+/ja/contact  /ja/contact/index.html 200!
+
+# SPA fallback for everything else (without force flag)
+/*           /index.html           200
+`
+
+writeFileSync(join(__dirname, '../dist/_redirects'), redirectsContent, 'utf8')
+console.log('✅ Generated: _redirects')
+
 console.log(`🎉 Generated ${routes.length} SEO pages successfully!`)
