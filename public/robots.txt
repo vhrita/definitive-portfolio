@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://vhrita.dev/sitemap.xml
+
+# Crawl-delay for better server performance
+Crawl-delay: 1
+
+# Block access to sensitive files
+Disallow: /scripts/
+Disallow: /*.json$
+Disallow: /src/
+Disallow: /node_modules/
