@@ -17,7 +17,7 @@ export default function SEO() {
     const firstPart = pathParts[0]
     if (['pt', 'ja'].includes(firstPart)) {
       // Language prefix route: /pt/about, /ja/portfolio
-      currentLang = firstPart === 'pt' ? 'pt-BR' : 'ja'
+      currentLang = firstPart // Use 'pt' and 'ja' directly
       baseSection = pathParts.length > 1 ? `/${pathParts[1]}` : '/'
     } else if (['about', 'portfolio', 'contact'].includes(firstPart)) {
       // Direct section route (English default): /about, /portfolio
@@ -28,7 +28,12 @@ export default function SEO() {
 
   // Force translation to use the detected language
   const tWithLang = (key, fallback) => {
-    return i18n.getFixedT(currentLang)(key, fallback)
+    try {
+      const fixedT = i18n.getFixedT(currentLang)
+      return fixedT(key, fallback)
+    } catch (error) {
+      return fallback
+    }
   }
 
   // Define route-specific meta data
