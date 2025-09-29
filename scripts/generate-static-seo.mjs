@@ -155,14 +155,44 @@ function generateHTML(route) {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- Load SPA only for real users, not crawlers -->
+    <!-- Block crawlers completely from SPA -->
     <script>
-      // Detecta bots/crawlers
+      // Enhanced bot detection
       const ua = navigator.userAgent.toLowerCase();
-      const isCrawler = /(bot|crawler|spider|facebookexternalhit|whatsapp|twitterbot|linkedinbot|slackbot|telegrambot|googlebot|bingbot|duckduckbot|baiduspider|yandex)/.test(ua);
+      const isCrawler = /(bot|crawler|spider|facebookexternalhit|whatsapp|twitterbot|linkedinbot|slackbot|telegrambot|googlebot|bingbot|duckduckbot|baiduspider|yandex|facebook|meta|instagram|snapchat|pinterest|tumblr|reddit|discord|skype|viber|telegram|line|wechat)/.test(ua);
 
-      if (!isCrawler) {
-        // injeta CSS e JS da SPA APENAS para usuários reais
+      // Also check for headless browsers and automation
+      const isHeadless = navigator.webdriver || window.navigator.webdriver || window.callPhantom || window._phantom || window.phantom;
+
+      // If crawler or headless, prevent any dynamic loading
+      if (isCrawler || isHeadless) {
+        // Block all dynamic script loading
+        document.addEventListener('DOMContentLoaded', () => {
+          const seoContent = document.getElementById('seo-content');
+          const appRoot = document.getElementById('root');
+          if (seoContent) {
+            seoContent.style.display = 'block';
+            seoContent.style.visibility = 'visible';
+          }
+          if (appRoot) {
+            appRoot.style.display = 'none';
+            appRoot.style.visibility = 'hidden';
+          }
+        });
+
+        // Prevent SPA from loading by blocking module scripts
+        const originalCreateElement = document.createElement;
+        document.createElement = function(tagName) {
+          const element = originalCreateElement.call(this, tagName);
+          if (tagName.toLowerCase() === 'script' && (element.type === 'module' || element.src)) {
+            element.onerror = () => {}; // Prevent errors
+            element.onload = () => {}; // Prevent load
+            return element;
+          }
+          return element;
+        };
+      } else {
+        // For real users, load SPA normally
         const css = document.createElement('link');
         css.rel = 'stylesheet';
         css.crossOrigin = 'anonymous';
@@ -174,19 +204,14 @@ function generateHTML(route) {
         js.crossOrigin = 'anonymous';
         js.src = '${mainJsPath}';
         document.head.appendChild(js);
-      }
 
-      document.addEventListener('DOMContentLoaded', () => {
-        const seoContent = document.getElementById('seo-content');
-        const appRoot = document.getElementById('root');
-        if (!isCrawler) {
+        document.addEventListener('DOMContentLoaded', () => {
+          const seoContent = document.getElementById('seo-content');
+          const appRoot = document.getElementById('root');
           if (seoContent) seoContent.style.display = 'none';
           if (appRoot) appRoot.style.display = 'block';
-        } else {
-          if (seoContent) seoContent.style.display = 'block';
-          if (appRoot) appRoot.style.display = 'none';
-        }
-      });
+        });
+      }
     </script>
 </head>
 <body>
