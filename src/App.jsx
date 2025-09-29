@@ -5,6 +5,7 @@ import { useScroll, useMotionValueEvent, inView } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Social from "./components/Social";
 import ErrorBoundary from "./components/ErrorBoundary";
+import SEO from "./components/SEO";
 import { lazy, Suspense } from "react";
 
 const Home = lazy(() => import("./pages/Home"));
@@ -150,6 +151,7 @@ function App() {
 
 	return (
 		<LocaleContext.Provider value={{ locale, setLocale }}>
+			<SEO />
 			<a href="#main-content" className="skip-link">{t('accessibility.skipToMain')}</a>
 			<ErrorBoundary>
 				<Navbar

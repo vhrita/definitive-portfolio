@@ -49,6 +49,28 @@
       "copyPhoneClipboard": "Copiar número de telefone para área de transferência",
       "copyEmailClipboard": "Copiar endereço de email para área de transferência"
     },
+    "seo": {
+      "home": {
+        "title": "Vitor Rita — Engenheiro de Software Sênior",
+        "description": "Portfólio de um Engenheiro de Software Sênior especializado em React, Vue.js, Node.js e Adobe Experience Manager. Veja meus projetos e entre em contato.",
+        "keywords": "engenheiro de software, desenvolvedor frontend, react, vue, nodejs, portfólio, vitor rita"
+      },
+      "about": {
+        "title": "Sobre — Vitor Rita",
+        "description": "Conheça minha formação, habilidades e experiência como Engenheiro de Software Sênior. Especializado em tecnologias web modernas e soluções corporativas.",
+        "keywords": "sobre, formação, habilidades, experiência, engenheiro de software, desenvolvedor web"
+      },
+      "portfolio": {
+        "title": "Projetos — Vitor Rita",
+        "description": "Explore meus projetos selecionados incluindo bots Discord, leitores de mangá, ferramentas de IA e aplicações web corporativas construídas com tecnologias modernas.",
+        "keywords": "projetos, portfólio, bot discord, aplicações web, projetos react, projetos vue"
+      },
+      "contact": {
+        "title": "Contato — Vitor Rita",
+        "description": "Entre em contato para projetos freelance, oportunidades de trabalho ou colaboração. Disponível para trabalho remoto em todo o mundo.",
+        "keywords": "contato, contratar, freelance, trabalho remoto, engenheiro de software, colaboração"
+      }
+    },
     "projects": [
       {
         "id": "manga-downloader",

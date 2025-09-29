@@ -3,6 +3,7 @@ import './style.scss';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import LangSelector from '../LangSelector';
 import ResumeDownloader from '../ResumeDownloader';
@@ -13,8 +14,27 @@ import useIsMobile from '../../utils/useIsMobile';
 function Navbar({ items, view = 'home', position = 0, background = false, isPortfolio = false, isContact = false }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const isMobile = useIsMobile(1024)
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const navigate = useNavigate()
+
   const jumpTo = (id) => {
+    // Get current language for URL prefix (English is default, no prefix)
+    const currentLang = i18n.language
+    const langPrefix = currentLang === 'en' ? '' :
+                      currentLang === 'pt-BR' ? '/pt' : `/${currentLang}`
+
+    // Update URL first with language prefix
+    const routeMap = {
+      'home': `${langPrefix}/`,
+      'about': `${langPrefix}/about`,
+      'portfolio': `${langPrefix}/portfolio`,
+      'contact': `${langPrefix}/contact`
+    }
+
+    const route = routeMap[id] || `${langPrefix}/`
+    navigate(route)
+
+    // Then scroll to element with smooth animation
     const element = document.getElementById(id)
     if (element) {
       const startPosition = window.pageYOffset
