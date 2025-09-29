@@ -1,0 +1,20 @@
+# Static SEO pages - force priority over SPA fallback
+/            /index.html           200!
+/about       /about/index.html     200!
+/portfolio   /portfolio/index.html 200!
+/contact     /contact/index.html   200!
+
+# Portuguese routes
+/pt          /pt/index.html        200!
+/pt/about    /pt/about/index.html  200!
+/pt/portfolio /pt/portfolio/index.html 200!
+/pt/contact  /pt/contact/index.html 200!
+
+# Japanese routes
+/ja          /ja/index.html        200!
+/ja/about    /ja/about/index.html  200!
+/ja/portfolio /ja/portfolio/index.html 200!
+/ja/contact  /ja/contact/index.html 200!
+
+# SPA fallback for everything else (without force flag)
+/*           /index.html           200
