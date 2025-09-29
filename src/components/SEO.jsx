@@ -2,7 +2,19 @@ import { Helmet } from 'react-helmet-async'
 import { useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
+// Import translations directly
+import enTranslations from '../config/internationalization/locales/en/translation.json'
+import ptTranslations from '../config/internationalization/locales/pt-BR/translation.json'
+import jaTranslations from '../config/internationalization/locales/ja/translation.json'
+
 const siteUrl = 'https://vhrita.dev'
+
+// Direct translation access
+const translations = {
+  en: enTranslations.translation,
+  pt: ptTranslations.translation,
+  ja: jaTranslations.translation
+}
 
 export default function SEO() {
   const { pathname } = useLocation()
@@ -26,12 +38,23 @@ export default function SEO() {
     }
   }
 
-  // Force translation to use the detected language
+  // Direct translation function
   const tWithLang = (key, fallback) => {
     try {
-      const fixedT = i18n.getFixedT(currentLang)
-      return fixedT(key, fallback)
+      const langTranslations = translations[currentLang] || translations.en
+      const keys = key.split('.')
+      let result = langTranslations
+
+      for (const k of keys) {
+        result = result?.[k]
+        if (!result) break
+      }
+
+      const finalResult = result || fallback
+      console.log(`SEO DEBUG - URL: ${pathname}, Lang: ${currentLang}, Key: ${key}, Result: "${finalResult}"`)
+      return finalResult
     } catch (error) {
+      console.error('SEO Translation error:', error)
       return fallback
     }
   }
