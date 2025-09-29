@@ -5,6 +5,21 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
+// Get asset references from built index.html
+let mainJsPath = '/assets/index.js'
+let mainCssPath = '/assets/index.css'
+
+try {
+  const indexHtml = readFileSync(join(__dirname, '../dist/index.html'), 'utf8')
+  const jsMatch = indexHtml.match(/src="(\/assets\/index-[^"]+\.js)"/);
+  const cssMatch = indexHtml.match(/href="(\/assets\/index-[^"]+\.css)"/);
+
+  if (jsMatch) mainJsPath = jsMatch[1]
+  if (cssMatch) mainCssPath = cssMatch[1]
+} catch (error) {
+  console.warn('Could not read index.html for asset paths, using defaults')
+}
+
 // Load translations
 const enTranslations = JSON.parse(readFileSync(join(__dirname, '../src/config/internationalization/locales/en/translation.json'), 'utf8'))
 const ptTranslations = JSON.parse(readFileSync(join(__dirname, '../src/config/internationalization/locales/pt-BR/translation.json'), 'utf8'))
@@ -130,14 +145,23 @@ function generateHTML(route) {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- Redirect to SPA for browsers -->
+    <!-- Load SPA dynamically for browsers -->
+    <script type="module" crossorigin src="${mainJsPath}"></script>
+    <link rel="stylesheet" crossorigin href="${mainCssPath}">
     <script>
-      // Redirect to main SPA after social media crawlers have scraped the page
-      setTimeout(() => {
-        if (window.location.pathname !== '/' && !window.location.search.includes('_escaped_fragment_')) {
-          window.location.replace('/#' + window.location.pathname);
-        }
-      }, 100);
+      // Hide SEO content and show SPA for browsers
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isCrawler = /bot|crawler|spider|facebookexternalhit|whatsapp|twitterbot/.test(userAgent);
+
+      if (!isCrawler) {
+        document.addEventListener('DOMContentLoaded', () => {
+          const seoContent = document.getElementById('seo-content');
+          const appRoot = document.getElementById('root');
+
+          if (seoContent) seoContent.style.display = 'none';
+          if (appRoot) appRoot.style.display = 'block';
+        });
+      }
     </script>
 </head>
 <body>
@@ -146,6 +170,7 @@ function generateHTML(route) {
         <p>${meta.description}</p>
         <p>Loading portfolio...</p>
     </div>
+    <div id="root" style="display: none;"></div>
 </body>
 </html>`
 }
@@ -155,7 +180,9 @@ console.log('🚀 Generating static SEO pages...')
 
 routes.forEach(route => {
   const html = generateHTML(route)
-  const filePath = route.path === '/' ? 'index.html' : route.path + '/index.html'
+  let filePath = route.path === '/' ? 'index.html' : route.path + '/index.html'
+  // Fix double slashes
+  filePath = filePath.replace('//', '/')
   const fullPath = join(__dirname, '../dist', filePath)
 
   // Create directory if needed
