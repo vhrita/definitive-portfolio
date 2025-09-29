@@ -31,6 +31,9 @@ const translations = {
   ja: jaTranslations.translation
 }
 
+// Track missing i18n keys used for SEO
+const missingKeys = new Set()
+
 // SEO routes to generate
 const routes = [
   { path: '/', section: 'home', lang: 'en' },
@@ -55,8 +58,12 @@ function getTranslation(lang, key, fallback) {
       result = result?.[k]
       if (!result) break
     }
+    if (!result) {
+      missingKeys.add(`${lang}:${key}`)
+    }
     return result || fallback
   } catch (error) {
+    missingKeys.add(`${lang}:${key}`)
     return fallback
   }
 }
@@ -121,6 +128,9 @@ function generateHTML(route) {
     <meta property="og:url" content="${canonicalUrl}" />
     <meta property="og:site_name" content="Vitor Rita Portfolio" />
     <meta property="og:locale" content="${lang === 'pt' ? 'pt_BR' : lang === 'ja' ? 'ja_JP' : 'en_US'}" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:locale:alternate" content="pt_BR" />
+    <meta property="og:locale:alternate" content="ja_JP" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -145,23 +155,38 @@ function generateHTML(route) {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- Load SPA dynamically for browsers -->
-    <script type="module" crossorigin src="${mainJsPath}"></script>
-    <link rel="stylesheet" crossorigin href="${mainCssPath}">
+    <!-- Load SPA only for real users, not crawlers -->
     <script>
-      // Hide SEO content and show SPA for browsers
-      const userAgent = navigator.userAgent.toLowerCase();
-      const isCrawler = /bot|crawler|spider|facebookexternalhit|whatsapp|twitterbot/.test(userAgent);
+      // Detecta bots/crawlers
+      const ua = navigator.userAgent.toLowerCase();
+      const isCrawler = /(bot|crawler|spider|facebookexternalhit|whatsapp|twitterbot|linkedinbot|slackbot|telegrambot|googlebot|bingbot|duckduckbot|baiduspider|yandex)/.test(ua);
 
       if (!isCrawler) {
-        document.addEventListener('DOMContentLoaded', () => {
-          const seoContent = document.getElementById('seo-content');
-          const appRoot = document.getElementById('root');
+        // injeta CSS e JS da SPA APENAS para usuários reais
+        const css = document.createElement('link');
+        css.rel = 'stylesheet';
+        css.crossOrigin = 'anonymous';
+        css.href = '${mainCssPath}';
+        document.head.appendChild(css);
 
+        const js = document.createElement('script');
+        js.type = 'module';
+        js.crossOrigin = 'anonymous';
+        js.src = '${mainJsPath}';
+        document.head.appendChild(js);
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const seoContent = document.getElementById('seo-content');
+        const appRoot = document.getElementById('root');
+        if (!isCrawler) {
           if (seoContent) seoContent.style.display = 'none';
           if (appRoot) appRoot.style.display = 'block';
-        });
-      }
+        } else {
+          if (seoContent) seoContent.style.display = 'block';
+          if (appRoot) appRoot.style.display = 'none';
+        }
+      });
     </script>
 </head>
 <body>
@@ -192,5 +217,11 @@ routes.forEach(route => {
   writeFileSync(fullPath, html, 'utf8')
   console.log(`✅ Generated: ${filePath}`)
 })
+
+if (missingKeys.size) {
+  console.warn('\n⚠️  Missing SEO i18n keys (using fallbacks):')
+  for (const k of missingKeys) console.warn(' -', k)
+  console.warn('Add these under translation.json -> seo.* for each locale to avoid English fallbacks.')
+}
 
 console.log(`🎉 Generated ${routes.length} SEO pages successfully!`)
