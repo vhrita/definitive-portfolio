@@ -50,9 +50,7 @@ export default function SEO() {
         if (!result) break
       }
 
-      const finalResult = result || fallback
-      console.log(`SEO DEBUG - URL: ${pathname}, Lang: ${currentLang}, Key: ${key}, Result: "${finalResult}"`)
-      return finalResult
+      return result || fallback
     } catch (error) {
       console.error('SEO Translation error:', error)
       return fallback

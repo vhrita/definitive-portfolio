@@ -95,7 +95,6 @@ function generateHTML(route) {
   }
 
   const meta = seoData[section]
-  const canonicalUrl = `https://vhrita.dev${path === '/pt/' ? '/pt' : path === '/ja/' ? '/ja' : path === '/' ? '' : path}`
 
   return `<!doctype html>
 <html lang="${lang}">
@@ -110,42 +109,9 @@ function generateHTML(route) {
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- SEO Meta Tags -->
+    <!-- Basic meta tags only - SEO will be handled by React Helmet -->
     <title>${meta.title}</title>
     <meta name="description" content="${meta.description}" />
-    <meta name="author" content="Vitor Rita" />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <link rel="canonical" href="${canonicalUrl}" />
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="${meta.ogType}" />
-    <meta property="og:title" content="${meta.title}" />
-    <meta property="og:description" content="${meta.description}" />
-    <meta property="og:image" content="https://vhrita.dev/og-image.png" />
-    <meta property="og:image:alt" content="${meta.title}" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:url" content="${canonicalUrl}" />
-    <meta property="og:site_name" content="Vitor Rita Portfolio" />
-    <meta property="og:locale" content="${lang === 'pt' ? 'pt_BR' : lang === 'ja' ? 'ja_JP' : 'en_US'}" />
-    <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:locale:alternate" content="pt_BR" />
-    <meta property="og:locale:alternate" content="ja_JP" />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="${meta.title}" />
-    <meta name="twitter:description" content="${meta.description}" />
-    <meta name="twitter:image" content="https://vhrita.dev/og-image.png" />
-    <meta name="twitter:image:alt" content="${meta.title}" />
-    <meta name="twitter:creator" content="@vhrita" />
-    <meta name="twitter:site" content="@vhrita" />
-
-    <!-- Hreflang -->
-    <link rel="alternate" hrefLang="en" href="https://vhrita.dev${section === 'home' ? '/' : '/' + section}" />
-    <link rel="alternate" hrefLang="pt-br" href="https://vhrita.dev/pt${section === 'home' ? '/' : '/' + section}" />
-    <link rel="alternate" hrefLang="ja" href="https://vhrita.dev/ja${section === 'home' ? '/' : '/' + section}" />
-    <link rel="alternate" hrefLang="x-default" href="https://vhrita.dev${section === 'home' ? '/' : '/' + section}" />
 
     <!-- Theme -->
     <meta name="theme-color" content="#2bcab6" />
