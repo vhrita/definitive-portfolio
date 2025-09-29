@@ -109,9 +109,39 @@ function generateHTML(route) {
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Basic meta tags only - SEO will be handled by React Helmet -->
+    <!-- SEO Meta Tags for crawlers (React Helmet will override for browsers) -->
     <title>${meta.title}</title>
     <meta name="description" content="${meta.description}" />
+    <meta name="author" content="Vitor Rita" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href="https://vhrita.dev${path}" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="${meta.ogType}" />
+    <meta property="og:title" content="${meta.title}" />
+    <meta property="og:description" content="${meta.description}" />
+    <meta property="og:image" content="https://vhrita.dev/og-image.png" />
+    <meta property="og:image:alt" content="${meta.title}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://vhrita.dev${path}" />
+    <meta property="og:site_name" content="Vitor Rita Portfolio" />
+    <meta property="og:locale" content="${lang === 'pt' ? 'pt_BR' : lang === 'ja' ? 'ja_JP' : 'en_US'}" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="${meta.title}" />
+    <meta name="twitter:description" content="${meta.description}" />
+    <meta name="twitter:image" content="https://vhrita.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="${meta.title}" />
+    <meta name="twitter:creator" content="@vhrita" />
+    <meta name="twitter:site" content="@vhrita" />
+
+    <!-- Hreflang -->
+    <link rel="alternate" hrefLang="en" href="https://vhrita.dev${section === 'home' ? '/' : '/' + section}" />
+    <link rel="alternate" hrefLang="pt-br" href="https://vhrita.dev/pt${section === 'home' ? '/' : '/' + section}" />
+    <link rel="alternate" hrefLang="ja" href="https://vhrita.dev/ja${section === 'home' ? '/' : '/' + section}" />
+    <link rel="alternate" hrefLang="x-default" href="https://vhrita.dev${section === 'home' ? '/' : '/' + section}" />
 
     <!-- Theme -->
     <meta name="theme-color" content="#2bcab6" />
@@ -121,18 +151,43 @@ function generateHTML(route) {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- Block crawlers completely from SPA -->
+    <!-- Completely block SPA for crawlers -->
     <script>
-      // Enhanced bot detection
+      // Comprehensive crawler detection
       const ua = navigator.userAgent.toLowerCase();
-      const isCrawler = /(bot|crawler|spider|facebookexternalhit|whatsapp|twitterbot|linkedinbot|slackbot|telegrambot|googlebot|bingbot|duckduckbot|baiduspider|yandex|facebook|meta|instagram|snapchat|pinterest|tumblr|reddit|discord|skype|viber|telegram|line|wechat)/.test(ua);
+      const isCrawler = /(bot|crawler|spider|facebookexternalhit|whatsapp|twitterbot|linkedinbot|slackbot|telegrambot|googlebot|bingbot|duckduckbot|baiduspider|yandex|facebook|meta|instagram|snapchat|pinterest|tumblr|reddit|discord|skype|viber|telegram|line|wechat|externalhit|preview)/.test(ua);
 
-      // Also check for headless browsers and automation
+      // Also check for headless browsers
       const isHeadless = navigator.webdriver || window.navigator.webdriver || window.callPhantom || window._phantom || window.phantom;
 
-      // If crawler or headless, prevent any dynamic loading
+      // If any crawler detected, completely prevent SPA loading
       if (isCrawler || isHeadless) {
-        // Block all dynamic script loading
+        // Block all script loading immediately
+        window.stop && window.stop();
+
+        // Override createElement to prevent any script injection
+        const originalCreateElement = document.createElement;
+        document.createElement = function(tagName) {
+          if (tagName.toLowerCase() === 'script') {
+            // Return dummy script that does nothing
+            const dummy = originalCreateElement.call(this, 'div');
+            dummy.src = '';
+            dummy.type = 'text/plain';
+            return dummy;
+          }
+          return originalCreateElement.call(this, tagName);
+        };
+
+        // Block appendChild for scripts
+        const originalAppendChild = HTMLElement.prototype.appendChild;
+        HTMLElement.prototype.appendChild = function(child) {
+          if (child.tagName && child.tagName.toLowerCase() === 'script') {
+            return child; // Do nothing, return the element
+          }
+          return originalAppendChild.call(this, child);
+        };
+
+        // Ensure SEO content is visible
         document.addEventListener('DOMContentLoaded', () => {
           const seoContent = document.getElementById('seo-content');
           const appRoot = document.getElementById('root');
@@ -145,20 +200,8 @@ function generateHTML(route) {
             appRoot.style.visibility = 'hidden';
           }
         });
-
-        // Prevent SPA from loading by blocking module scripts
-        const originalCreateElement = document.createElement;
-        document.createElement = function(tagName) {
-          const element = originalCreateElement.call(this, tagName);
-          if (tagName.toLowerCase() === 'script' && (element.type === 'module' || element.src)) {
-            element.onerror = () => {}; // Prevent errors
-            element.onload = () => {}; // Prevent load
-            return element;
-          }
-          return element;
-        };
       } else {
-        // For real users, load SPA normally
+        // Load SPA for real users
         const css = document.createElement('link');
         css.rel = 'stylesheet';
         css.crossOrigin = 'anonymous';
