@@ -49,6 +49,28 @@
       "copyPhoneClipboard": "電話番号をクリップボードにコピー",
       "copyEmailClipboard": "メールアドレスをクリップボードにコピー"
     },
+    "seo": {
+      "home": {
+        "title": "Vitor Rita — シニアソフトウェアエンジニア",
+        "description": "React、Vue.js、Node.js、Adobe Experience Managerに特化したシニアソフトウェアエンジニアのポートフォリオ。プロジェクトをご覧いただき、お気軽にお問い合わせください。",
+        "keywords": "ソフトウェアエンジニア, フロントエンド開発者, react, vue, nodejs, ポートフォリオ, vitor rita"
+      },
+      "about": {
+        "title": "概要 — Vitor Rita",
+        "description": "シニアソフトウェアエンジニアとしての経歴、スキル、経験について。モダンなウェブ技術と企業向けソリューションを専門としています。",
+        "keywords": "概要, 経歴, スキル, 経験, ソフトウェアエンジニア, ウェブ開発者"
+      },
+      "portfolio": {
+        "title": "プロジェクト — Vitor Rita",
+        "description": "Discordボット、マンガリーダー、AIツール、モダンな技術で構築された企業向けウェブアプリケーションなど、厳選されたプロジェクトをご覧ください。",
+        "keywords": "プロジェクト, ポートフォリオ, discordボット, ウェブアプリケーション, reactプロジェクト, vueプロジェクト"
+      },
+      "contact": {
+        "title": "お問い合わせ — Vitor Rita",
+        "description": "フリーランスプロジェクト、正社員機会、コラボレーションについてお気軽にお問い合わせください。世界中でリモートワーク対応可能です。",
+        "keywords": "お問い合わせ, 採用, フリーランス, リモートワーク, ソフトウェアエンジニア, コラボレーション"
+      }
+    },
     "projects": [
       {
         "id": "manga-downloader",

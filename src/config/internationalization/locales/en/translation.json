@@ -49,6 +49,28 @@
       "copyPhoneClipboard": "Copy phone number to clipboard",
       "copyEmailClipboard": "Copy email address to clipboard"
     },
+    "seo": {
+      "home": {
+        "title": "Vitor Rita — Senior Software Engineer",
+        "description": "Portfolio of a Senior Software Engineer specialized in React, Vue.js, Node.js and Adobe Experience Manager. View my projects and get in touch.",
+        "keywords": "software engineer, frontend developer, react, vue, nodejs, portfolio, vitor rita"
+      },
+      "about": {
+        "title": "About — Vitor Rita",
+        "description": "Learn about my background, skills and experience as a Senior Software Engineer. Specialized in modern web technologies and enterprise solutions.",
+        "keywords": "about, background, skills, experience, software engineer, web developer"
+      },
+      "portfolio": {
+        "title": "Projects — Vitor Rita",
+        "description": "Explore my selected projects including Discord bots, manga readers, AI tools and enterprise web applications built with modern technologies.",
+        "keywords": "projects, portfolio, discord bot, web applications, react projects, vue projects"
+      },
+      "contact": {
+        "title": "Contact — Vitor Rita",
+        "description": "Get in touch for freelance projects, full-time opportunities or collaboration. Available for remote work worldwide.",
+        "keywords": "contact, hire, freelance, remote work, software engineer, collaboration"
+      }
+    },
     "projects": [
       {
         "id": "manga-downloader",
