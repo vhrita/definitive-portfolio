@@ -5,7 +5,6 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-// Get asset references from built index.html
 let mainJsPath = '/assets/index.js'
 let mainCssPath = '/assets/index.css'
 
@@ -20,7 +19,6 @@ try {
   console.warn('Could not read index.html for asset paths, using defaults')
 }
 
-// Load translations
 const enTranslations = JSON.parse(readFileSync(join(__dirname, '../src/config/internationalization/locales/en/translation.json'), 'utf8'))
 const ptTranslations = JSON.parse(readFileSync(join(__dirname, '../src/config/internationalization/locales/pt-BR/translation.json'), 'utf8'))
 const jaTranslations = JSON.parse(readFileSync(join(__dirname, '../src/config/internationalization/locales/ja/translation.json'), 'utf8'))
@@ -31,10 +29,6 @@ const translations = {
   ja: jaTranslations.translation
 }
 
-// Track missing i18n keys used for SEO
-const missingKeys = new Set()
-
-// SEO routes to generate
 const routes = [
   { path: '/', section: 'home', lang: 'en' },
   { path: '/about', section: 'about', lang: 'en' },
@@ -58,12 +52,8 @@ function getTranslation(lang, key, fallback) {
       result = result?.[k]
       if (!result) break
     }
-    if (!result) {
-      missingKeys.add(`${lang}:${key}`)
-    }
     return result || fallback
   } catch (error) {
-    missingKeys.add(`${lang}:${key}`)
     return fallback
   }
 }
@@ -96,6 +86,16 @@ function generateHTML(route) {
 
   const meta = seoData[section]
 
+  // Get language-specific Open Graph image
+  const getOgImage = () => {
+    const ogImages = {
+      en: 'https://vhrita.dev/og-image.png',
+      pt: 'https://vhrita.dev/og-image-pt.png',
+      ja: 'https://vhrita.dev/og-image-ja.png'
+    }
+    return ogImages[lang] || ogImages.en
+  }
+
   return `<!doctype html>
 <html lang="${lang}">
 <head>
@@ -120,7 +120,7 @@ function generateHTML(route) {
     <meta property="og:type" content="${meta.ogType}" />
     <meta property="og:title" content="${meta.title}" />
     <meta property="og:description" content="${meta.description}" />
-    <meta property="og:image" content="https://vhrita.dev/og-image.png" />
+    <meta property="og:image" content="${getOgImage()}" />
     <meta property="og:image:alt" content="${meta.title}" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -132,7 +132,7 @@ function generateHTML(route) {
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${meta.title}" />
     <meta name="twitter:description" content="${meta.description}" />
-    <meta name="twitter:image" content="https://vhrita.dev/og-image.png" />
+    <meta name="twitter:image" content="${getOgImage()}" />
     <meta name="twitter:image:alt" content="${meta.title}" />
     <meta name="twitter:creator" content="@vhrita" />
     <meta name="twitter:site" content="@vhrita" />
@@ -234,33 +234,20 @@ function generateHTML(route) {
 </html>`
 }
 
-// Generate static HTML files
 console.log('🚀 Generating static SEO pages...')
 
 routes.forEach(route => {
   const html = generateHTML(route)
   let filePath = route.path === '/' ? 'index.html' : route.path + '/index.html'
-  // Fix double slashes
   filePath = filePath.replace('//', '/')
   const fullPath = join(__dirname, '../dist', filePath)
 
-  // Create directory if needed
   mkdirSync(dirname(fullPath), { recursive: true })
-
-  // Write HTML file
   writeFileSync(fullPath, html, 'utf8')
   console.log(`✅ Generated: ${filePath}`)
 })
 
-if (missingKeys.size) {
-  console.warn('\n⚠️  Missing SEO i18n keys (using fallbacks):')
-  for (const k of missingKeys) console.warn(' -', k)
-  console.warn('Add these under translation.json -> seo.* for each locale to avoid English fallbacks.')
-}
-
-// Generate .htaccess file for Apache/hosting providers
-const htaccessContent = `# Static SEO pages priority
-RewriteEngine On
+const htaccessContent = `RewriteEngine On
 RewriteRule ^$ /index.html [L]
 RewriteRule ^about$ /about/index.html [L]
 RewriteRule ^portfolio$ /portfolio/index.html [L]
@@ -277,6 +264,5 @@ RewriteRule ^(.*)$ /index.html [L]
 `
 
 writeFileSync(join(__dirname, '../dist/.htaccess'), htaccessContent, 'utf8')
-console.log('✅ Generated: .htaccess (for Apache hosting)')
-
+console.log('✅ Generated: .htaccess')
 console.log(`🎉 Generated ${routes.length} SEO pages successfully!`)

@@ -1,15 +1,11 @@
 import { Helmet } from 'react-helmet-async'
 import { useLocation } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
-
-// Import translations directly
 import enTranslations from '../config/internationalization/locales/en/translation.json'
 import ptTranslations from '../config/internationalization/locales/pt-BR/translation.json'
 import jaTranslations from '../config/internationalization/locales/ja/translation.json'
 
 const siteUrl = 'https://vhrita.dev'
 
-// Direct translation access
 const translations = {
   en: enTranslations.translation,
   pt: ptTranslations.translation,
@@ -18,28 +14,23 @@ const translations = {
 
 export default function SEO() {
   const { pathname } = useLocation()
-  const { t, i18n } = useTranslation()
 
-  // Extract language and section from URL pathname
   const pathParts = pathname.split('/').filter(Boolean)
-  let currentLang = 'en' // default
+  let currentLang = 'en'
   let baseSection = '/'
 
   if (pathParts.length > 0) {
     const firstPart = pathParts[0]
     if (['pt', 'ja'].includes(firstPart)) {
-      // Language prefix route: /pt/about, /ja/portfolio
-      currentLang = firstPart // Use 'pt' and 'ja' directly
+      currentLang = firstPart
       baseSection = pathParts.length > 1 ? `/${pathParts[1]}` : '/'
     } else if (['about', 'portfolio', 'contact'].includes(firstPart)) {
-      // Direct section route (English default): /about, /portfolio
       currentLang = 'en'
       baseSection = `/${firstPart}`
     }
   }
 
-  // Direct translation function
-  const tWithLang = (key, fallback) => {
+  const getTranslation = (key, fallback) => {
     try {
       const langTranslations = translations[currentLang] || translations.en
       const keys = key.split('.')
@@ -52,36 +43,34 @@ export default function SEO() {
 
       return result || fallback
     } catch (error) {
-      console.error('SEO Translation error:', error)
       return fallback
     }
   }
 
-  // Define route-specific meta data
   const routes = {
     '/': {
-      title: tWithLang('seo.home.title', 'Vitor Rita — Senior Software Engineer'),
-      description: tWithLang('seo.home.description', 'Portfolio of a Senior Software Engineer specialized in React, Vue.js, Node.js and Adobe Experience Manager. View my projects and get in touch.'),
+      title: getTranslation('seo.home.title', 'Vitor Rita — Senior Software Engineer'),
+      description: getTranslation('seo.home.description', 'Portfolio of a Senior Software Engineer specialized in React, Vue.js, Node.js and Adobe Experience Manager. View my projects and get in touch.'),
       ogType: 'website',
-      keywords: tWithLang('seo.home.keywords', 'software engineer, frontend developer, react, vue, nodejs, portfolio, vitor rita'),
+      keywords: getTranslation('seo.home.keywords', 'software engineer, frontend developer, react, vue, nodejs, portfolio, vitor rita'),
     },
     '/about': {
-      title: tWithLang('seo.about.title', 'About — Vitor Rita'),
-      description: tWithLang('seo.about.description', 'Learn about my background, skills and experience as a Senior Software Engineer. Specialized in modern web technologies and enterprise solutions.'),
+      title: getTranslation('seo.about.title', 'About — Vitor Rita'),
+      description: getTranslation('seo.about.description', 'Learn about my background, skills and experience as a Senior Software Engineer. Specialized in modern web technologies and enterprise solutions.'),
       ogType: 'profile',
-      keywords: tWithLang('seo.about.keywords', 'about, background, skills, experience, software engineer, web developer'),
+      keywords: getTranslation('seo.about.keywords', 'about, background, skills, experience, software engineer, web developer'),
     },
     '/portfolio': {
-      title: tWithLang('seo.portfolio.title', 'Projects — Vitor Rita'),
-      description: tWithLang('seo.portfolio.description', 'Explore my selected projects including Discord bots, manga readers, AI tools and enterprise web applications built with modern technologies.'),
+      title: getTranslation('seo.portfolio.title', 'Projects — Vitor Rita'),
+      description: getTranslation('seo.portfolio.description', 'Explore my selected projects including Discord bots, manga readers, AI tools and enterprise web applications built with modern technologies.'),
       ogType: 'website',
-      keywords: tWithLang('seo.portfolio.keywords', 'projects, portfolio, discord bot, web applications, react projects, vue projects'),
+      keywords: getTranslation('seo.portfolio.keywords', 'projects, portfolio, discord bot, web applications, react projects, vue projects'),
     },
     '/contact': {
-      title: tWithLang('seo.contact.title', 'Contact — Vitor Rita'),
-      description: tWithLang('seo.contact.description', 'Get in touch for freelance projects, full-time opportunities or collaboration. Available for remote work worldwide.'),
+      title: getTranslation('seo.contact.title', 'Contact — Vitor Rita'),
+      description: getTranslation('seo.contact.description', 'Get in touch for freelance projects, full-time opportunities or collaboration. Available for remote work worldwide.'),
       ogType: 'website',
-      keywords: tWithLang('seo.contact.keywords', 'contact, hire, freelance, remote work, software engineer, collaboration'),
+      keywords: getTranslation('seo.contact.keywords', 'contact, hire, freelance, remote work, software engineer, collaboration'),
     }
   }
 
@@ -93,6 +82,16 @@ export default function SEO() {
     en: `${siteUrl}${baseSection === '/' ? '/' : baseSection}`,
     pt: `${siteUrl}/pt${baseSection === '/' ? '/' : baseSection}`,
     ja: `${siteUrl}/ja${baseSection === '/' ? '/' : baseSection}`
+  }
+
+  // Get language-specific Open Graph image
+  const getOgImage = () => {
+    const ogImages = {
+      en: `${siteUrl}/og-image.png`,
+      pt: `${siteUrl}/og-image-pt.png`,
+      ja: `${siteUrl}/og-image-ja.png`
+    }
+    return ogImages[currentLang] || ogImages.en
   }
 
   // Structured data based on page type
@@ -159,7 +158,7 @@ export default function SEO() {
       <meta property="og:type" content={meta.ogType} />
       <meta property="og:title" content={meta.title} />
       <meta property="og:description" content={meta.description} />
-      <meta property="og:image" content={`${siteUrl}/og-image.png`} />
+      <meta property="og:image" content={getOgImage()} />
       <meta property="og:image:alt" content={meta.title} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
@@ -171,7 +170,7 @@ export default function SEO() {
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={meta.title} />
       <meta name="twitter:description" content={meta.description} />
-      <meta name="twitter:image" content={`${siteUrl}/og-image.png`} />
+      <meta name="twitter:image" content={getOgImage()} />
       <meta name="twitter:image:alt" content={meta.title} />
       <meta name="twitter:creator" content="@vhrita" />
       <meta name="twitter:site" content="@vhrita" />
