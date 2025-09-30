@@ -86,6 +86,16 @@ function generateHTML(route) {
 
   const meta = seoData[section]
 
+  // Get language-specific Open Graph image
+  const getOgImage = () => {
+    const ogImages = {
+      en: 'https://vhrita.dev/og-image.png',
+      pt: 'https://vhrita.dev/og-image-pt.png',
+      ja: 'https://vhrita.dev/og-image-ja.png'
+    }
+    return ogImages[lang] || ogImages.en
+  }
+
   return `<!doctype html>
 <html lang="${lang}">
 <head>
@@ -110,7 +120,7 @@ function generateHTML(route) {
     <meta property="og:type" content="${meta.ogType}" />
     <meta property="og:title" content="${meta.title}" />
     <meta property="og:description" content="${meta.description}" />
-    <meta property="og:image" content="https://vhrita.dev/og-image.png" />
+    <meta property="og:image" content="${getOgImage()}" />
     <meta property="og:image:alt" content="${meta.title}" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -122,7 +132,7 @@ function generateHTML(route) {
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${meta.title}" />
     <meta name="twitter:description" content="${meta.description}" />
-    <meta name="twitter:image" content="https://vhrita.dev/og-image.png" />
+    <meta name="twitter:image" content="${getOgImage()}" />
     <meta name="twitter:image:alt" content="${meta.title}" />
     <meta name="twitter:creator" content="@vhrita" />
     <meta name="twitter:site" content="@vhrita" />

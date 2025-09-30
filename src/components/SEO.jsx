@@ -84,6 +84,16 @@ export default function SEO() {
     ja: `${siteUrl}/ja${baseSection === '/' ? '/' : baseSection}`
   }
 
+  // Get language-specific Open Graph image
+  const getOgImage = () => {
+    const ogImages = {
+      en: `${siteUrl}/og-image.png`,
+      pt: `${siteUrl}/og-image-pt.png`,
+      ja: `${siteUrl}/og-image-ja.png`
+    }
+    return ogImages[currentLang] || ogImages.en
+  }
+
   // Structured data based on page type
   const getStructuredData = () => {
     const basePersonData = {
@@ -148,7 +158,7 @@ export default function SEO() {
       <meta property="og:type" content={meta.ogType} />
       <meta property="og:title" content={meta.title} />
       <meta property="og:description" content={meta.description} />
-      <meta property="og:image" content={`${siteUrl}/og-image.png`} />
+      <meta property="og:image" content={getOgImage()} />
       <meta property="og:image:alt" content={meta.title} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
@@ -160,7 +170,7 @@ export default function SEO() {
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={meta.title} />
       <meta name="twitter:description" content={meta.description} />
-      <meta name="twitter:image" content={`${siteUrl}/og-image.png`} />
+      <meta name="twitter:image" content={getOgImage()} />
       <meta name="twitter:image:alt" content={meta.title} />
       <meta name="twitter:creator" content="@vhrita" />
       <meta name="twitter:site" content="@vhrita" />
