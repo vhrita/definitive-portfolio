@@ -6,8 +6,15 @@ import { motion } from 'framer-motion'
 
 const mainSkills = [
   'React.js',
-  'Vue.js',
   'Node.js',
+  'TypeScript',
+  'AWS',
+  'Docker',
+  'AI Integration',
+  'CI/CD',
+  'Vue.js',
+  'Azure',
+  'Python',
   'Adobe Experience Manager'
 ]
 
