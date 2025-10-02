@@ -395,8 +395,8 @@
     --min-img-overlap-tablet: calc(var(--img-height) * 0.1);
     --max-img-overlap-tablet: calc(var(--img-height) * 0.2);
     --min-img-overlap-mobile: calc(var(--img-height) * 0.3);
-    --max-img-overlap-mobile: calc(var(--img-height) * 0.5);
-    --content-max-height-mobile: calc(var(--main-container-height-mobile) - (var(--img-height) * 0.5));
+    --max-img-overlap-mobile: calc(var(--img-height) * 0.6);
+    --content-max-height-mobile: calc(var(--main-container-height-mobile) - (var(--img-height) * 0.4));
     --content-max-height-tablet: calc(var(--main-container-height) - (var(--img-height) * 0.8));
   }
 
@@ -428,7 +428,7 @@
       }
 
       @include respond-to('mobile') {
-        margin-top: 1em;
+        display: none;
       }
     }
   }
@@ -513,14 +513,15 @@
     }
 
     @include respond-to('mobile') {
-      padding: 1.4rem;
-      margin-top: calc(-1 * var(--min-img-overlap-mobile, 16.5vh));
+      padding: 1rem;
+      margin-top: calc(-1 * var(--dynamic-overlap, calc(var(--img-height, 55vh) * 0.3)));
       height: auto;
-      max-height: calc(var(--main-container-height-mobile, 75vh) - var(--img-height, 55vh) + var(--max-img-overlap-mobile, 27.5vh));
-      min-height: calc(var(--main-container-height-mobile, 75vh) - var(--img-height, 55vh) + var(--min-img-overlap-mobile, 16.5vh));
-      margin-bottom: 1rem;
-      flex-grow: 1;
-      flex-shrink: 1;
+      max-height: none !important;
+      min-height: auto;
+      margin-bottom: 0.5rem;
+      flex-grow: 0;
+      flex-shrink: 0;
+      overflow: visible;
     }
   }
 
@@ -530,29 +531,14 @@
     flex-direction: column;
     justify-content: flex-start;
     gap: 0.85rem;
-    overflow: visible;
+    overflow: hidden;
     min-height: 0;
     padding-bottom: 0.5rem;
 
     @include respond-to('mobile') {
-      overflow-y: auto;
-      overflow-x: hidden;
-      padding-bottom: 0.75rem;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
-
-      &::-webkit-scrollbar {
-        width: 4px;
-      }
-
-      &::-webkit-scrollbar-track {
-        background: transparent;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.3);
-        border-radius: 2px;
-      }
+      overflow: hidden;
+      gap: 0.6rem;
+      padding-bottom: 0.3rem;
     }
   }
 
@@ -565,19 +551,29 @@
     @include respond-to('tablet') {
       font-size: 1.45rem;
     }
+
+    @include respond-to('mobile') {
+      font-size: 1.3rem;
+      line-height: 1.3;
+    }
   }
 
   .sticky-card-copy {
     flex-direction: column;
     gap: 0.85rem;
-    flex: 1;
+    flex: 1 1 auto;
     overflow: hidden;
-    min-height: 80px;
+    min-height: 0;
     display: flex;
 
     @include respond-to('tablet') {
       gap: 0.7rem;
-      min-height: 60px;
+    }
+
+    @include respond-to('mobile') {
+      gap: 0.4rem;
+      flex: 1 1 auto;
+      min-height: 0;
     }
   }
 
@@ -590,38 +586,39 @@
       text-transform: uppercase;
       color: rgba(255, 255, 255, 0.7);
       margin: 0;
+
+      @include respond-to('mobile') {
+        font-size: 0.7rem;
+        letter-spacing: 0.08em;
+      }
     }
   }
 
   .sticky-card-copy-description {
     overflow: hidden;
-    flex: 1;
-    min-height: 60px;
-    max-height: none;
+    flex: 1 1 auto;
+    min-height: 0;
 
     p {
       font-size: 1rem;
       line-height: 1.5;
       text-align: center;
       margin: 0;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: none;
-      -webkit-box-orient: vertical;
-      max-height: none;
 
       @include respond-to('tablet') {
         font-size: 0.95rem;
-        -webkit-line-clamp: none;
-        max-height: none;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
       }
 
       @include respond-to('mobile') {
-        font-size: 0.9rem;
-        line-height: 1.4;
-        -webkit-line-clamp: none;
-        max-height: none;
+        font-size: 0.85rem;
+        line-height: 1.35;
+        overflow: visible;
+        text-overflow: clip;
       }
     }
   }
@@ -646,9 +643,10 @@
         font-size: 0.75rem;
       }
       @include respond-to('mobile') {
-        font-size: 0.65rem;
-        padding: 0.25rem 0.6rem;
-        border-radius: 12px;
+        font-size: 0.6rem;
+        padding: 0.2rem 0.5rem;
+        border-radius: 10px;
+        gap: 0.3rem;
       }
     }
   }
@@ -664,6 +662,11 @@
     align-items: center;
     flex-wrap: wrap;
     align-self: center;
+
+    @include respond-to('mobile') {
+      gap: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
 
     .sticky-card-action-btn {
       padding: 0.8rem 1.6rem;
@@ -683,10 +686,10 @@
         font-size: 0.9rem;
       }
       @include respond-to('mobile') {
-        padding: 0.6rem 1.1rem;
-        font-size: 0.85rem;
-        border-radius: 18px;
-        gap: 0.3rem;
+        padding: 0.5rem 0.9rem;
+        font-size: 0.75rem;
+        border-radius: 14px;
+        gap: 0.25rem;
       }
 
       &:hover {
@@ -700,8 +703,8 @@
         filter: brightness(0) invert(1);
 
         @include respond-to('mobile') {
-          width: 0.9em;
-          height: 0.9em;
+          width: 0.85em;
+          height: 0.85em;
         }
       }
     }
