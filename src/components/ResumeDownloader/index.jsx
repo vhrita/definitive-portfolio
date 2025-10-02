@@ -11,16 +11,15 @@ function ResumeDownloader({ isPortfolio = false, isContact = false }) {
   const isMobile = useIsMobile(1024)
 
   const handleDownload = () => {
-    // Criar um link temporário para download
     const link = document.createElement('a')
-    link.href = '/resume.pdf' // Arquivo deve estar na pasta public
+    link.href = '/resume.pdf'
     link.download = 'Vitor_Resume.pdf'
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
   }
 
-  const resumeText = t('resume') // "Currículo" em PT, "Resume" em EN
+  const resumeText = t('resume')
 
   return (
     <motion.div

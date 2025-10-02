@@ -42,7 +42,6 @@
         white-space: nowrap;
     }
 
-    // Mobile responsivo
     @include respond-to('mobile') {
         height: 5vh;
         min-width: 120px;

@@ -1,28 +1,7 @@
 import "./style.scss";
 
 import { motion } from 'framer-motion';
-
-import Linkedin from "../../assets/icons/linkedin.svg";
-import Instagram from "../../assets/icons/instagram.svg";
-import Github from "../../assets/icons/github.svg";
-
-const socialMedias = [
-  {
-    name: "Linkedin",
-    icon: Linkedin,
-    link: "https://www.linkedin.com/in/vhrita/",
-  },
-  {
-    name: "Instagram",
-    icon: Instagram,
-    link: "https://www.instagram.com/vhrita.dev/",
-  },
-  {
-    name: "Github",
-    icon: Github,
-    link: "https://github.com/vhrita",
-  },
-];
+import { SOCIAL_MEDIA } from '../../config/constants';
 
 function Social({ orientation = 'vertical', isContactInView = false, isPortfolio = false }) {
   return (
@@ -42,7 +21,7 @@ function Social({ orientation = 'vertical', isContactInView = false, isPortfolio
       }}
     >
       <div key={orientation}>
-        {socialMedias.map((media, index) => (
+        {SOCIAL_MEDIA.map((media, index) => (
           <motion.a
             key={media.name}
             href={media.link}
@@ -58,7 +37,7 @@ function Social({ orientation = 'vertical', isContactInView = false, isPortfolio
               delay: isContactInView
                 ? index * 0.2
                 : orientation === "vertical"
-                  ? 0.3 + (socialMedias.length - index) / 2
+                  ? 0.3 + (SOCIAL_MEDIA.length - index) / 2
                   : 0.3 + index / 2,
               opacity: { duration: isContactInView ? 0.4 : 1 },
               scale: { duration: isContactInView ? 0.6 : 1 }

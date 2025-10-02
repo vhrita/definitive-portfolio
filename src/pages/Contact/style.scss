@@ -685,7 +685,6 @@
     }
   }
 
-  // Extra small screens and landscape mobile
   @media (max-height: 600px) {
     padding: 1rem 0;
     align-items: flex-start;
@@ -749,7 +748,6 @@
     }
   }
 
-  // Very small mobile screens - extra safety
   @media (max-width: 360px) {
     .social-icons-absorbed {
       .absorbed-icon {
