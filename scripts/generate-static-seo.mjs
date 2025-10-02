@@ -247,22 +247,4 @@ routes.forEach(route => {
   console.log(`✅ Generated: ${filePath}`)
 })
 
-const htaccessContent = `RewriteEngine On
-RewriteRule ^$ /index.html [L]
-RewriteRule ^about$ /about/index.html [L]
-RewriteRule ^portfolio$ /portfolio/index.html [L]
-RewriteRule ^contact$ /contact/index.html [L]
-RewriteRule ^pt$ /pt/index.html [L]
-RewriteRule ^pt/about$ /pt/about/index.html [L]
-RewriteRule ^pt/portfolio$ /pt/portfolio/index.html [L]
-RewriteRule ^pt/contact$ /pt/contact/index.html [L]
-RewriteRule ^ja$ /ja/index.html [L]
-RewriteRule ^ja/about$ /ja/about/index.html [L]
-RewriteRule ^ja/portfolio$ /ja/portfolio/index.html [L]
-RewriteRule ^ja/contact$ /ja/contact/index.html [L]
-RewriteRule ^(.*)$ /index.html [L]
-`
-
-writeFileSync(join(__dirname, '../dist/.htaccess'), htaccessContent, 'utf8')
-console.log('✅ Generated: .htaccess')
 console.log(`🎉 Generated ${routes.length} SEO pages successfully!`)
