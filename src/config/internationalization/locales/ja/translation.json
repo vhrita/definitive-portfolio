@@ -52,23 +52,23 @@
     "seo": {
       "home": {
         "title": "Vitor Rita — シニアソフトウェアエンジニア",
-        "description": "React、Vue.js、Node.js、Adobe Experience Managerに特化したシニアソフトウェアエンジニアのポートフォリオ。プロジェクトをご覧いただき、お気軽にお問い合わせください。",
-        "keywords": "ソフトウェアエンジニア, フロントエンド開発者, react, vue, nodejs, ポートフォリオ, vitor rita"
+        "description": "7年以上スケーラブルなWebプラットフォームを構築してきたシニアフルスタック開発者。React、Vue.js、Node.js、TypeScript、Python、AWS、AI統合を専門としています。プロジェクトをご覧いただき、ぜひご連絡ください。",
+        "keywords": "ソフトウェアエンジニア, フルスタック開発者, react, vue, nodejs, typescript, python, aws, ai統合, docker, ポートフォリオ, vitor rita"
       },
       "about": {
         "title": "概要 — Vitor Rita",
-        "description": "シニアソフトウェアエンジニアとしての経歴、スキル、経験について。モダンなウェブ技術と企業向けソリューションを専門としています。",
-        "keywords": "概要, 経歴, スキル, 経験, ソフトウェアエンジニア, ウェブ開発者"
+        "description": "Compass UOLやGenesis Groupなどの企業向けに7年以上フルスタックソリューションを提供。JavaScript、TypeScript、React、Vue.js、Node.js、Python、AWSインフラ、AI活用ワークフローのエキスパート。",
+        "keywords": "概要, 経歴, スキル, 経験, ソフトウェアエンジニア, フルスタック開発者, aws, マイクロサービス, ai"
       },
       "portfolio": {
         "title": "プロジェクト — Vitor Rita",
-        "description": "Discordボット、マンガリーダー、AIツール、モダンな技術で構築された企業向けウェブアプリケーションなど、厳選されたプロジェクトをご覧ください。",
-        "keywords": "プロジェクト, ポートフォリオ, discordボット, ウェブアプリケーション, reactプロジェクト, vueプロジェクト"
+        "description": "私のプロジェクトをご覧ください：AI画像生成を搭載したDiscordボット、自動化ワークフロー、Webスクレイパー、WebSocketsを使ったリアルタイムアプリケーション、React、Next.js、TypeScript、Pythonで構築されたモダンなWebプラットフォーム。",
+        "keywords": "プロジェクト, ポートフォリオ, discordボット, ai画像生成, websockets, 自動化, webスクレイピング, react, nextjs, typescript, python"
       },
       "contact": {
         "title": "お問い合わせ — Vitor Rita",
-        "description": "フリーランスプロジェクト、正社員機会、コラボレーションについてお気軽にお問い合わせください。世界中でリモートワーク対応可能です。",
-        "keywords": "お問い合わせ, 採用, フリーランス, リモートワーク, ソフトウェアエンジニア, コラボレーション"
+        "description": "正社員機会、フリーランスプロジェクト、技術的なコラボレーションを受け付けています。スケーラブルなプラットフォーム、API、AI統合、クラウドインフラの構築経験があります。世界中でリモートワーク対応可能。",
+        "keywords": "お問い合わせ, 採用, フリーランス, リモートワーク, フルスタック開発者, aws, apis, ai統合, コラボレーション"
       }
     },
     "projects": [

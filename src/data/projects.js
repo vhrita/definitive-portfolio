@@ -1,4 +1,4 @@
-import imageExample from '../assets/background.jpg'
+import fallbackImage from '../assets/background.jpg'
 import baixarMangasImg from '../assets/portfolio/baixar-mangas.png'
 import musaBotImg from '../assets/portfolio/musa-bot.png'
 import stellaBotImg from '../assets/portfolio/stella-bot.png'
@@ -8,6 +8,8 @@ import definitivePortfolioImg from '../assets/portfolio/definitive-portfolio.png
 import familiaCataVentoImg from '../assets/portfolio/familia-cata-vento.png'
 import kindleNewsletterImg from '../assets/portfolio/kindle_newsletter.png'
 import investidorScraperImg from '../assets/portfolio/investidor10-scraper.png'
+
+const FALLBACK_IMAGE = fallbackImage
 
 const PROJECTS_BASE = {
   'manga-downloader': {
@@ -74,8 +76,6 @@ const PROJECTS_BASE = {
     repository: 'https://github.com/vhrita/investidor10-scrap'
   }
 }
-
-const FALLBACK_IMAGE = imageExample
 
 export function buildProjects(translatedProjects = []) {
   return translatedProjects.map(project => {

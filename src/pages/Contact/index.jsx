@@ -3,32 +3,12 @@ import { motion, useInView } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import Linkedin from "../../assets/icons/linkedin.svg"
-import Instagram from "../../assets/icons/instagram.svg"
-import Github from "../../assets/icons/github.svg"
 import PhoneIcon from "../../assets/icons/phone.svg"
 import EmailIcon from "../../assets/icons/email.svg"
 import LocationIcon from "../../assets/icons/location.svg"
 import CopyIcon from "../../assets/icons/copy.svg"
 import useIsMobile from '../../utils/useIsMobile'
-
-const socialMedias = [
-  {
-    name: "Linkedin",
-    icon: Linkedin,
-    link: "https://www.linkedin.com/in/vhrita/",
-  },
-  {
-    name: "Instagram",
-    icon: Instagram,
-    link: "https://www.instagram.com/vhrita.dev/",
-  },
-  {
-    name: "Github",
-    icon: Github,
-    link: "https://github.com/vhrita",
-  },
-]
+import { SOCIAL_MEDIA } from '../../config/constants'
 
 function Contact({ isContactInView = false }) {
   const { t } = useTranslation()
@@ -47,7 +27,7 @@ function Contact({ isContactInView = false }) {
         setCopyFeedback(prev => ({ ...prev, [type]: false }))
       }, 2000)
     } catch (err) {
-      console.error('Failed to copy: ', err)
+      // Clipboard access denied or unavailable
     }
   }
 
@@ -176,7 +156,7 @@ function Contact({ isContactInView = false }) {
           }}
           transition={{ delay: 0.8, duration: 1, stagger: 0.2 }}
         >
-          {socialMedias.map((media, index) => (
+          {SOCIAL_MEDIA.map((media, index) => (
             <motion.div
               key={media.name}
               className="absorbed-icon"

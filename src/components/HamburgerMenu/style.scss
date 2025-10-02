@@ -33,7 +33,6 @@
     outline: none;
   }
 
-  // Portfolio mode styles
   &.portfolio-mode {
     span {
       background-color: white;
@@ -45,7 +44,6 @@
   }
 }
 
-// Hide on desktop
 @media (min-width: 1025px) {
   .hamburger-menu {
     display: none;

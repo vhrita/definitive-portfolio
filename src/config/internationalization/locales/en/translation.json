@@ -52,23 +52,23 @@
     "seo": {
       "home": {
         "title": "Vitor Rita — Senior Software Engineer",
-        "description": "Portfolio of a Senior Software Engineer specialized in React, Vue.js, Node.js and Adobe Experience Manager. View my projects and get in touch.",
-        "keywords": "software engineer, frontend developer, react, vue, nodejs, portfolio, vitor rita"
+        "description": "Senior Full Stack Developer with 7+ years building scalable web platforms. Specialized in React, Vue.js, Node.js, TypeScript, Python, AWS, and AI integration. Explore my projects and let's connect.",
+        "keywords": "software engineer, full stack developer, react, vue, nodejs, typescript, python, aws, ai integration, docker, portfolio, vitor rita"
       },
       "about": {
         "title": "About — Vitor Rita",
-        "description": "Learn about my background, skills and experience as a Senior Software Engineer. Specialized in modern web technologies and enterprise solutions.",
-        "keywords": "about, background, skills, experience, software engineer, web developer"
+        "description": "7+ years delivering full-stack solutions for companies like Compass UOL and Genesis Group. Expert in JavaScript, TypeScript, React, Vue.js, Node.js, Python, AWS infrastructure, and AI-powered workflows.",
+        "keywords": "about, background, skills, experience, software engineer, full stack developer, aws, microservices, ai"
       },
       "portfolio": {
         "title": "Projects — Vitor Rita",
-        "description": "Explore my selected projects including Discord bots, manga readers, AI tools and enterprise web applications built with modern technologies.",
-        "keywords": "projects, portfolio, discord bot, web applications, react projects, vue projects"
+        "description": "Explore my projects: Discord bots with AI image generation, automated workflows, web scrapers, real-time applications with WebSockets, and modern web platforms built with React, Next.js, TypeScript, and Python.",
+        "keywords": "projects, portfolio, discord bot, ai image generation, websockets, automation, web scraping, react, nextjs, typescript, python"
       },
       "contact": {
         "title": "Contact — Vitor Rita",
-        "description": "Get in touch for freelance projects, full-time opportunities or collaboration. Available for remote work worldwide.",
-        "keywords": "contact, hire, freelance, remote work, software engineer, collaboration"
+        "description": "Available for full-time opportunities, freelance projects, or technical collaboration. Experienced in building scalable platforms, APIs, AI integration, and cloud infrastructure. Remote work worldwide.",
+        "keywords": "contact, hire, freelance, remote work, full stack developer, aws, apis, ai integration, collaboration"
       }
     },
     "projects": [
