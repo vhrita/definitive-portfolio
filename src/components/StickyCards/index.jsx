@@ -1,6 +1,6 @@
 import './style.scss'
 
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { gsap } from 'gsap/dist/gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
@@ -42,9 +42,77 @@ function StickyCards({ cards = [] }) {
     setLoadingStates(prev => ({ ...prev, [index]: 'error' }))
   }
 
+  const adjustMobileOverlap = () => {
+    if (!isMobile || !container.current) return
+
+    const stickyCards = container.current.querySelectorAll('.sticky-card')
+
+    stickyCards.forEach((card) => {
+      const cardImg = card.querySelector('.sticky-card-img')
+      const cardContent = card.querySelector('.sticky-card-content')
+      const mainContainer = card.querySelector('.sticky-card-main-container')
+
+      if (!cardImg || !cardContent || !mainContainer) return
+
+      const imgHeight = cardImg.offsetHeight
+      const contentHeight = cardContent.scrollHeight
+      const mainContainerHeight = mainContainer.offsetHeight
+
+      const contentStyles = window.getComputedStyle(cardContent)
+      const contentPadding = parseFloat(contentStyles.paddingTop) + parseFloat(contentStyles.paddingBottom)
+
+      const minOverlap = imgHeight * 0.3
+      const maxOverlap = imgHeight * 0.6
+
+      const availableSpaceWithMinOverlap = mainContainerHeight - imgHeight + minOverlap
+
+      let requiredOverlap = minOverlap
+
+      if (contentHeight > availableSpaceWithMinOverlap) {
+        const additionalOverlapNeeded = contentHeight - availableSpaceWithMinOverlap
+        requiredOverlap = Math.min(maxOverlap, minOverlap + additionalOverlapNeeded)
+      }
+
+      if (contentHeight > mainContainerHeight - imgHeight + requiredOverlap) {
+        requiredOverlap = maxOverlap
+      }
+
+      cardContent.style.setProperty('--dynamic-overlap', `${requiredOverlap}px`)
+      cardContent.style.marginTop = `-${requiredOverlap}px`
+
+      const maxContentHeight = mainContainerHeight - imgHeight + requiredOverlap
+      const copyDescription = cardContent.querySelector('.sticky-card-copy-description p')
+
+      if (contentHeight > maxContentHeight) {
+        cardContent.style.maxHeight = `${maxContentHeight}px`
+
+        if (copyDescription) {
+          copyDescription.style.display = '-webkit-box'
+          copyDescription.style.webkitBoxOrient = 'vertical'
+          copyDescription.style.overflow = 'hidden'
+          copyDescription.style.textOverflow = 'ellipsis'
+
+          const lineHeight = parseFloat(window.getComputedStyle(copyDescription).lineHeight)
+          const availableHeight = maxContentHeight - contentPadding
+          const maxLines = Math.floor(availableHeight / lineHeight) - 8
+          copyDescription.style.webkitLineClamp = Math.max(3, maxLines).toString()
+        }
+      } else {
+        cardContent.style.maxHeight = 'none'
+
+        if (copyDescription) {
+          copyDescription.style.display = 'block'
+          copyDescription.style.webkitBoxOrient = 'initial'
+          copyDescription.style.overflow = 'visible'
+          copyDescription.style.textOverflow = 'clip'
+          copyDescription.style.webkitLineClamp = 'none'
+        }
+      }
+    })
+  }
+
   useGSAP(
     () => {
-      // Clear all previous ScrollTriggers to avoid conflicts
       ScrollTrigger.getAll().forEach(trigger => trigger.kill())
 
       const stickyCards = container.current.querySelectorAll('.sticky-card')
@@ -54,9 +122,6 @@ function StickyCards({ cards = [] }) {
         const cardContent = card.querySelector('.sticky-card-content')
 
         if (isMobile) {
-          // Mobile-specific implementation optimized for touch
-
-          // Set initial positions for mobile - volta para transform X
           gsap.set(cardImg, {
             x: index === 0 ? '0%' : '-100%',
             opacity: index === 0 ? 1 : 0
@@ -66,7 +131,6 @@ function StickyCards({ cards = [] }) {
             opacity: index === 0 ? 1 : 0
           })
 
-          // Simple pin for mobile
           if (index < stickyCards.length - 1) {
             ScrollTrigger.create({
               trigger: card,
@@ -78,7 +142,6 @@ function StickyCards({ cards = [] }) {
             })
           }
 
-          // Mobile: Slide-in animations baseadas no scroll (igual desktop)
           ScrollTrigger.create({
             trigger: card,
             start: 'top bottom',
@@ -103,18 +166,17 @@ function StickyCards({ cards = [] }) {
             },
           })
 
-          // Scale out animation when next card approaches - após animação de entrada
           if (index < stickyCards.length - 1) {
             ScrollTrigger.create({
               trigger: stickyCards[index + 1],
-              start: 'top 90%', // Começa quando o próximo card está bem próximo
+              start: 'top 90%',
               end: 'top top',
               invalidateOnRefresh: true,
               onUpdate: (self) => {
                 const progress = self.progress
-                const scale = 1 - progress * 0.15 // Menos scale para mobile
-                const rotation = (index % 2 === 0 ? 2 : -2) * progress // Menos rotação
-                const afterOpacity = progress * 0.4 // Menos opacidade do overlay
+                const scale = 1 - progress * 0.15
+                const rotation = (index % 2 === 0 ? 2 : -2) * progress
+                const afterOpacity = progress * 0.4
 
                 gsap.set(card, {
                   scale: scale,
@@ -125,9 +187,6 @@ function StickyCards({ cards = [] }) {
             })
           }
         } else {
-          // Desktop animations - keep the original complex animations
-
-          // Pin cards
           if (index < stickyCards.length - 1) {
             ScrollTrigger.create({
               trigger: card,
@@ -141,7 +200,6 @@ function StickyCards({ cards = [] }) {
             })
           }
 
-          // Slide-in animations
           ScrollTrigger.create({
             trigger: card,
             start: 'top bottom',
@@ -166,7 +224,6 @@ function StickyCards({ cards = [] }) {
             },
           })
 
-          // Scale-out animations
           if (index < stickyCards.length - 1) {
             ScrollTrigger.create({
               trigger: stickyCards[index + 1],
@@ -190,15 +247,14 @@ function StickyCards({ cards = [] }) {
         }
       })
 
-      // Configure ScrollTrigger for mobile touch
       if (isMobile) {
         ScrollTrigger.config({
           autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load,resize',
           limitCallbacks: true
         })
 
-        // Force refresh after a short delay to ensure mobile setup
         setTimeout(() => {
+          adjustMobileOverlap()
           ScrollTrigger.refresh()
         }, 100)
       } else {
@@ -207,6 +263,26 @@ function StickyCards({ cards = [] }) {
     },
     { scope: container, dependencies: [isMobile] }
   )
+
+  useEffect(() => {
+    if (!isMobile) return
+
+    const handleResize = () => {
+      adjustMobileOverlap()
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    const timer = setTimeout(() => {
+      adjustMobileOverlap()
+    }, 300)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      clearTimeout(timer)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMobile, loadingStates])
 
   return (
     <div className="sticky-cards" ref={container}>
